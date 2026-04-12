@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cell Cycle & G1/S Checkpoint — USMLE Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e29;
+    --border: #252a38;
+    --border-bright: #3a4158;
+    --text: #e8eaf2;
+    --text-muted: #7a8099;
+    --text-dim: #4a5068;
+    --accent: #6c8aff;
+    --accent-dim: #2a3560;
+    --green: #3ecf8e;
+    --green-dim: #0f3325;
+    --amber: #f5a623;
+    --amber-dim: #3a2800;
+    --red: #ff5c5c;
+    --red-dim: #3a1010;
+    --purple: #b57bee;
+    --purple-dim: #2a1a45;
+    --teal: #38bdf8;
+    --teal-dim: #0a2535;
+    --coral: #ff8c69;
+    --coral-dim: #3a1e0f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(108,138,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  header p {
+    color: var(--text-muted);
+    max-width: 640px;
+    font-size: 14px;
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: calc(100vh - 140px);
+  }
+
+  /* ── SIDEBAR NAV ── */
+  nav {
+    border-right: 1px solid var(--border);
+    padding: 2rem 0;
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+  nav::-webkit-scrollbar { width: 4px; }
+  nav::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+
+  .nav-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 1.2rem 1.5rem 0.4rem;
+  }
+  nav a {
+    display: block;
+    padding: 0.45rem 1.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13.5px;
+    border-left: 2px solid transparent;
+    transition: all 0.18s;
+  }
+  nav a:hover, nav a.active {
+    color: var(--text);
+    border-left-color: var(--accent);
+    background: rgba(108,138,255,0.06);
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    padding: 2.5rem 3rem;
+    max-width: 900px;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 2rem;
+  }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+    line-height: 1.2;
+  }
+  section h3 {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 1.8rem 0 0.7rem;
+    letter-spacing: 0.01em;
+  }
+  p { color: var(--text-muted); margin-bottom: 1rem; }
+  p strong { color: var(--text); font-weight: 600; }
+
+  /* ── PHASE STRIP ── */
+  .phase-strip {
+    display: flex;
+    gap: 3px;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .phase-block {
+    padding: 0.7rem 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: filter 0.2s;
+    position: relative;
+  }
+  .phase-block:hover { filter: brightness(1.2); }
+  .phase-block .phase-name { display: block; }
+  .phase-block .phase-sub { font-size: 10px; font-weight: 400; opacity: 0.75; margin-top: 2px; }
+  .ph-g0  { flex: 0.6; background: #1e2230; color: #7a8099; }
+  .ph-g1  { flex: 1.8; background: #1e2a3a; color: var(--teal); }
+  .ph-s   { flex: 1.4; background: #1a2e1a; color: var(--green); }
+  .ph-g2  { flex: 0.9; background: #2a2618; color: var(--amber); }
+  .ph-m   { flex: 0.7; background: #2a1a1a; color: var(--coral); }
+
+  /* ── MOLECULAR PATHWAY ── */
+  .pathway {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 1.5rem 0;
+  }
+  .pathway-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+  .pathway-connector {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0;
+  }
+  .pathway-connector::before {
+    content: '';
+    width: 1px;
+    background: var(--border-bright);
+    display: block;
+    margin-left: 80px;
+  }
+  .pathway-connector.inhibit::before { background: var(--red); }
+
+  .node-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+  .node-card:hover {
+    border-color: var(--border-bright);
+    transform: translateX(3px);
+    background: var(--surface);
+  }
+  .node-card .node-label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .node-card .node-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .node-card .node-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 16px;
+    transition: transform 0.2s;
+  }
+  .node-card:hover .node-arrow { transform: translateY(-50%) translateX(3px); }
+
+  .nc-purple { border-color: var(--purple-dim); background: rgba(42,26,69,0.4); }
+  .nc-purple .node-label { color: var(--purple); }
+  .nc-blue   { border-color: var(--accent-dim); background: rgba(42,53,96,0.4); }
+  .nc-blue .node-label { color: var(--accent); }
+  .nc-teal   { border-color: var(--teal-dim); background: rgba(10,37,53,0.4); }
+  .nc-teal .node-label { color: var(--teal); }
+  .nc-green  { border-color: var(--green-dim); background: rgba(15,51,37,0.4); }
+  .nc-green .node-label { color: var(--green); }
+  .nc-amber  { border-color: var(--amber-dim); background: rgba(58,40,0,0.4); }
+  .nc-amber .node-label { color: var(--amber); }
+  .nc-red    { border-color: var(--red-dim); background: rgba(58,16,16,0.4); }
+  .nc-red .node-label { color: var(--red); }
+  .nc-coral  { border-color: var(--coral-dim); background: rgba(58,30,15,0.4); }
+  .nc-coral .node-label { color: var(--coral); }
+  .nc-gray   { border-color: var(--border); background: var(--surface); }
+  .nc-gray .node-label { color: var(--text-muted); }
+
+  /* ── ARROW between pathway nodes ── */
+  .arrow-down {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 18px;
+    padding: 2px 0;
+    line-height: 1;
+    margin-left: 0;
+  }
+  .arrow-inhibit {
+    color: var(--red);
+  }
+  .arrow-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    text-align: center;
+    margin: -2px 0;
+  }
+  .arrow-label.inhibit { color: var(--red); }
+
+  /* ── TWO COLUMN NODE ROWS ── */
+  .node-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 0.8rem 0;
+  }
+  .node-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 0.8rem 0;
+  }
+
+  /* ── INFO BOXES ── */
+  .info-box {
+    border-radius: 8px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.2rem 0;
+    border-left: 3px solid;
+  }
+  .info-box h4 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .info-box p { font-size: 13px; margin-bottom: 0; color: var(--text-muted); }
+  .ib-key    { background: rgba(108,138,255,0.08); border-color: var(--accent); }
+  .ib-key h4 { color: var(--accent); }
+  .ib-warn   { background: rgba(245,166,35,0.08); border-color: var(--amber); }
+  .ib-warn h4 { color: var(--amber); }
+  .ib-danger { background: rgba(255,92,92,0.08); border-color: var(--red); }
+  .ib-danger h4 { color: var(--red); }
+  .ib-good   { background: rgba(62,207,142,0.08); border-color: var(--green); }
+  .ib-good h4 { color: var(--green); }
+
+  /* ── TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 13.5px;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 0.6rem 0.9rem;
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 0.65rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--surface); }
+  .data-table td:first-child { color: var(--text); font-weight: 500; }
+  .mono { font-family: 'DM Mono', monospace; font-size: 12px; }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .pill-red    { background: var(--red-dim); color: var(--red); }
+  .pill-green  { background: var(--green-dim); color: var(--green); }
+  .pill-amber  { background: var(--amber-dim); color: var(--amber); }
+  .pill-blue   { background: var(--accent-dim); color: var(--accent); }
+  .pill-purple { background: var(--purple-dim); color: var(--purple); }
+
+  /* ── DETAIL MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 640px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.22s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.96) translateY(8px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .modal-close:hover { color: var(--text); border-color: var(--border-bright); }
+  .modal-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .modal h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .modal p { font-size: 13.5px; color: var(--text-muted); margin-bottom: 0.8rem; }
+  .modal p strong { color: var(--text); }
+  .modal ul { padding-left: 1.2rem; color: var(--text-muted); font-size: 13.5px; margin-bottom: 0.8rem; }
+  .modal ul li { margin-bottom: 0.3rem; }
+  .modal h4 { color: var(--text); font-size: 13px; font-weight: 600; margin: 1.1rem 0 0.4rem; }
+  .modal-table { width: 100%; font-size: 13px; border-collapse: collapse; margin-top: 0.5rem; }
+  .modal-table th { text-align: left; color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border); }
+  .modal-table td { padding: 0.5rem 0.6rem; color: var(--text-muted); border-bottom: 1px solid var(--border); vertical-align: top; }
+  .modal-table tr:last-child td { border-bottom: none; }
+  .modal-table td:first-child { color: var(--text); font-weight: 500; }
+
+  /* ── QUIZ ── */
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+  .quiz-q {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1rem;
+    font-size: 14px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    background: transparent;
+    text-align: left;
+    width: 100%;
+  }
+  .quiz-opt:hover { border-color: var(--border-bright); color: var(--text); }
+  .quiz-opt.correct { border-color: var(--green); background: var(--green-dim); color: var(--green); }
+  .quiz-opt.wrong   { border-color: var(--red); background: var(--red-dim); color: var(--red); }
+  .quiz-opt.disabled { pointer-events: none; opacity: 0.5; }
+  .quiz-opt.disabled.correct { opacity: 1; }
+  .quiz-letter {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    min-width: 20px;
+    margin-top: 1px;
+  }
+  .quiz-feedback {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 7px;
+    font-size: 13px;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
+  .quiz-feedback.wrong   { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); }
+
+  /* ── DRUG TABLE ── */
+  .drug-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.7rem;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .drug-card:hover { border-color: var(--border-bright); background: var(--surface); }
+  .drug-name { font-weight: 600; font-size: 14px; color: var(--accent); }
+  .drug-class { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* SCROLLBAR */
+  main::-webkit-scrollbar { width: 4px; }
+  main::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    nav { display: none; }
+    main { padding: 1.5rem; }
+    header { padding: 1.5rem; }
+    .node-row-2, .node-row-3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-label">USMLE Step 1 · Cell Biology</div>
+  <h1>Cell Cycle &amp; <em>G1/S Checkpoint</em></h1>
+  <p>A comprehensive interactive reference covering the cell cycle phases, checkpoint machinery, Rb/E2F regulation, CDK inhibitors, and clinical correlates — with clickable deep-dives on every concept.</p>
+</header>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="nav-section-label">Overview</div>
+  <a href="#phases" class="active">Cell cycle phases</a>
+  <a href="#checkpoint">G1/S checkpoint</a>
+
+  <div class="nav-section-label">Molecular Machinery</div>
+  <a href="#growth-signals">Growth factor signaling</a>
+  <a href="#cyclin-cdk4">Cyclin D / CDK4</a>
+  <a href="#cyclin-cdk2">Cyclin E / CDK2</a>
+  <a href="#rb">Retinoblastoma protein</a>
+  <a href="#e2f">E2F transcription factor</a>
+  <a href="#p27">p27 — CDK inhibitor</a>
+  <a href="#p21">p21 &amp; p53 axis</a>
+
+  <div class="nav-section-label">Clinical</div>
+  <a href="#cancer">Cancer mechanisms</a>
+  <a href="#drugs">CDK4/6 inhibitors</a>
+  <a href="#wrong-answers">Wrong answer analysis</a>
+
+  <div class="nav-section-label">Review</div>
+  <a href="#tables">High-yield tables</a>
+  <a href="#quiz">Practice questions</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: PHASES -->
+<!-- ══════════════════════════════════ -->
+<section id="phases">
+  <div class="section-tag">01 — Overview</div>
+  <h2>Cell cycle phases</h2>
+  <p>The eukaryotic cell cycle is divided into <strong>interphase</strong> (G1, S, G2) and <strong>mitosis</strong> (M phase). Cells may also exit into a quiescent state called <strong>G0</strong>. Each transition is governed by cyclin/CDK complexes and monitored by checkpoints.</p>
+
+  <div class="phase-strip">
+    <div class="phase-block ph-g0" onclick="openModal('g0')">
+      <span class="phase-name">G0</span>
+      <span class="phase-sub">Quiescent</span>
+    </div>
+    <div class="phase-block ph-g1" onclick="openModal('g1')">
+      <span class="phase-name">G1</span>
+      <span class="phase-sub">Gap 1 · Growth</span>
+    </div>
+    <div class="phase-block ph-s" onclick="openModal('sphase')">
+      <span class="phase-name">S</span>
+      <span class="phase-sub">DNA synthesis</span>
+    </div>
+    <div class="phase-block ph-g2" onclick="openModal('g2')">
+      <span class="phase-name">G2</span>
+      <span class="phase-sub">Gap 2</span>
+    </div>
+    <div class="phase-block ph-m" onclick="openModal('mphase')">
+      <span class="phase-name">M</span>
+      <span class="phase-sub">Mitosis</span>
+    </div>
+  </div>
+  <p style="font-size:12px; color:var(--text-dim); margin-top:-0.5rem;">↑ Click each phase block to expand full details</p>
+
+  <div class="node-row-3" style="margin-top:1.5rem;">
+    <div class="node-card nc-teal" onclick="openModal('dhfr')" style="cursor:pointer;">
+      <div class="node-label">Dihydrofolate reductase</div>
+      <div class="node-desc">Active in S phase — makes dTMP for DNA</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-teal" onclick="openModal('dnapol')" style="cursor:pointer;">
+      <div class="node-label">DNA polymerase α/δ</div>
+      <div class="node-desc">Replicates DNA strands in S phase</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-teal" onclick="openModal('tdk')" style="cursor:pointer;">
+      <div class="node-label">Thymidine kinase</div>
+      <div class="node-desc">Phosphorylates thymidine — S phase marker</div>
+      <span class="node-arrow">›</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: G1/S CHECKPOINT -->
+<!-- ══════════════════════════════════ -->
+<section id="checkpoint">
+  <div class="section-tag">02 — Checkpoint</div>
+  <h2>G1/S checkpoint</h2>
+  <p>The G1/S checkpoint (also called the <strong>restriction point</strong>) is the most clinically important cell cycle checkpoint. The cell evaluates DNA integrity and extracellular growth signals. Passing this point commits the cell irreversibly to division.</p>
+
+  <div class="info-box ib-key">
+    <h4>Key concept: the restriction point</h4>
+    <p>Before the restriction point, removing growth factors allows the cell to retreat to G0. After it, the CDK2/E2F positive feedback loop is self-sustaining — the cell divides regardless of external signals. This is the threshold that cancer cells bypass.</p>
+  </div>
+
+  <h3>What is checked at this checkpoint?</h3>
+  <div class="node-row-2">
+    <div class="node-card nc-amber" onclick="openModal('dna-integrity')" style="cursor:pointer;">
+      <div class="node-label">DNA integrity</div>
+      <div class="node-desc">Double-strand breaks, base damage, stalled replication forks</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-purple" onclick="openModal('growth-factor-check')" style="cursor:pointer;">
+      <div class="node-label">Growth factor availability</div>
+      <div class="node-desc">Sufficient mitogenic signal to warrant division?</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-blue" onclick="openModal('cell-size')" style="cursor:pointer;">
+      <div class="node-label">Cell size / nutrients</div>
+      <div class="node-desc">mTOR pathway senses amino acid and energy sufficiency</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-coral" onclick="openModal('contact-inhibition')" style="cursor:pointer;">
+      <div class="node-label">Contact inhibition</div>
+      <div class="node-desc">Dense cell-cell contact → upregulates p27 → halts cycle</div>
+      <span class="node-arrow">›</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: GROWTH SIGNALS -->
+<!-- ══════════════════════════════════ -->
+<section id="growth-signals">
+  <div class="section-tag">03 — Molecular machinery</div>
+  <h2>Growth factor signaling</h2>
+  <p>Mitogenic signals from the extracellular environment feed into the Ras/MAPK cascade, ultimately driving transcription of Cyclin D. This makes Cyclin D the cell's direct sensor of whether the environment wants it to divide.</p>
+
+  <div class="pathway">
+    <a class="node-card nc-purple" onclick="openModal('growth-factors-detail')" href="javascript:void(0)">
+      <div class="node-label">Growth factors (EGF, PDGF, IGF-1, FGF…)</div>
+      <div class="node-desc">Bind receptor tyrosine kinases → autophosphorylation → adaptor recruitment</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-purple" onclick="openModal('ras')" href="javascript:void(0)">
+      <div class="node-label">Ras → RAF → MEK → ERK (MAPK cascade)</div>
+      <div class="node-desc">GTP-bound Ras is active; GDP-bound is inactive. Mutant Ras = constitutively active</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-purple" onclick="openModal('myc')" href="javascript:void(0)">
+      <div class="node-label">Myc / AP-1 transcription factors activated</div>
+      <div class="node-desc">Myc directly transactivates the Cyclin D1 promoter</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-blue" onclick="openModal('cyclin-d-synth')" href="javascript:void(0)">
+      <div class="node-label">Cyclin D1/D2/D3 synthesized</div>
+      <div class="node-desc">Short-lived protein (t½ ~20–30 min) — levels directly track growth signal strength</div>
+      <span class="node-arrow">›</span>
+    </a>
+  </div>
+
+  <div class="info-box ib-warn">
+    <h4>Ras is upstream, not immediate</h4>
+    <p>This is why Ras-GDP binding (choice B in the original question) is wrong — it precedes Rb phosphorylation by multiple steps. The question asks for the most <em>immediate</em> predecessor to S phase entry, which is Rb phosphorylation by the cyclin/CDK complexes.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: CYCLIN D / CDK4 -->
+<!-- ══════════════════════════════════ -->
+<section id="cyclin-cdk4">
+  <div class="section-tag">04 — Molecular machinery</div>
+  <h2>Cyclin D / CDK4</h2>
+  <p>The Cyclin D / CDK4 complex is the first kinase complex activated in G1. CDK4 (and CDK6) requires Cyclin D binding for activation. CDK4 alone is catalytically inert.</p>
+
+  <h3>Function</h3>
+  <div class="node-row-2">
+    <div class="node-card nc-blue" onclick="openModal('rb-partial')" style="cursor:pointer;">
+      <div class="node-label">Partial Rb phosphorylation</div>
+      <div class="node-desc">Mono-phosphorylates Rb at specific sites — loosens but does not release E2F</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-red" onclick="openModal('p27-titration')" style="cursor:pointer;">
+      <div class="node-label">p27 sequestration</div>
+      <div class="node-desc">Cyclin D binds and sequesters p27, freeing CDK2 to become active</div>
+      <span class="node-arrow">›</span>
+    </div>
+  </div>
+
+  <div class="info-box ib-good">
+    <h4>Unique property: growth factor sensor</h4>
+    <p>Unlike Cyclin E, A, B (which oscillate with the intrinsic cell clock), Cyclin D is almost entirely controlled by extracellular signals. Withdraw growth factors → Cyclin D mRNA decays in minutes → complex dissolves → CDK4 goes quiet → cell retreats to G0.</p>
+  </div>
+
+  <h3>Inhibitors of CDK4</h3>
+  <table class="data-table">
+    <tr><th>Inhibitor</th><th>Family</th><th>Mechanism</th><th>Clinical relevance</th></tr>
+    <tr>
+      <td onclick="openModal('p16')" style="cursor:pointer;color:var(--accent)">p16 (INK4a) <span style="color:var(--text-dim)">›</span></td>
+      <td>INK4</td>
+      <td>Competes with Cyclin D for CDK4/6 binding</td>
+      <td><span class="pill pill-red">Deleted</span> in pancreatic CA, melanoma</td>
+    </tr>
+    <tr>
+      <td onclick="openModal('p15')" style="cursor:pointer;color:var(--accent)">p15 (INK4b) <span style="color:var(--text-dim)">›</span></td>
+      <td>INK4</td>
+      <td>Induced by TGF-β; inhibits CDK4/CDK6</td>
+      <td>TGF-β tumor suppression pathway</td>
+    </tr>
+    <tr>
+      <td onclick="openModal('p18')" style="cursor:pointer;color:var(--accent)">p18 (INK4c) <span style="color:var(--text-dim)">›</span></td>
+      <td>INK4</td>
+      <td>Expressed during differentiation</td>
+      <td>Multiple myeloma, hematologic malignancies</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: CYCLIN E / CDK2 -->
+<!-- ══════════════════════════════════ -->
+<section id="cyclin-cdk2">
+  <div class="section-tag">05 — Molecular machinery</div>
+  <h2>Cyclin E / CDK2</h2>
+  <p>Cyclin E/CDK2 delivers the decisive blow to Rb at the late G1/S boundary. It hyperphosphorylates Rb at the remaining sites that CDK4 could not reach, fully releasing E2F. This creates a positive feedback loop that is self-amplifying past the restriction point.</p>
+
+  <div class="pathway">
+    <a class="node-card nc-blue" onclick="openModal('low-e2f')" href="javascript:void(0)">
+      <div class="node-label">Partial Rb phosphorylation (by CDK4) allows low E2F activity</div>
+      <div class="node-desc">Enough E2F escapes to transcribe Cyclin E gene</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-teal" onclick="openModal('cyclin-e-rises')" href="javascript:void(0)">
+      <div class="node-label">Cyclin E rises → binds CDK2</div>
+      <div class="node-desc">CDK2 also freed from p27 by Cyclin D sequestration</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-teal" onclick="openModal('rb-full')" href="javascript:void(0)">
+      <div class="node-label">CDK2 hyperphosphorylates Rb</div>
+      <div class="node-desc">Rb fully inactivated → E2F fully released</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-green" onclick="openModal('positive-feedback')" href="javascript:void(0)">
+      <div class="node-label">Positive feedback: E2F also transcribes Cyclin E</div>
+      <div class="node-desc">Self-amplifying loop → irreversible commitment to S phase</div>
+      <span class="node-arrow">›</span>
+    </a>
+  </div>
+
+  <table class="data-table" style="margin-top:1.5rem;">
+    <tr><th>Cyclin</th><th>CDK partner</th><th>Phase</th><th>Key substrate</th></tr>
+    <tr><td>Cyclin D</td><td>CDK4, CDK6</td><td>G1</td><td>Rb (partial phosphorylation)</td></tr>
+    <tr><td>Cyclin E</td><td>CDK2</td><td>Late G1 → S</td><td>Rb (hyperphosphorylation), p27</td></tr>
+    <tr><td>Cyclin A</td><td>CDK2, CDK1</td><td>S → G2</td><td>DNA replication factors, p27</td></tr>
+    <tr><td>Cyclin B</td><td>CDK1 (CDC2)</td><td>G2 → M</td><td>Nuclear lamins, condensins, spindle proteins</td></tr>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: Rb PROTEIN -->
+<!-- ══════════════════════════════════ -->
+<section id="rb">
+  <div class="section-tag">06 — Molecular machinery</div>
+  <h2>Retinoblastoma protein (Rb)</h2>
+  <p>Rb is the master regulator of the G1/S transition — the "guardian of the checkpoint." It has two functional states controlled by phosphorylation status.</p>
+
+  <div class="node-row-2">
+    <div class="node-card nc-coral" onclick="openModal('rb-active')" style="cursor:pointer;">
+      <div class="node-label">Active Rb (dephosphorylated)</div>
+      <div class="node-desc">Binds E2F. Recruits HDAC. Compacts chromatin. Prevents S phase. Found in G0, early G1.</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-teal" onclick="openModal('rb-inactive')" style="cursor:pointer;">
+      <div class="node-label">Inactive Rb (phosphorylated)</div>
+      <div class="node-desc">Cannot bind E2F. E2F free to activate S-phase genes. Remains phosphorylated until mitosis ends.</div>
+      <span class="node-arrow">›</span>
+    </div>
+  </div>
+
+  <div class="info-box ib-danger">
+    <h4>Rb as a tumor suppressor — Knudson's two-hit hypothesis</h4>
+    <p>Retinoblastoma (childhood eye tumor) arises when <em>both</em> copies of the RB1 gene are inactivated. Hereditary cases carry one germline mutation — only one somatic "hit" is needed. Sporadic cases require two independent somatic mutations in the same cell (rare). Loss of Rb also seen in osteosarcoma, small cell lung cancer, bladder cancer.</p>
+  </div>
+
+  <h3>Viral proteins that mimic Rb phosphorylation</h3>
+  <p>Several oncogenic viruses encode proteins that directly bind and inactivate Rb, bypassing the need for CDK-mediated phosphorylation:</p>
+  <table class="data-table">
+    <tr><th>Virus</th><th>Protein</th><th>Effect</th><th>Cancer</th></tr>
+    <tr><td onclick="openModal('hpv-rb')" style="cursor:pointer;color:var(--accent)">HPV <span style="color:var(--text-dim)">›</span></td><td>E7</td><td>Binds and inactivates Rb</td><td>Cervical, oropharyngeal CA</td></tr>
+    <tr><td>Adenovirus</td><td>E1A</td><td>Binds Rb — disrupts Rb/E2F complex</td><td>N/A (experimental)</td></tr>
+    <tr><td>SV40</td><td>Large T antigen</td><td>Binds Rb and p53</td><td>Rare human tumors</td></tr>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: E2F -->
+<!-- ══════════════════════════════════ -->
+<section id="e2f">
+  <div class="section-tag">07 — Molecular machinery</div>
+  <h2>E2F transcription factor</h2>
+  <p>E2F is the effector transcription factor of the Rb pathway. When released from Rb, it drives a gene expression program that commits the cell to DNA replication.</p>
+
+  <h3>E2F target genes</h3>
+  <div class="node-row-3">
+    <div class="node-card nc-teal" onclick="openModal('dhfr')" style="cursor:pointer;">
+      <div class="node-label">Dihydrofolate reductase</div>
+      <div class="node-desc">Provides dTMP for deoxyribonucleotides</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-teal" onclick="openModal('dnapol')" style="cursor:pointer;">
+      <div class="node-label">DNA polymerase α</div>
+      <div class="node-desc">Initiates DNA replication</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-teal" onclick="openModal('tdk')" style="cursor:pointer;">
+      <div class="node-label">Thymidine kinase</div>
+      <div class="node-desc">Nucleotide salvage — S phase</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-blue" onclick="openModal('cyclin-e-e2f')" style="cursor:pointer;">
+      <div class="node-label">Cyclin E</div>
+      <div class="node-desc">Self-amplifying loop — more CDK2</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-blue" onclick="openModal('cyclin-a-e2f')" style="cursor:pointer;">
+      <div class="node-label">Cyclin A</div>
+      <div class="node-desc">Sustains CDK2 activity into S phase</div>
+      <span class="node-arrow">›</span>
+    </div>
+    <div class="node-card nc-purple" onclick="openModal('cdc6')" style="cursor:pointer;">
+      <div class="node-label">CDC6</div>
+      <div class="node-desc">Origins of replication licensing factor</div>
+      <span class="node-arrow">›</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: p27 -->
+<!-- ══════════════════════════════════ -->
+<section id="p27">
+  <div class="section-tag">08 — CDK inhibitors</div>
+  <h2>p27 — the cell cycle brake pedal</h2>
+  <p>p27 (encoded by <span class="mono">CDKN1B</span>) is a CIP/KIP family CDK inhibitor. It physically occupies the active site of Cyclin E/CDK2, preventing kinase activity and stalling G1→S progression.</p>
+
+  <h3>Mechanism of inhibition</h3>
+  <div class="pathway">
+    <a class="node-card nc-red" onclick="openModal('p27-mechanism')" href="javascript:void(0)">
+      <div class="node-label">p27 binds Cyclin E / CDK2 complex</div>
+      <div class="node-desc">Inserts into the active site cleft — blocks ATP and substrate access</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-coral" onclick="openModal('rb-stays-active')" href="javascript:void(0)">
+      <div class="node-label">CDK2 cannot phosphorylate Rb</div>
+      <div class="node-desc">Rb stays dephosphorylated (active) — grips E2F tightly</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-gray" onclick="openModal('g0-arrest')" href="javascript:void(0)">
+      <div class="node-label">Cell arrested in G1 or exits to G0</div>
+      <div class="node-desc">No DNA replication enzymes transcribed</div>
+      <span class="node-arrow">›</span>
+    </a>
+  </div>
+
+  <h3>How p27 is removed when the cell needs to divide</h3>
+  <div class="pathway">
+    <a class="node-card nc-purple" onclick="openModal('growth-factor-p27')" href="javascript:void(0)">
+      <div class="node-label">Growth factor signal → Cyclin D accumulates</div>
+      <div class="node-desc">Cyclin D/CDK4 titrates p27 away from CDK2 (sequestration)</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-amber" onclick="openModal('skp2')" href="javascript:void(0)">
+      <div class="node-label">SCF–Skp2 ubiquitin ligase recognizes p27</div>
+      <div class="node-desc">Skp2 is the F-box protein that recognizes phosphorylated p27 (T187)</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-amber" onclick="openModal('proteasome')" href="javascript:void(0)">
+      <div class="node-label">26S proteasome degrades p27</div>
+      <div class="node-desc">Ubiquitin chain marks p27 for proteolytic destruction</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-teal" onclick="openModal('cdk2-free')" href="javascript:void(0)">
+      <div class="node-label">CDK2 uninhibited → Rb hyperphosphorylated → S phase</div>
+      <div class="node-desc">Cell crosses the restriction point</div>
+      <span class="node-arrow">›</span>
+    </a>
+  </div>
+
+  <div class="info-box ib-danger">
+    <h4>p27 in cancer — low expression = poor prognosis</h4>
+    <p>p27 mutations are rare, but cancers reduce p27 protein by overexpressing Skp2 (accelerating degradation) or mislocalizing p27 to the cytoplasm where it cannot inhibit nuclear CDK2. Low nuclear p27 is a prognostic marker in breast, colon, gastric, prostate, and many other cancers.</p>
+  </div>
+
+  <h3>CIP/KIP family comparison</h3>
+  <table class="data-table">
+    <tr><th>Protein</th><th>Gene</th><th>Target CDKs</th><th>Inducing signal</th><th>Clinical note</th></tr>
+    <tr><td onclick="openModal('p21-detail')" style="cursor:pointer;color:var(--accent)">p21 <span style="color:var(--text-dim)">›</span></td><td class="mono">CDKN1A</td><td>CDK2, CDK4/6</td><td>p53 activation (DNA damage)</td><td>DNA damage response</td></tr>
+    <tr><td>p27</td><td class="mono">CDKN1B</td><td>CDK2, CDK4/6</td><td>Growth withdrawal, TGF-β</td><td>Low = poor prognosis</td></tr>
+    <tr><td>p57</td><td class="mono">CDKN1C</td><td>CDK2, CDK4/6</td><td>Differentiation signals</td><td>Beckwith-Wiedemann syndrome</td></tr>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: p21 / p53 -->
+<!-- ══════════════════════════════════ -->
+<section id="p21">
+  <div class="section-tag">09 — CDK inhibitors</div>
+  <h2>p21 &amp; the p53 axis</h2>
+  <p>p21 (CDKN1A) is the transcriptional target of p53 — it bridges DNA damage sensing and cell cycle arrest. When DNA damage is detected, p53 is stabilized and drives p21 expression, halting the cycle at G1/S.</p>
+
+  <div class="pathway">
+    <a class="node-card nc-red" onclick="openModal('dna-damage')" href="javascript:void(0)">
+      <div class="node-label">DNA double-strand break / UV damage</div>
+      <div class="node-desc">Sensed by ATM/ATR kinases</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-amber" onclick="openModal('atm-chk2')" href="javascript:void(0)">
+      <div class="node-label">ATM → CHK2 (ionizing radiation) / ATR → CHK1 (UV)</div>
+      <div class="node-desc">Phosphorylate and stabilize p53; also directly halt CDC25 phosphatases</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-purple" onclick="openModal('p53-detail')" href="javascript:void(0)">
+      <div class="node-label">p53 stabilized (MDM2 inhibited)</div>
+      <div class="node-desc">p53 normally kept low by MDM2-mediated ubiquitination</div>
+      <span class="node-arrow">›</span>
+    </a>
+    <div class="arrow-down">↓</div>
+    <a class="node-card nc-red" onclick="openModal('p21-detail')" href="javascript:void(0)">
+      <div class="node-label">p53 transcribes p21</div>
+      <div class="node-desc">p21 inhibits CDK2 → Rb stays active → G1 arrest</div>
+      <span class="node-arrow">›</span>
+    </a>
+  </div>
+
+  <div class="info-box ib-warn">
+    <h4>p53 vs p27: know the difference</h4>
+    <p><strong>p27</strong> responds to growth factor withdrawal and contact inhibition — it's about environmental signals. <strong>p21</strong> responds to DNA damage via p53 — it's about genomic integrity. Both inhibit CDK2, but via completely different upstream triggers.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: CANCER -->
+<!-- ══════════════════════════════════ -->
+<section id="cancer">
+  <div class="section-tag">10 — Clinical correlates</div>
+  <h2>Cancer mechanisms at the G1/S checkpoint</h2>
+  <p>Virtually every cancer has found at least one way to bypass the G1/S checkpoint. The most common strategies target the Rb/E2F axis directly.</p>
+
+  <table class="data-table">
+    <tr><th>Alteration</th><th>Effect on pathway</th><th>Example cancer</th><th>Frequency</th></tr>
+    <tr>
+      <td onclick="openModal('cyclin-d-cancer')" style="cursor:pointer;color:var(--accent)">Cyclin D1 amplification <span style="color:var(--text-dim)">›</span></td>
+      <td>CDK4 constitutively active → Rb always phosphorylated</td>
+      <td>Mantle cell lymphoma (t11;14), breast CA, head/neck CA</td>
+      <td><span class="pill pill-red">High</span></td>
+    </tr>
+    <tr>
+      <td onclick="openModal('cdk4-cancer')" style="cursor:pointer;color:var(--accent)">CDK4 amplification <span style="color:var(--text-dim)">›</span></td>
+      <td>Excess kinase → excessive Rb phosphorylation</td>
+      <td>Glioblastoma, liposarcoma, melanoma</td>
+      <td><span class="pill pill-amber">Moderate</span></td>
+    </tr>
+    <tr>
+      <td onclick="openModal('p16-loss')" style="cursor:pointer;color:var(--accent)">p16/INK4a deletion <span style="color:var(--text-dim)">›</span></td>
+      <td>CDK4 no longer inhibited → unrestrained Rb phosphorylation</td>
+      <td>Pancreatic CA, melanoma, esophageal CA</td>
+      <td><span class="pill pill-red">High</span></td>
+    </tr>
+    <tr>
+      <td onclick="openModal('rb-loss')" style="cursor:pointer;color:var(--accent)">RB1 deletion/mutation <span style="color:var(--text-dim)">›</span></td>
+      <td>No Rb → E2F always free → uncontrolled S phase entry</td>
+      <td>Retinoblastoma, SCLC, osteosarcoma, bladder CA</td>
+      <td><span class="pill pill-red">High</span></td>
+    </tr>
+    <tr>
+      <td onclick="openModal('p53-loss')" style="cursor:pointer;color:var(--accent)">TP53 mutation <span style="color:var(--text-dim)">›</span></td>
+      <td>No p21 induction → damaged cells bypass G1 arrest</td>
+      <td>Most human cancers (~50% TP53 mutation)</td>
+      <td><span class="pill pill-red">Very high</span></td>
+    </tr>
+    <tr>
+      <td onclick="openModal('skp2-cancer')" style="cursor:pointer;color:var(--accent)">Skp2 overexpression <span style="color:var(--text-dim)">›</span></td>
+      <td>p27 rapidly degraded → CDK2 perpetually active</td>
+      <td>Breast, prostate, colon CA</td>
+      <td><span class="pill pill-amber">Moderate</span></td>
+    </tr>
+    <tr>
+      <td onclick="openModal('ras-cancer')" style="cursor:pointer;color:var(--accent)">KRAS/NRAS mutation <span style="color:var(--text-dim)">›</span></td>
+      <td>Constitutive MAPK → perpetual Cyclin D transcription</td>
+      <td>Pancreatic CA (~90%), colon CA, NSCLC</td>
+      <td><span class="pill pill-red">Very high</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: DRUGS -->
+<!-- ══════════════════════════════════ -->
+<section id="drugs">
+  <div class="section-tag">11 — Pharmacology</div>
+  <h2>CDK4/6 inhibitors</h2>
+  <p>CDK4/6 inhibitors block the first step of Rb phosphorylation, locking tumor cells in G1. They are now standard of care in hormone receptor-positive (HR+), HER2-negative metastatic breast cancer, and are being investigated in many other Rb-intact tumors.</p>
+
+  <div class="drug-card" onclick="openModal('palbociclib')">
+    <div class="drug-name">Palbociclib (Ibrance)</div>
+    <div class="drug-class">First-in-class CDK4/6 inhibitor · FDA approved 2015 · HR+/HER2− breast cancer</div>
+  </div>
+  <div class="drug-card" onclick="openModal('ribociclib')">
+    <div class="drug-name">Ribociclib (Kisqali)</div>
+    <div class="drug-class">CDK4/6 inhibitor · OS benefit shown in premenopausal women · HR+/HER2− breast cancer</div>
+  </div>
+  <div class="drug-card" onclick="openModal('abemaciclib')">
+    <div class="drug-name">Abemaciclib (Verzenio)</div>
+    <div class="drug-class">CDK4/6 inhibitor · Also approved in early-stage high-risk HR+/HER2− breast cancer · More selective for CDK4</div>
+  </div>
+
+  <div class="info-box ib-key">
+    <h4>Biomarker: Rb expression required</h4>
+    <p>CDK4/6 inhibitors only work if the tumor has intact Rb — if Rb is deleted (e.g. SCLC), there is nothing for phosphorylated CDK4 to act on, and the drug has no effect. This is why SCLC (which almost universally loses Rb) does not respond to these agents.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: WRONG ANSWERS -->
+<!-- ══════════════════════════════════ -->
+<section id="wrong-answers">
+  <div class="section-tag">12 — Exam strategy</div>
+  <h2>Wrong answer analysis</h2>
+  <p>Understanding <em>why</em> the wrong choices are wrong is as high-yield as knowing the correct answer. Each distractor tests a specific misconception.</p>
+
+  <div class="node-card nc-gray" onclick="openModal('choice-a')" style="cursor:pointer;margin-bottom:0.7rem;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="pill pill-red">A</span>
+      <div>
+        <div class="node-label" style="color:var(--text);">Caspase enzyme cleavage</div>
+        <div class="node-desc">Apoptosis pathway — unrelated to G1/S progression</div>
+      </div>
+    </div>
+    <span class="node-arrow">›</span>
+  </div>
+
+  <div class="node-card nc-gray" onclick="openModal('choice-b')" style="cursor:pointer;margin-bottom:0.7rem;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="pill pill-red">B</span>
+      <div>
+        <div class="node-label" style="color:var(--text);">GDP binding to Ras protein</div>
+        <div class="node-desc">GDP-bound Ras is inactive; Ras is upstream, not immediate</div>
+      </div>
+    </div>
+    <span class="node-arrow">›</span>
+  </div>
+
+  <div class="node-card nc-gray" onclick="openModal('choice-c')" style="cursor:pointer;margin-bottom:0.7rem;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="pill pill-red">C</span>
+      <div>
+        <div class="node-label" style="color:var(--text);">p27 protein upregulation</div>
+        <div class="node-desc">p27 up = cycle arrest, not S phase entry</div>
+      </div>
+    </div>
+    <span class="node-arrow">›</span>
+  </div>
+
+  <div class="node-card nc-gray" onclick="openModal('choice-d')" style="cursor:pointer;margin-bottom:0.7rem;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="pill pill-red">D</span>
+      <div>
+        <div class="node-label" style="color:var(--text);">Protein kinase A phosphorylation</div>
+        <div class="node-desc">cAMP/PKA pathway — not involved in G1/S transition</div>
+      </div>
+    </div>
+    <span class="node-arrow">›</span>
+  </div>
+
+  <div class="node-card nc-teal" onclick="openModal('choice-e')" style="cursor:pointer;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="pill pill-green">E ✓</span>
+      <div>
+        <div class="node-label">Retinoblastoma protein phosphorylation</div>
+        <div class="node-desc">Directly gates E2F release → immediately precedes S phase gene activation</div>
+      </div>
+    </div>
+    <span class="node-arrow">›</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: TABLES -->
+<!-- ══════════════════════════════════ -->
+<section id="tables">
+  <div class="section-tag">13 — High-yield summary</div>
+  <h2>High-yield tables</h2>
+
+  <h3>CDK inhibitor families</h3>
+  <table class="data-table">
+    <tr><th>Family</th><th>Members</th><th>Targets</th><th>Induced by</th></tr>
+    <tr><td>INK4</td><td>p16, p15, p18, p19</td><td>CDK4, CDK6 only</td><td>TGF-β, senescence signals</td></tr>
+    <tr><td>CIP/KIP</td><td>p21, p27, p57</td><td>CDK2, CDK4/6, CDK1</td><td>p53 (p21), growth withdrawal (p27), differentiation (p57)</td></tr>
+  </table>
+
+  <h3>Cyclin/CDK complex timeline</h3>
+  <table class="data-table">
+    <tr><th>Complex</th><th>Active in</th><th>Key function</th><th>Inhibitor</th></tr>
+    <tr><td>Cyclin D / CDK4,6</td><td>Mid G1</td><td>Initiate Rb phosphorylation, titrate p27</td><td>p16 (INK4a)</td></tr>
+    <tr><td>Cyclin E / CDK2</td><td>Late G1 → S</td><td>Complete Rb hyperphosphorylation</td><td>p27, p21</td></tr>
+    <tr><td>Cyclin A / CDK2</td><td>S phase</td><td>DNA elongation, fire each origin once</td><td>p21, p27</td></tr>
+    <tr><td>Cyclin A / CDK1</td><td>G2</td><td>G2/M preparation</td><td>—</td></tr>
+    <tr><td>Cyclin B / CDK1</td><td>M phase</td><td>Nuclear envelope breakdown, chromosome condensation</td><td>WEE1 kinase</td></tr>
+  </table>
+
+  <h3>Rb protein states</h3>
+  <table class="data-table">
+    <tr><th>State</th><th>Phosphorylation</th><th>E2F status</th><th>Cell cycle phase</th></tr>
+    <tr><td>Active Rb</td><td>Dephosphorylated (ppRb)</td><td>Bound — repressed</td><td>G0, early G1</td></tr>
+    <tr><td>Partially active</td><td>Mono-phosphorylated (by CDK4)</td><td>Partially released</td><td>Mid G1</td></tr>
+    <tr><td>Inactive Rb</td><td>Hyperphosphorylated (by CDK2)</td><td>Fully released — active</td><td>Late G1 → G2/M</td></tr>
+    <tr><td>Restored</td><td>Dephosphorylated (by PP1 post-mitosis)</td><td>Rebound in daughter cells</td><td>After M phase</td></tr>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION: QUIZ -->
+<!-- ══════════════════════════════════ -->
+<section id="quiz">
+  <div class="section-tag">14 — Practice</div>
+  <h2>Practice questions</h2>
+
+  <div class="quiz-card" id="q1">
+    <div class="quiz-q">1. A 4-year-old presents with leukocoria (white pupillary reflex) in one eye. Genetic testing reveals a germline mutation in one copy of the RB1 gene. Which additional event is most likely required for tumor formation?</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz('q1',this,'wrong')"><span class="quiz-letter">A</span> Gain-of-function mutation in CDK4</button>
+      <button class="quiz-opt" onclick="answerQuiz('q1',this,'wrong')"><span class="quiz-letter">B</span> Overexpression of Cyclin D1</button>
+      <button class="quiz-opt" onclick="answerQuiz('q1',this,'correct')"><span class="quiz-letter">C</span> Loss of the second wild-type RB1 allele in a retinal cell</button>
+      <button class="quiz-opt" onclick="answerQuiz('q1',this,'wrong')"><span class="quiz-letter">D</span> p53 inactivation</button>
+      <button class="quiz-opt" onclick="answerQuiz('q1',this,'wrong')"><span class="quiz-letter">E</span> Skp2 overexpression</button>
+    </div>
+    <div class="quiz-feedback" id="q1-fb-correct correct">
+      <strong>Correct.</strong> This is Knudson's two-hit hypothesis. One germline RB1 mutation is inherited. The tumor forms only when the second allele is lost somatically in a retinal cell (second "hit"). Options A, B, and E would leave Rb intact — just unable to be phosphorylated or stabilized — but functional Rb protein from the wild-type allele would still suppress the cycle.
+    </div>
+    <div class="quiz-feedback" id="q1-fb-wrong wrong">
+      <strong>Incorrect.</strong> Knudson's two-hit hypothesis: the hereditary RB1 mutation provides the first hit, but tumor formation requires loss of the second wild-type copy in a somatic retinal cell. A, B, and E affect upstream regulators of Rb phosphorylation but don't eliminate Rb protein itself.
+    </div>
+  </div>
+
+  <div class="quiz-card" id="q2">
+    <div class="quiz-q">2. A cancer researcher treats a breast cancer cell line with a CDK4/6 inhibitor. Flow cytometry shows cell cycle arrest. In which phase would you expect the cells to accumulate?</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz('q2',this,'correct')"><span class="quiz-letter">A</span> G1</button>
+      <button class="quiz-opt" onclick="answerQuiz('q2',this,'wrong')"><span class="quiz-letter">B</span> S phase</button>
+      <button class="quiz-opt" onclick="answerQuiz('q2',this,'wrong')"><span class="quiz-letter">C</span> G2</button>
+      <button class="quiz-opt" onclick="answerQuiz('q2',this,'wrong')"><span class="quiz-letter">D</span> M phase</button>
+      <button class="quiz-opt" onclick="answerQuiz('q2',this,'wrong')"><span class="quiz-letter">E</span> G0</button>
+    </div>
+    <div class="quiz-feedback" id="q2-fb-correct correct">
+      <strong>Correct.</strong> CDK4/6 inhibitors (palbociclib, ribociclib, abemaciclib) block the initial Rb phosphorylation step. Without phosphorylated Rb, E2F stays sequestered and S-phase genes are not transcribed. Cells cannot cross the restriction point and accumulate in G1.
+    </div>
+    <div class="quiz-feedback" id="q2-fb-wrong wrong">
+      <strong>Incorrect.</strong> CDK4/6 is active in G1. Blocking it prevents Rb phosphorylation, trapping E2F and halting progression through the G1/S checkpoint. Cells accumulate in G1.
+    </div>
+  </div>
+
+  <div class="quiz-card" id="q3">
+    <div class="quiz-q">3. TGF-β is found to arrest cells in G1 via upregulation of p15 (INK4b). Which downstream event is most directly responsible for this arrest?</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz('q3',this,'wrong')"><span class="quiz-letter">A</span> Decreased Cyclin B / CDK1 activity</button>
+      <button class="quiz-opt" onclick="answerQuiz('q3',this,'correct')"><span class="quiz-letter">B</span> Hypophosphorylated Rb retaining E2F</button>
+      <button class="quiz-opt" onclick="answerQuiz('q3',this,'wrong')"><span class="quiz-letter">C</span> Activation of caspase-3</button>
+      <button class="quiz-opt" onclick="answerQuiz('q3',this,'wrong')"><span class="quiz-letter">D</span> Reduction in Cyclin E mRNA transcription</button>
+      <button class="quiz-opt" onclick="answerQuiz('q3',this,'wrong')"><span class="quiz-letter">E</span> Increased ATM kinase activity</button>
+    </div>
+    <div class="quiz-feedback" id="q3-fb-correct correct">
+      <strong>Correct.</strong> p15 is an INK4 family inhibitor that blocks CDK4/6. With CDK4/6 inhibited, Rb cannot be phosphorylated and remains in its active (dephosphorylated) state, keeping E2F transcription factors bound and inactive. S-phase gene programs are not initiated.
+    </div>
+    <div class="quiz-feedback" id="q3-fb-wrong wrong">
+      <strong>Incorrect.</strong> p15 inhibits CDK4/6, which are required to initiate Rb phosphorylation. Unphosphorylated Rb remains active, binds E2F, and prevents transcription of S-phase genes. This is the direct G1 arrest mechanism. Cyclin B/CDK1 and caspases are not part of the G1/S checkpoint.
+    </div>
+  </div>
+
+</section>
+
+</main>
+</div><!-- end layout -->
+
+<!-- ══════════════════════════════════ -->
+<!-- MODAL -->
+<!-- ══════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-content">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-tag" id="modal-tag"></div>
+    <h3 id="modal-title"></h3>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ── NAV ACTIVE STATE ──
+const navLinks = document.querySelectorAll('nav a');
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
+
+// ── QUIZ ──
+function answerQuiz(qid, btn, result) {
+  const card = document.getElementById(qid);
+  const opts = card.querySelectorAll('.quiz-opt');
+  opts.forEach(o => {
+    o.classList.add('disabled');
+    if (o === btn) o.classList.add(result);
+  });
+  if (result === 'correct') {
+    opts.forEach(o => { if (o !== btn && o.classList.contains('disabled')) {} });
+  }
+  const fb = card.querySelector('.quiz-feedback.' + result);
+  if (fb) { fb.classList.add('show'); }
+  if (result === 'wrong') {
+    // highlight correct too
+    opts.forEach(o => {
+      if (o.textContent.includes('C') && qid==='q1') o.classList.add('correct');
+      if (o.textContent.includes('A') && qid==='q2') o.classList.add('correct');
+      if (o.textContent.includes('B') && qid==='q3') o.classList.add('correct');
+    });
+  }
+}
+
+// ── MODAL DATA ──
+const modals = {
+  g0: {
+    tag: 'Cell cycle phase',
+    title: 'G0 — quiescent phase',
+    body: `<p><strong>G0</strong> is a resting state outside the active cell cycle. Cells exit G1 and enter G0 when growth factor signals are insufficient or when differentiation signals dominate.</p>
+    <h4>Key features</h4>
+    <ul>
+      <li>Rb remains permanently dephosphorylated (active) → E2F permanently suppressed</li>
+      <li>Cyclin D levels are near zero — no mitogenic signal</li>
+      <li>p27 levels are high — CDK2 is inhibited</li>
+      <li>Cell volume is maintained but no DNA replication occurs</li>
+    </ul>
+    <h4>Which cells are in G0?</h4>
+    <p>Terminally differentiated cells: neurons, skeletal muscle fibers, cardiomyocytes (post-natal), red blood cells. Also quiescent stem cells and memory lymphocytes. These cells can remain in G0 for the lifetime of the organism.</p>
+    <h4>Re-entry from G0</h4>
+    <p>Some G0 cells (like hepatocytes after partial hepatectomy, T cells after antigen stimulation) can re-enter G1. This requires sustained growth factor stimulation sufficient to rebuild Cyclin D and degrade p27.</p>`
+  },
+  g1: {
+    tag: 'Cell cycle phase',
+    title: 'G1 — first gap phase',
+    body: `<p>G1 is the main preparatory phase where the cell decides whether to divide. It is the longest and most variable phase — lasting hours to days depending on cell type and growth signals.</p>
+    <h4>What happens in G1</h4>
+    <ul>
+      <li>Cell grows in volume (protein and organelle synthesis)</li>
+      <li>Growth factor receptors are expressed and signal transduction occurs</li>
+      <li>Cyclin D accumulates in response to mitogenic signals</li>
+      <li>Rb undergoes progressive phosphorylation</li>
+      <li>The restriction point is passed in late G1</li>
+    </ul>
+    <h4>Duration</h4>
+    <p>Highly variable — hours in rapidly cycling embryonic cells, many hours to days in somatic cells. This variability mostly comes from the time required to accumulate sufficient Cyclin D and complete Rb phosphorylation.</p>`
+  },
+  sphase: {
+    tag: 'Cell cycle phase',
+    title: 'S phase — DNA synthesis',
+    body: `<p>S phase (synthesis phase) is when DNA replication occurs. The entire genome must be duplicated once and only once before mitosis. This requires precise regulation to prevent re-replication.</p>
+    <h4>Key enzymes active in S phase</h4>
+    <ul>
+      <li><strong>DNA polymerase α</strong> — initiates new strands at origins of replication</li>
+      <li><strong>DNA polymerase δ/ε</strong> — processive elongation of leading/lagging strands</li>
+      <li><strong>Dihydrofolate reductase (DHFR)</strong> — reduces dihydrofolate to tetrahydrofolate, providing 1-carbon units for dTMP synthesis</li>
+      <li><strong>Thymidine kinase</strong> — phosphorylates thymidine to TMP (salvage pathway)</li>
+      <li><strong>Ribonucleotide reductase</strong> — converts ribonucleotides to deoxyribonucleotides</li>
+    </ul>
+    <h4>Why the question stem specifies these enzymes</h4>
+    <p>Seeing DHFR and DNA polymerase active = cell is in S phase = something immediately upstream unlocked S phase. That upstream event is Rb phosphorylation → E2F release → transcription of S-phase gene programs.</p>
+    <h4>Clinical relevance</h4>
+    <p>Methotrexate inhibits DHFR → depletes dTMP → halts DNA synthesis → kills rapidly dividing cells. Fluorouracil (5-FU) is converted to FdUMP which also inhibits thymidylate synthase (the enzyme DHFR supplies with methylene-THF).</p>`
+  },
+  g2: {
+    tag: 'Cell cycle phase',
+    title: 'G2 — second gap phase',
+    body: `<p>G2 follows DNA replication. The cell checks that DNA has been replicated completely and accurately before entering mitosis.</p>
+    <h4>G2/M checkpoint</h4>
+    <ul>
+      <li>ATM/ATR kinases detect unreplicated or damaged DNA</li>
+      <li>CHK1/CHK2 phosphorylate and inhibit CDC25C phosphatase</li>
+      <li>CDC25C cannot activate CDK1 → cell arrested in G2</li>
+      <li>WEE1 kinase inhibits CDK1 as an additional brake</li>
+    </ul>
+    <h4>Cyclin B/CDK1 (MPF)</h4>
+    <p>Maturation-promoting factor (MPF) = Cyclin B / CDK1. This complex drives the G2→M transition, phosphorylating nuclear lamins (nuclear envelope breakdown), condensins (chromosome condensation), and spindle proteins.</p>`
+  },
+  mphase: {
+    tag: 'Cell cycle phase',
+    title: 'M phase — mitosis',
+    body: `<p>Mitosis separates the two sets of chromosomes into daughter cells. It consists of prophase, prometaphase, metaphase, anaphase, telophase, and cytokinesis.</p>
+    <h4>Spindle assembly checkpoint (SAC)</h4>
+    <p>The SAC monitors kinetochore-microtubule attachment. Unattached kinetochores produce the mitotic checkpoint complex (MCC) which inhibits the APC/C ubiquitin ligase, preventing Cyclin B degradation and maintaining CDK1 activity. Once all kinetochores are attached, APC/C is activated → Cyclin B is ubiquitinated → CDK1 drops → anaphase proceeds.</p>
+    <h4>Rb re-activation after mitosis</h4>
+    <p>PP1 phosphatase dephosphorylates Rb in daughter cells after mitosis. This resets the system — the newly born cells start in G1 with active Rb and must receive new growth signals to progress again.</p>`
+  },
+  dhfr: {
+    tag: 'S phase enzyme',
+    title: 'Dihydrofolate reductase (DHFR)',
+    body: `<p>DHFR reduces dihydrofolate (DHF) to tetrahydrofolate (THF), which serves as a carrier of one-carbon units. THF (as methylene-THF) donates a methyl group to dUMP, converting it to dTMP — the direct precursor of thymine in DNA.</p>
+    <h4>Why DHFR activity signals S phase</h4>
+    <p>DHFR expression is directly driven by E2F transcription factor. When Rb is phosphorylated and E2F is released, DHFR gene transcription increases dramatically. Active DHFR = active E2F = post-Rb-phosphorylation = S phase.</p>
+    <h4>Clinical: methotrexate</h4>
+    <p>Methotrexate (MTX) competitively inhibits DHFR. Without THF, dTMP cannot be synthesized, DNA replication halts, and rapidly dividing cells die. Used in: ALL, NHL, rheumatoid arthritis (low dose), psoriasis, ectopic pregnancy. Leucovorin (folinic acid) is used to rescue normal cells from MTX toxicity.</p>`
+  },
+  dnapol: {
+    tag: 'S phase enzyme',
+    title: 'DNA polymerase',
+    body: `<p>Multiple DNA polymerases cooperate in eukaryotic replication:</p>
+    <ul>
+      <li><strong>DNA pol α</strong> — initiates new strands with a short RNA-DNA primer; E2F target gene</li>
+      <li><strong>DNA pol δ</strong> — primary lagging-strand polymerase; also fills Okazaki fragments</li>
+      <li><strong>DNA pol ε</strong> — primary leading-strand polymerase</li>
+      <li><strong>DNA pol β</strong> — base excision repair (not replication)</li>
+    </ul>
+    <h4>Why pol α is an E2F target</h4>
+    <p>The DNA pol α gene has E2F binding sites in its promoter. Rb phosphorylation → E2F release → pol α transcription → replication initiation. This is a direct molecular link between the checkpoint and the DNA synthesis machinery.</p>
+    <h4>Clinical: hydroxyurea</h4>
+    <p>Inhibits ribonucleotide reductase → depletes dNTP pools → stalls DNA pol → used in sickle cell disease (increases fetal hemoglobin), CML, essential thrombocythemia.</p>`
+  },
+  tdk: {
+    tag: 'S phase enzyme',
+    title: 'Thymidine kinase',
+    body: `<p>Thymidine kinase (TK) phosphorylates thymidine to thymidine monophosphate (TMP) in the nucleotide salvage pathway. Its expression peaks in late G1/S phase and is an E2F target gene.</p>
+    <h4>Clinical significance</h4>
+    <p>TK activity is used as a proliferation marker in some lymphomas (serum TK1 levels). Also, the herpes simplex virus TK (HSV-TK) is the basis of suicide gene therapy — HSV-TK phosphorylates ganciclovir to a toxic triphosphate that kills dividing cells (used experimentally in glioblastoma).</p>`
+  },
+  'dna-integrity': {
+    tag: 'G1/S checkpoint sensor',
+    title: 'DNA integrity sensing',
+    body: `<p>The primary DNA damage sensors at the G1/S checkpoint are <strong>ATM</strong> (activated by double-strand breaks — ionizing radiation, radiomimetic drugs) and <strong>ATR</strong> (activated by single-stranded DNA — UV damage, replication stress).</p>
+    <h4>Signal cascade</h4>
+    <ul>
+      <li>ATM → phosphorylates CHK2 → CHK2 phosphorylates and destabilizes CDC25A → CDK2 cannot be activated</li>
+      <li>ATM/CHK2 → phosphorylates p53 at Ser15/20 → disrupts MDM2 binding → p53 stabilized</li>
+      <li>Stable p53 → transcribes p21 → p21 inhibits CDK2/CDK4 → Rb stays active → G1 arrest</li>
+    </ul>
+    <h4>Why this matters</h4>
+    <p>Cells with damaged DNA that cannot arrest (p53 mutant, p21 deleted) replicate damaged templates → introduce mutations into daughter cells → tumor evolution. This is why TP53 mutation is so prevalent in cancers.</p>`
+  },
+  'growth-factor-check': {
+    tag: 'G1/S checkpoint',
+    title: 'Growth factor availability',
+    body: `<p>The cell continuously monitors extracellular growth factor levels throughout G1. Because Cyclin D has a very short half-life (~20–30 minutes), Cyclin D levels directly track current growth factor signaling. Remove growth factors → Cyclin D mRNA decays → protein degrades → CDK4 loses its activating subunit → Rb re-accumulates in dephosphorylated state → E2F re-sequestered → cell retreats to G0.</p>
+    <p>This surveillance only operates until the restriction point. After that, the CDK2/E2F positive feedback loop is self-sustaining regardless of whether growth factors are present.</p>`
+  },
+  'cell-size': {
+    tag: 'G1/S checkpoint',
+    title: 'Cell size and nutrient sensing — mTOR',
+    body: `<p>mTORC1 integrates amino acid availability, energy status (AMPK), growth factor signals (PI3K/Akt), and oxygen levels. When sufficient, mTORC1 phosphorylates S6K1 and 4E-BP1, promoting ribosome biogenesis and protein synthesis necessary for cell growth before division.</p>
+    <p>A cell must reach a critical size threshold before committing to division. This is why mTOR inhibitors (rapamycin, everolimus) have anti-proliferative effects — they uncouple growth signaling from cell cycle entry.</p>`
+  },
+  'contact-inhibition': {
+    tag: 'G1/S checkpoint',
+    title: 'Contact inhibition',
+    body: `<p>In dense epithelial monolayers, cell-cell contact via E-cadherin and Merlin (NF2) signaling activates the Hippo pathway (LATS1/2 → YAP/TAZ phosphorylation and cytoplasmic sequestration). YAP/TAZ normally promote Cyclin D transcription; when inhibited, Cyclin D drops. Contact inhibition also upregulates p27 via unknown mechanisms.</p>
+    <h4>Cancer relevance</h4>
+    <p>Loss of contact inhibition is a hallmark of transformation. Cancer cells pile up rather than arresting when the monolayer is confluent. E-cadherin loss (epithelial-to-mesenchymal transition, EMT) and Merlin/NF2 mutations contribute to this.</p>`
+  },
+  'growth-factors-detail': {
+    tag: 'Signaling',
+    title: 'Growth factors and their receptors',
+    body: `<p>Mitogenic growth factors bind receptor tyrosine kinases (RTKs) on the cell surface, triggering dimerization and autophosphorylation of intracellular kinase domains.</p>
+    <table class="modal-table"><tr><th>Growth factor</th><th>Receptor</th><th>Cell types</th></tr>
+    <tr><td>EGF</td><td>EGFR (HER1/ErbB1)</td><td>Epithelial cells — skin, GI, lung</td></tr>
+    <tr><td>PDGF</td><td>PDGFR</td><td>Fibroblasts, smooth muscle, glia</td></tr>
+    <tr><td>IGF-1</td><td>IGF-1R</td><td>Most tissues — growth and survival</td></tr>
+    <tr><td>FGF</td><td>FGFR1-4</td><td>Angiogenesis, limb development</td></tr>
+    <tr><td>HGF</td><td>MET</td><td>Epithelial scatter, liver regeneration</td></tr>
+    </table>
+    <p>After RTK activation: Grb2/SOS adaptor complex recruits to the receptor → SOS (a GEF) exchanges GDP for GTP on Ras → GTP-Ras is active → initiates MAPK cascade.</p>`
+  },
+  ras: {
+    tag: 'Signaling',
+    title: 'Ras / MAPK signaling pathway',
+    body: `<p>Ras is a small GTPase that acts as a molecular switch: GTP-bound = ON, GDP-bound = OFF. This is why choice B (GDP binding to Ras) represents the inactive state — it is the opposite of what triggers Cyclin D expression.</p>
+    <h4>Activation and inactivation</h4>
+    <ul>
+      <li><strong>GEFs</strong> (guanine nucleotide exchange factors, e.g. SOS) exchange GDP→GTP → activates Ras</li>
+      <li><strong>GAPs</strong> (GTPase-activating proteins, e.g. NF1) accelerate GTP hydrolysis → inactivates Ras</li>
+    </ul>
+    <h4>KRAS mutations in cancer</h4>
+    <p>KRAS G12D/G12V mutations impair GTP hydrolysis → Ras stays GTP-bound → constitutive MAPK signaling → Cyclin D always transcribed → cells cycle without growth factor input. KRAS mutations occur in ~90% of pancreatic adenocarcinoma, ~45% of colorectal cancers, ~30% of NSCLC.</p>
+    <h4>Why Ras-GDP is a wrong answer</h4>
+    <p>The question asks what immediately precedes S phase enzyme activation. Ras signaling is several steps upstream — it occurs at the plasma membrane, must be transduced through the MAPK cascade, then Cyclin D must be transcribed and translated, then CDK4 must phosphorylate Rb. Many steps intervene before S phase.</p>`
+  },
+  myc: {
+    tag: 'Transcription factor',
+    title: 'Myc — driving Cyclin D transcription',
+    body: `<p>Myc is a basic helix-loop-helix leucine zipper (bHLH-LZ) transcription factor that heterodimerizes with Max to activate target genes. Myc is a critical downstream effector of the MAPK pathway and a major driver of Cyclin D1 expression.</p>
+    <h4>Myc target genes relevant to the cell cycle</h4>
+    <ul>
+      <li>Cyclin D1, Cyclin D2 — CDK4/6 activating subunits</li>
+      <li>CDK4 — kinase subunit (Myc can upregulate both halves of the complex)</li>
+      <li>E2F itself — amplifies the E2F transcriptional program</li>
+      <li>Ribosomal genes — promotes cell growth to support division</li>
+    </ul>
+    <h4>Myc in cancer</h4>
+    <p>MYC is one of the most commonly amplified/overexpressed oncogenes. Burkitt lymphoma: t(8;14) translocation places MYC under the immunoglobulin heavy chain promoter → massive overexpression. Also amplified in breast CA, neuroblastoma (MYCN), SCLC.</p>`
+  },
+  'cyclin-d-synth': {
+    tag: 'Cell cycle protein',
+    title: 'Cyclin D — the growth factor sensor',
+    body: `<p>There are three D-type cyclins (D1, D2, D3) with overlapping but distinct expression patterns. Cyclin D1 is the most studied and most commonly amplified in cancer.</p>
+    <h4>Unique properties compared to other cyclins</h4>
+    <ul>
+      <li>Very short t½ (~20–30 min) — degraded by ubiquitin/proteasome as soon as growth signals wane</li>
+      <li>Levels track growth factor input in real time — unlike Cyclin E/A/B which oscillate with the intrinsic cell clock</li>
+      <li>Also functions as a transcriptional co-regulator independently of CDK4</li>
+      <li>Contains a LXCXE motif that directly contacts the Rb pocket domain</li>
+    </ul>
+    <h4>Cyclin D1 in cancer</h4>
+    <p>Mantle cell lymphoma: t(11;14) juxtaposes Cyclin D1 with the IGH locus → overexpression. Also amplified in ER+ breast cancer (~20%), head and neck squamous CA, multiple myeloma.</p>`
+  },
+  'rb-partial': {
+    tag: 'Molecular mechanism',
+    title: 'Partial Rb phosphorylation by CDK4',
+    body: `<p>CDK4 can only mono-phosphorylate Rb — it can phosphorylate individual serine/threonine residues (e.g. Ser780) but cannot achieve the full hyperphosphorylated state that completely releases E2F.</p>
+    <h4>Effect of partial phosphorylation</h4>
+    <ul>
+      <li>Rb grip on E2F is loosened but not released</li>
+      <li>Small amounts of E2F activity leak through — sufficient to begin Cyclin E transcription</li>
+      <li>Cyclin E gene is among the first E2F targets activated</li>
+    </ul>
+    <h4>Analogy</h4>
+    <p>Think of CDK4 as partially opening a dam gate — just enough water flows through to power the turbine (Cyclin E/CDK2) that will blow the gate open completely.</p>`
+  },
+  'p27-titration': {
+    tag: 'Molecular mechanism',
+    title: 'Cyclin D titrates p27 away from CDK2',
+    body: `<p>Cyclin D has a LXCXE motif that allows it to sequester p27 in a non-inhibitory complex. When Cyclin D accumulates, it physically binds p27 and pulls it away from CDK2/Cyclin E complexes.</p>
+    <h4>Two-step p27 removal</h4>
+    <ul>
+      <li><strong>Step 1 — Titration:</strong> Cyclin D sequesters p27 (immediate effect, does not degrade p27)</li>
+      <li><strong>Step 2 — Degradation:</strong> CDK2, once partially activated, phosphorylates p27 at Thr187, marking it for SCF-Skp2 ubiquitination and proteasomal degradation</li>
+    </ul>
+    <p>This creates another positive feedback: CDK2 activity → p27 degradation → more CDK2 activity → more p27 degradation.</p>`
+  },
+  p16: {
+    tag: 'CDK inhibitor',
+    title: 'p16 (INK4a / CDKN2A)',
+    body: `<p>p16 is an INK4 family CDK inhibitor that specifically inhibits CDK4 and CDK6 by competing with Cyclin D for binding to CDK4. Without its activating cyclin, CDK4 cannot phosphorylate Rb.</p>
+    <h4>Mechanism</h4>
+    <p>p16 binds the CDK4 catalytic subunit and induces a conformational change that prevents Cyclin D docking. This is distinct from CIP/KIP family inhibitors (p21, p27) that bind the Cyclin/CDK complex after it forms.</p>
+    <h4>The CDKN2A locus — remarkably complex</h4>
+    <p>The CDKN2A locus at 9p21 encodes two tumor suppressor proteins from overlapping reading frames: p16/INK4a (inhibits CDK4) and p14/ARF (stabilizes p53 by inhibiting MDM2). Deletion of this locus simultaneously disables both the Rb and p53 pathways.</p>
+    <h4>Cancer relevance</h4>
+    <p>Deleted/silenced by methylation in: pancreatic adenocarcinoma, melanoma (germline mutations cause familial atypical mole-melanoma syndrome), esophageal CA, NSCLC, mesothelioma, GBM. One of the most commonly inactivated tumor suppressor genes across all cancers.</p>`
+  },
+  p15: {
+    tag: 'CDK inhibitor',
+    title: 'p15 (INK4b / CDKN2B)',
+    body: `<p>p15 is closely related to p16 and also inhibits CDK4/CDK6. Its expression is directly induced by TGF-β — making it the molecular link between TGF-β's anti-proliferative effect and the cell cycle machinery.</p>
+    <h4>TGF-β → p15 → G1 arrest pathway</h4>
+    <ul>
+      <li>TGF-β binds TGF-βR → activates Smad2/3 → Smad4 complex enters nucleus</li>
+      <li>Smad complex transcribes p15 → p15 inhibits CDK4/6</li>
+      <li>CDK4/6 cannot phosphorylate Rb → E2F stays sequestered → G1 arrest</li>
+    </ul>
+    <p>The CDKN2B gene (encoding p15) is adjacent to CDKN2A (encoding p16) on chromosome 9p21 and is often co-deleted in cancers that lose p16.</p>`
+  },
+  p18: {
+    tag: 'CDK inhibitor',
+    title: 'p18 (INK4c / CDKN2C)',
+    body: `<p>p18 is an INK4 family member that inhibits CDK4 and CDK6, expressed during differentiation programs. It is most relevant in hematologic contexts.</p>
+    <p>p18 knockout mice develop multiple myeloma-like plasmacytomas and pituitary tumors, suggesting tumor suppressor function. p18 expression is often reduced in multiple myeloma cell lines.</p>`
+  },
+  'rb-active': {
+    tag: 'Rb protein',
+    title: 'Active (dephosphorylated) Rb',
+    body: `<p>Dephosphorylated Rb (ppRb) is the active, growth-suppressive form. It works by binding to E2F transcription factors and recruiting co-repressors.</p>
+    <h4>Mechanism of E2F repression</h4>
+    <ul>
+      <li>Rb binds E2F at the Rb "pocket domain" (A and B subdomains)</li>
+      <li>The Rb:E2F complex cannot activate transcription — E2F's transactivation domain is masked</li>
+      <li>Rb also recruits HDAC1/2 → deacetylates histones at E2F target gene promoters → chromatin compaction → active repression</li>
+      <li>Can also recruit DNMT3a for long-term silencing in quiescent cells</li>
+    </ul>
+    <h4>Where active Rb is found</h4>
+    <p>G0 cells (permanently), G1 cells (before restriction point), differentiated post-mitotic cells (permanently). After phosphorylation in late G1, Rb stays phosphorylated throughout S, G2, and M, then PP1 dephosphorylates it again after mitosis.</p>`
+  },
+  'rb-inactive': {
+    tag: 'Rb protein',
+    title: 'Inactive (phosphorylated) Rb',
+    body: `<p>Hyperphosphorylated Rb cannot bind E2F. The conformational change induced by multiple phosphorylation events (at up to 14 CDK consensus sites) disrupts the Rb pocket domain structure.</p>
+    <h4>Consequences of Rb inactivation</h4>
+    <ul>
+      <li>E2F dimers (E2F1-3 with DP1/2) are free and bind target gene promoters</li>
+      <li>E2F with co-activators (p300/CBP) → acetylation of target gene promoters → active transcription</li>
+      <li>S-phase gene program fully activated: DHFR, DNA pol α, thymidine kinase, Cyclin E, Cyclin A, CDC6…</li>
+    </ul>
+    <p>Rb remains phosphorylated until anaphase, when APC/C activation and CDK1 inactivation allow PP1 to dephosphorylate it in the daughter cells.</p>`
+  },
+  'hpv-rb': {
+    tag: 'Viral oncogenesis',
+    title: 'HPV E7 and Rb inactivation',
+    body: `<p>High-risk HPV (types 16, 18) encodes the E7 oncoprotein, which binds directly to the Rb pocket domain via an LXCXE motif — the same domain that E2F uses to bind. This displaces E2F from Rb, mimicking the effect of CDK4/6-mediated Rb phosphorylation without any growth factor stimulation.</p>
+    <h4>Why this is so potent</h4>
+    <p>E7 constitutively releases E2F → perpetual S-phase gene transcription. HPV also encodes E6, which promotes p53 degradation via an E3 ubiquitin ligase. Together, E6 and E7 simultaneously disable both the Rb pathway and the p53 pathway — the two most important tumor suppressor axes in the cell.</p>
+    <h4>Gardasil vaccination</h4>
+    <p>The HPV vaccine (Gardasil 9) targets the L1 capsid protein of HPV types 6, 11, 16, 18, 31, 33, 45, 52, 58. By preventing infection, it prevents E6/E7 expression and dramatically reduces the risk of cervical, oropharyngeal, anal, vulvar, and penile cancers.</p>`
+  },
+  'low-e2f': {
+    tag: 'Positive feedback',
+    title: 'Low-level E2F activity primes Cyclin E',
+    body: `<p>When CDK4 partially phosphorylates Rb, enough E2F "leaks out" to begin transcribing early E2F target genes — most importantly <strong>Cyclin E itself</strong>. This is the seed of the positive feedback loop.</p>
+    <p>At this stage, Cyclin E levels are low, CDK2 is still partially inhibited by p27, and the cell is not yet committed. The restriction point has not yet been crossed. Growth factor withdrawal can still reverse the process.</p>`
+  },
+  'cyclin-e-rises': {
+    tag: 'Cell cycle',
+    title: 'Cyclin E accumulation and CDK2 activation',
+    body: `<p>As Cyclin E levels rise, the Cyclin E/CDK2 complex forms. CDK2 activity is also enabled by p27 being titrated away by Cyclin D. CDK2 is additionally activated by CDC25A phosphatase (which removes inhibitory phosphates at Thr14/Tyr15).</p>
+    <h4>CDK2 activation requires three inputs</h4>
+    <ul>
+      <li>Cyclin E binding (provides specificity and activates conformation)</li>
+      <li>p27 removal (relieves inhibition)</li>
+      <li>CDC25A dephosphorylation (removes WEE1/MYT1-added inhibitory phosphates)</li>
+    </ul>`
+  },
+  'rb-full': {
+    tag: 'Molecular mechanism',
+    title: 'CDK2 hyperphosphorylates Rb',
+    body: `<p>Cyclin E/CDK2 phosphorylates Rb at additional sites not reached by CDK4, achieving "hyperphosphorylation." This is the decisive step — fully inactivated Rb releases E2F completely and irreversibly (until mitosis ends).</p>
+    <p>Key CDK2 phosphorylation sites on Rb include Ser608, Ser612, Thr821, Thr826 — the full complement of 14 phosphorylatable residues achieves complete pocket domain disruption.</p>`
+  },
+  'positive-feedback': {
+    tag: 'Systems biology',
+    title: 'The positive feedback loop — restriction point bistability',
+    body: `<p>E2F, once released from Rb, transcribes its own activating machinery: Cyclin E (→more CDK2 → more Rb phosphorylation → more E2F release) and Cyclin A (sustains S phase). This creates a bistable switch:</p>
+    <ul>
+      <li>Below threshold: system is stable in the G1 state (Rb active, E2F bound)</li>
+      <li>Above threshold: system switches irreversibly to the S-phase state (Rb phosphorylated, E2F free)</li>
+    </ul>
+    <p>This bistability is the molecular basis of the restriction point. The positive feedback ensures the decision is digital (committed or not), not analog (proportional to signal strength). Cancer cells typically shift this threshold downward or eliminate it entirely.</p>`
+  },
+  'rb-stays-active': {
+    tag: 'p27 mechanism',
+    title: 'Rb stays active — E2F remains bound',
+    body: `<p>When p27 inhibits CDK2, no kinase is available to hyperphosphorylate Rb. Rb remains in its active (dephosphorylated or mono-phosphorylated) state and continues to bind E2F transcription factors.</p>
+    <p>Rb:E2F complexes also actively recruit HDACs and SWI/SNF remodeling complexes to compact chromatin at S-phase gene promoters — this is not merely passive repression but active silencing of the proliferative gene program.</p>`
+  },
+  'g0-arrest': {
+    tag: 'Cell biology',
+    title: 'G1 arrest vs G0',
+    body: `<p>G1 arrest (temporary) and G0 (quiescence) are mechanistically similar but differ in depth of commitment:</p>
+    <ul>
+      <li><strong>G1 arrest:</strong> Rb active, E2F bound, p27 elevated. Cell can re-enter cycle within hours of growth factor stimulation.</li>
+      <li><strong>G0/quiescence:</strong> Deeper chromatin remodeling, Rb permanently associated with E2F, additional gene silencing. Re-entry may require more sustained stimulation or may not be possible at all (terminally differentiated cells).</li>
+    </ul>`
+  },
+  'growth-factor-p27': {
+    tag: 'p27 regulation',
+    title: 'Growth factors initiate p27 removal',
+    body: `<p>The sequence of p27 removal after growth factor stimulation:</p>
+    <ol style="color:var(--text-muted);padding-left:1.2rem;font-size:13.5px;">
+      <li>Growth factor → Ras/MAPK → Cyclin D transcribed (within ~4–6 hours)</li>
+      <li>Cyclin D / CDK4 forms → sequesters p27 away from CDK2 (titration, reversible)</li>
+      <li>Partial CDK2 activity → phosphorylates p27 at Thr187</li>
+      <li>Phospho-T187 p27 recognized by Skp2/SCF complex → ubiquitination</li>
+      <li>Proteasome degrades p27 → CDK2 fully active → Rb hyperphosphorylated → restriction point crossed</li>
+    </ol>`
+  },
+  skp2: {
+    tag: 'Ubiquitin proteasome system',
+    title: 'SCF–Skp2 ubiquitin ligase',
+    body: `<p>The SCF complex (Skp1–Cullin1–F-box protein) is a multisubunit E3 ubiquitin ligase. The F-box protein (Skp2 in this context) provides substrate specificity — it recognizes p27 only when p27 is phosphorylated at Thr187 by CDK2.</p>
+    <h4>Skp2 in cancer</h4>
+    <p>Skp2 is overexpressed in many cancers. High Skp2 → rapid p27 degradation → low p27 → CDK2 perpetually active → uncontrolled cycling. Skp2 overexpression correlates with low p27, high proliferation index, and poor prognosis across multiple tumor types. Skp2 inhibitors are in preclinical development.</p>`
+  },
+  proteasome: {
+    tag: 'Protein degradation',
+    title: '26S proteasome',
+    body: `<p>The 26S proteasome consists of a barrel-shaped 20S catalytic core and 19S regulatory caps. Ubiquitinated substrates are recognized by the 19S cap, deubiquitinated, unfolded by AAA-ATPases, and fed into the 20S core where threonine proteases degrade them into peptides.</p>
+    <p><strong>Bortezomib</strong> (Velcade) is a proteasome inhibitor used in multiple myeloma and mantle cell lymphoma. By blocking proteasomal degradation, it accumulates pro-apoptotic proteins (including p27) and misfolded proteins, inducing ER stress and apoptosis in rapidly dividing plasma cells.</p>`
+  },
+  'cdk2-free': {
+    tag: 'Cell cycle commitment',
+    title: 'CDK2 uninhibited — restriction point crossed',
+    body: `<p>Once p27 is fully degraded and CDK2 is active, the positive feedback loop is established. CDK2 phosphorylates Rb → more E2F released → more Cyclin E transcribed → more CDK2 activity. This loop is irreversible under normal conditions. The cell is now committed to completing DNA replication and cell division.</p>
+    <p>At this point, even if all growth factors are removed, the cell will complete S phase, G2, and M. This is the molecular definition of the restriction point.</p>`
+  },
+  'p21-detail': {
+    tag: 'CDK inhibitor',
+    title: 'p21 (CDKN1A) — DNA damage responder',
+    body: `<p>p21 is the primary transcriptional target of p53 and the main effector of the DNA damage-induced G1 arrest. It inhibits CDK2 (and CDK4/6), is a "universal" CDK inhibitor that can stop the cycle at multiple points.</p>
+    <h4>p21 vs p27 — exam distinction</h4>
+    <ul>
+      <li><strong>p21:</strong> induced by p53 (DNA damage signal). ATM/ATR → p53 → p21 → G1 arrest</li>
+      <li><strong>p27:</strong> induced by growth factor withdrawal, TGF-β, contact inhibition. Responds to environmental signals, not DNA damage</li>
+    </ul>
+    <h4>p21 also inhibits PCNA</h4>
+    <p>p21 binds proliferating cell nuclear antigen (PCNA), the DNA polymerase δ clamp, directly inhibiting replication. This provides a more rapid arrest than waiting for CDK inhibition alone.</p>
+    <h4>p21 paradox in cancer</h4>
+    <p>p21 can also be anti-apoptotic in certain contexts (cytoplasmic p21 inhibits pro-apoptotic kinases). High cytoplasmic p21 in some cancers correlates with chemotherapy resistance.</p>`
+  },
+  'dna-damage': {
+    tag: 'DNA damage response',
+    title: 'DNA damage — types and sensors',
+    body: `<p>The DNA damage response (DDR) detects and responds to multiple types of genomic insults:</p>
+    <table class="modal-table"><tr><th>Damage type</th><th>Cause</th><th>Sensor</th><th>Signal kinase</th></tr>
+    <tr><td>Double-strand break</td><td>Ionizing radiation, radiomimetics</td><td>MRN complex</td><td>ATM → CHK2</td></tr>
+    <tr><td>Single-strand break / stalled fork</td><td>UV light, replication stress</td><td>RPA-ssDNA</td><td>ATR → CHK1</td></tr>
+    <tr><td>Base damage</td><td>Chemical mutagens, oxidation</td><td>Base excision repair</td><td>—</td></tr>
+    <tr><td>Interstrand crosslinks</td><td>Platinum drugs, MMC</td><td>Fanconi anemia pathway</td><td>ATR</td></tr>
+    </table>`
+  },
+  'atm-chk2': {
+    tag: 'DNA damage signaling',
+    title: 'ATM/ATR → CHK1/CHK2 → p53 and CDC25',
+    body: `<p>The ATM/ATR kinases are the apical kinases of the DNA damage response. They have two major arms:</p>
+    <h4>Arm 1: p53 stabilization</h4>
+    <ul>
+      <li>ATM/CHK2 phosphorylate p53 at Ser15 and Ser20 → disrupts MDM2 binding → p53 escapes MDM2-mediated degradation</li>
+      <li>Stable p53 transcribes p21 → CDK2 inhibition → G1/S arrest</li>
+      <li>Also transcribes MDM2 (negative feedback), BAX, PUMA, NOXA (apoptosis if damage is severe)</li>
+    </ul>
+    <h4>Arm 2: CDC25 inhibition (fast response)</h4>
+    <ul>
+      <li>CHK1/CHK2 phosphorylate CDC25A → triggers SCF-mediated degradation of CDC25A</li>
+      <li>Without CDC25A, inhibitory phosphates on CDK2 (Tyr15) are not removed → CDK2 immediately inactive</li>
+      <li>This is faster than waiting for p21 to be transcribed — provides rapid arrest within minutes</li>
+    </ul>`
+  },
+  'p53-detail': {
+    tag: 'Tumor suppressor',
+    title: 'p53 — "guardian of the genome"',
+    body: `<p>p53 (TP53) is a transcription factor and the most commonly mutated tumor suppressor in human cancer (~50% of all cancers). Under normal conditions, MDM2 continuously ubiquitinates p53, keeping levels low.</p>
+    <h4>MDM2 — the key regulator</h4>
+    <ul>
+      <li>MDM2 is an E3 ubiquitin ligase that ubiquitinates p53 → nuclear export → proteasomal degradation</li>
+      <li>MDM2 is itself an E2F and p53 target gene — negative feedback loop</li>
+      <li>ATM/CHK2 phosphorylation of p53 disrupts p53/MDM2 interaction → p53 accumulates</li>
+    </ul>
+    <h4>p53 outcomes: arrest vs apoptosis</h4>
+    <p>Mild/repairable damage → p21 induction → G1 arrest → allow repair. Severe/irreparable damage → BAX, PUMA, NOXA induction → mitochondrial outer membrane permeabilization → cytochrome c release → apoptosome → caspase-9/3 activation → apoptosis.</p>
+    <h4>Li-Fraumeni syndrome</h4>
+    <p>Germline TP53 mutations → dramatically elevated lifetime risk of cancers: breast CA, sarcomas, brain tumors, adrenocortical CA, leukemias — often at young age.</p>`
+  },
+  'cyclin-d-cancer': {
+    tag: 'Cancer biology',
+    title: 'Cyclin D1 amplification in cancer',
+    body: `<p>Cyclin D1 overexpression keeps CDK4/6 constitutively active, maintaining Rb in a phosphorylated (inactive) state even without growth factor stimulation.</p>
+    <h4>Mechanisms of Cyclin D1 overexpression</h4>
+    <ul>
+      <li><strong>Gene amplification:</strong> 11q13 amplification in breast CA (~15%), head and neck CA (~40%)</li>
+      <li><strong>Chromosomal translocation:</strong> t(11;14)(q13;q32) in mantle cell lymphoma — Cyclin D1 under IgH enhancer → massive overexpression. This translocation is diagnostic for MCL and detectable by FISH.</li>
+      <li><strong>Upstream pathway activation:</strong> KRAS, BRAF mutations → constitutive MAPK → perpetual Cyclin D transcription</li>
+    </ul>`
+  },
+  'cdk4-cancer': {
+    tag: 'Cancer biology',
+    title: 'CDK4 amplification in cancer',
+    body: `<p>CDK4 amplification (at 12q14) provides excess kinase ready to phosphorylate Rb whenever Cyclin D is present. Found in ~15% of GBM, ~20% of liposarcomas, and some melanomas.</p>
+    <p>CDK4/6 inhibitors (palbociclib, ribociclib, abemaciclib) are effective regardless of whether the amplification is at Cyclin D or CDK4, because both converge on the same kinase complex. The key requirement is intact Rb.</p>`
+  },
+  'p16-loss': {
+    tag: 'Cancer biology',
+    title: 'p16/INK4a loss in cancer',
+    body: `<p>When p16 is lost, CDK4 is no longer inhibitable by the INK4 family, and can phosphorylate Rb freely whenever Cyclin D is present. Since Cyclin D tracks growth factor signaling, the cell still requires some mitogenic input — but the threshold is dramatically lowered.</p>
+    <h4>Mechanisms of p16 loss</h4>
+    <ul>
+      <li>Homozygous deletion (most common): 9p21 deletion in pancreatic CA (~90%), melanoma, mesothelioma</li>
+      <li>Promoter hypermethylation: epigenetic silencing in colon CA, NSCLC, esophageal CA</li>
+      <li>Point mutation: familial atypical mole-melanoma (FAMM) syndrome</li>
+    </ul>`
+  },
+  'rb-loss': {
+    tag: 'Cancer biology',
+    title: 'RB1 deletion — Knudson two-hit hypothesis',
+    body: `<p>When Rb is absent, E2F is permanently free. There is nothing to restrain S-phase gene transcription. The cell bypasses the G1/S checkpoint entirely.</p>
+    <h4>Tumor spectrum of RB1 loss</h4>
+    <ul>
+      <li>Retinoblastoma: childhood eye tumor, 40% hereditary (germline RB1 mutation)</li>
+      <li>Osteosarcoma: highly associated with RB1 loss; also occurs in retinoblastoma survivors</li>
+      <li>Small cell lung cancer: Rb loss in virtually 100% of cases — explains resistance to CDK4/6 inhibitors</li>
+      <li>Bladder cancer: RB1 mutation in ~20%</li>
+      <li>Cervical CA: HPV E7 functionally inactivates Rb</li>
+    </ul>`
+  },
+  'p53-loss': {
+    tag: 'Cancer biology',
+    title: 'TP53 mutation — most common cancer mutation',
+    body: `<p>p53 mutations occur in ~50% of all human cancers. Unlike most tumor suppressor mutations (which are loss-of-function), many TP53 mutations produce gain-of-function (GOF) mutant p53 proteins that actively promote oncogenesis.</p>
+    <h4>GOF mutant p53 activities</h4>
+    <ul>
+      <li>Binds and inactivates other tumor suppressors (p63, p73)</li>
+      <li>Promotes transcription of pro-oncogenic genes (cyclin A, CDK1)</li>
+      <li>Cooperates with transcription factors to drive invasion and metastasis</li>
+    </ul>
+    <h4>Targeting p53 pharmacologically</h4>
+    <ul>
+      <li>MDM2 inhibitors (nutlins): block MDM2/p53 interaction → stabilize wild-type p53 → cell cycle arrest/apoptosis in tumors with wild-type p53</li>
+      <li>APR-246 (eprenetapopt): restores wild-type conformation to mutant p53 — clinical trials ongoing</li>
+    </ul>`
+  },
+  'skp2-cancer': {
+    tag: 'Cancer biology',
+    title: 'Skp2 overexpression — p27 destruction',
+    body: `<p>Skp2 is the F-box protein that targets p27 (phosphorylated at Thr187) for ubiquitination. Overexpression of Skp2 dramatically accelerates p27 degradation, keeping CDK2 active even in the absence of strong mitogenic signals.</p>
+    <p>Skp2 itself is an E2F target gene — creating a feedforward loop: Rb phosphorylation → E2F → Skp2 → p27 degradation → more CDK2 → more Rb phosphorylation.</p>
+    <p>High Skp2 / low p27 is associated with aggressive disease in breast, prostate, gastric, and colorectal cancers. Skp2 inhibitors are in preclinical development as a strategy to restore p27 levels in cancer cells.</p>`
+  },
+  'ras-cancer': {
+    tag: 'Cancer biology',
+    title: 'Oncogenic Ras — constitutive Cyclin D transcription',
+    body: `<p>The three human Ras GTPases (KRAS, NRAS, HRAS) are mutated in approximately 30% of all human cancers. KRAS is the most commonly mutated (~85% of RAS mutations), with hotspots at codons 12 and 13.</p>
+    <h4>Why oncogenic Ras drives cell cycle entry</h4>
+    <p>Mutant Ras (G12D, G12V, G12C etc.) cannot hydrolyze GTP due to disruption of the GAP-stimulated hydrolysis mechanism. Ras is locked in the GTP-bound (active) conformation, constitutively signaling through RAF/MEK/ERK → perpetual Myc/AP-1 activation → Cyclin D always transcribed → CDK4 always active → Rb always phosphorylated.</p>
+    <h4>Therapeutic targeting</h4>
+    <p>KRAS G12C (found in ~13% of NSCLC) is now targetable by sotorasib (AMG 510) and adagrasib, which covalently lock mutant KRAS in the GDP-bound (inactive) state. KRAS G12D and other mutations remain difficult to target directly.</p>`
+  },
+  palbociclib: {
+    tag: 'CDK4/6 inhibitor',
+    title: 'Palbociclib (Ibrance)',
+    body: `<p>Palbociclib was the first CDK4/6 inhibitor approved by the FDA (2015). It is a selective inhibitor of CDK4 and CDK6, blocking Rb phosphorylation and causing G1 arrest.</p>
+    <h4>Indications</h4>
+    <ul>
+      <li>HR+/HER2− metastatic breast cancer (with aromatase inhibitor or fulvestrant)</li>
+    </ul>
+    <h4>Mechanism of selectivity</h4>
+    <p>Palbociclib has higher affinity for CDK4/6 than CDK2, CDK1, or CDK7 — though it is less selective than abemaciclib. The selectivity is achieved through interactions with a unique hydrophobic pocket adjacent to the ATP binding site of CDK4/6.</p>
+    <h4>Key side effects</h4>
+    <ul>
+      <li>Neutropenia (most common dose-limiting toxicity)</li>
+      <li>Fatigue, nausea, alopecia (mild)</li>
+      <li>No significant QTc prolongation (unlike ribociclib)</li>
+    </ul>
+    <h4>Resistance mechanisms</h4>
+    <p>Loss of Rb expression (most common), Cyclin E amplification (bypasses CDK4/6 dependence via direct CDK2 activation), CDK6 amplification.</p>`
+  },
+  ribociclib: {
+    tag: 'CDK4/6 inhibitor',
+    title: 'Ribociclib (Kisqali)',
+    body: `<p>Ribociclib (approved 2017) has demonstrated overall survival (OS) benefit in premenopausal women with HR+/HER2− metastatic breast cancer (MONALEESA-7 trial) — the first CDK4/6 inhibitor to show OS improvement in this population.</p>
+    <h4>Key differentiators</h4>
+    <ul>
+      <li>QTc prolongation: ribociclib inhibits hERG potassium channels → requires baseline and on-treatment ECG monitoring</li>
+      <li>Hepatotoxicity: liver function monitoring required</li>
+      <li>Strong OS data in premenopausal women (alongside goserelin + letrozole)</li>
+    </ul>`
+  },
+  abemaciclib: {
+    tag: 'CDK4/6 inhibitor',
+    title: 'Abemaciclib (Verzenio)',
+    body: `<p>Abemaciclib (approved 2017) is the most CDK4-selective of the three approved CDK4/6 inhibitors. It also has activity against CDK9 (which promotes oncogenic transcription elongation).</p>
+    <h4>Key differentiators</h4>
+    <ul>
+      <li>Can be used as monotherapy (does not require endocrine therapy partner in some settings)</li>
+      <li>Approved in early-stage high-risk HR+/HER2− breast cancer (adjuvant) after the monarchE trial — first CDK4/6 inhibitor in early-stage disease</li>
+      <li>Diarrhea is the predominant toxicity (vs neutropenia for palbociclib/ribociclib)</li>
+      <li>CNS penetration — ongoing trials in brain metastases</li>
+    </ul>`
+  },
+  'choice-a': {
+    tag: 'Wrong answer',
+    title: 'Choice A — Caspase cleavage',
+    body: `<p>Caspases are cysteine-aspartate proteases that execute apoptosis. There are two major groups:</p>
+    <ul>
+      <li><strong>Initiator caspases:</strong> Caspase-8 (extrinsic/death receptor pathway), Caspase-9 (intrinsic/mitochondrial pathway)</li>
+      <li><strong>Executioner caspases:</strong> Caspase-3, -6, -7 — cleave >300 cellular substrates → cell dismantling</li>
+    </ul>
+    <p>Caspase activation and cell cycle progression are fundamentally opposite cell fates. A cell activating caspases is dying; a cell entering S phase is dividing. These pathways are mutually exclusive under normal conditions — some apoptotic signals actually cleave cyclin-dependent kinases to ensure division doesn't occur while a cell is dying.</p>
+    <p><strong>Why it's tempting:</strong> Caspases are buzzword enzymes. Any answer involving a well-known enzyme class feels plausible on a high-pressure exam.</p>`
+  },
+  'choice-b': {
+    tag: 'Wrong answer',
+    title: 'Choice B — GDP binding to Ras',
+    body: `<p>This choice contains two errors:</p>
+    <ol style="color:var(--text-muted);font-size:13.5px;padding-left:1.2rem;">
+      <li><strong>GDP-bound Ras is inactive.</strong> GTP-bound Ras is the active form that drives cell proliferation. GDP-bound Ras is the resting state. So GDP binding to Ras would actually <em>terminate</em> signaling, not initiate it.</li>
+      <li><strong>Even active Ras is not the immediate precursor to S phase.</strong> The pathway is: Ras → RAF → MEK → ERK → Myc/AP-1 → Cyclin D transcription → CDK4 activation → Rb phosphorylation. Many steps intervene between Ras activation and the G1/S gate.</li>
+    </ol>
+    <p>The question asks for the event that <em>most immediately</em> precedes the observed increase in DHFR and DNA polymerase activity. Rb phosphorylation (choice E) directly releases E2F which directly transcribes these genes. Ras activation is 5+ steps upstream.</p>`
+  },
+  'choice-c': {
+    tag: 'Wrong answer',
+    title: 'Choice C — p27 upregulation',
+    body: `<p>p27 upregulation would arrest the cell cycle, not advance it. This is the opposite of what the question describes. The scenario shows a cell entering S phase (DHFR and DNA polymerase are active), which means the G1/S checkpoint has been passed — meaning CDK inhibitors like p27 must have been overcome, not upregulated.</p>
+    <p>In fact, the pathway to S phase requires p27 to be <em>downregulated</em> (sequestered by Cyclin D, then degraded by SCF-Skp2). The presence of active S-phase enzymes confirms that p27 is low in this cell.</p>
+    <p><strong>Why it's tempting:</strong> p27 is a well-known cell cycle regulator. Candidates who know the name but are fuzzy on its direction of action may pick this distractors.</p>`
+  },
+  'choice-d': {
+    tag: 'Wrong answer',
+    title: 'Choice D — Protein kinase A',
+    body: `<p>Protein kinase A (PKA) is the downstream effector of the cAMP signaling pathway. It is activated by GPCRs coupled to Gs proteins → adenylyl cyclase → cAMP → PKA.</p>
+    <p>PKA's major roles are in metabolic regulation (glycogenolysis, lipolysis, gluconeogenesis) and in some cellular proliferation contexts (particularly in specific cell types like thyroid follicular cells, where TSH/cAMP drives growth). However, PKA is not part of the canonical G1/S checkpoint machinery involving Rb, E2F, cyclins, and CDKs.</p>
+    <p><strong>Why it's tempting:</strong> Protein kinases are broadly associated with proliferation signaling. The word "phosphorylation" in the answer (PKA phosphorylates substrates) echoes the correct answer (Rb phosphorylation) and may create false familiarity.</p>`
+  },
+  'choice-e': {
+    tag: 'Correct answer',
+    title: 'Choice E — Rb phosphorylation ✓',
+    body: `<p>This is correct because Rb phosphorylation is the most immediate molecular event that precedes S phase gene activation. The causal chain is direct and without intervening steps:</p>
+    <ol style="color:var(--text-muted);font-size:13.5px;padding-left:1.2rem;">
+      <li>Cyclin D/CDK4 + Cyclin E/CDK2 phosphorylate Rb</li>
+      <li>Phosphorylated Rb releases E2F</li>
+      <li>Free E2F binds promoters of S-phase genes: DHFR, DNA polymerase α, thymidine kinase, Cyclin E, Cyclin A, CDC6…</li>
+      <li>S-phase enzymes are transcribed and translated → their activity is the signal the researcher observes</li>
+    </ol>
+    <p>Rb phosphorylation → E2F release → S-phase enzyme expression is a <strong>direct three-step chain</strong>. No other answer choice has such a direct mechanistic connection to the observed increase in DHFR and DNA polymerase activity.</p>
+    <p>All other choices are either upstream by many steps (B, D), opposite in direction (C), or unrelated to cell cycle progression (A).</p>`
+  },
+  'cyclin-e-e2f': {
+    tag: 'E2F target',
+    title: 'Cyclin E as an E2F target — positive feedback',
+    body: `<p>The Cyclin E promoter contains multiple E2F binding sites. When E2F is released from Rb, one of its first targets is Cyclin E itself. This creates the critical positive feedback: more E2F → more Cyclin E → more CDK2 → more Rb phosphorylation → more E2F.</p>
+    <p>This self-amplifying loop is why the restriction point is a bistable switch. Once initiated, it runs to completion regardless of the initial signal strength, as long as it crosses the activation threshold.</p>`
+  },
+  'cyclin-a-e2f': {
+    tag: 'E2F target',
+    title: 'Cyclin A — sustaining S phase',
+    body: `<p>Cyclin A is another E2F target gene. Cyclin A/CDK2 maintains CDK2 activity throughout S phase (after Cyclin E levels drop — Cyclin E is degraded by SCF-Fbxw7 once it has done its job). Cyclin A/CDK2 also phosphorylates replication factors to prevent re-firing of origins already used.</p>
+    <p>Cyclin A is also the target of viral proteins in some cancer viruses. Its overexpression is seen in many solid tumors.</p>`
+  },
+  cdc6: {
+    tag: 'E2F target',
+    title: 'CDC6 — origin licensing factor',
+    body: `<p>CDC6 is an AAA-ATPase required for loading MCM2-7 helicases onto origins of replication (origin "licensing"). Without CDC6, DNA replication cannot initiate. CDC6 is an E2F target, ensuring that the replication licensing machinery is assembled only after the checkpoint has been passed.</p>
+    <p>After S phase, Cyclin A/CDK2 phosphorylates CDC6, triggering its degradation — this prevents re-licensing of already-fired origins and ensures each piece of DNA is copied exactly once per cell cycle.</p>`
+  }
+};
+
+function openModal(id) {
+  const data = modals[id];
+  if (!data) return;
+  document.getElementById('modal-tag').textContent = data.tag || '';
+  document.getElementById('modal-tag').style.color = 'var(--text-dim)';
+  document.getElementById('modal-title').textContent = data.title;
+  document.getElementById('modal-body').innerHTML = data.body;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Smooth scroll for nav
+document.querySelectorAll('nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
