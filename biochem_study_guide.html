@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Biochemistry Master Review</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.65}
+nav{background:#161b22;border-bottom:1px solid #30363d;padding:6px 16px;display:flex;flex-wrap:wrap;gap:2px;position:sticky;top:0;z-index:100}
+nav a{color:#8b949e;padding:7px 11px;text-decoration:none;font-size:12.5px;border-radius:4px;white-space:nowrap;transition:all .15s}
+nav a:hover{background:#21262d;color:#c9d1d9}
+nav a.active{background:#1f6feb;color:#fff}
+main{max-width:1050px;margin:0 auto;padding:28px 20px}
+section{display:none}section.active{display:block}
+h1{font-size:1.8em;color:#e6edf3;margin-bottom:4px;padding-bottom:10px;border-bottom:2px solid #21262d}
+.subtitle{color:#8b949e;font-size:13px;margin-bottom:20px}
+h2{font-size:1.25em;color:#79c0ff;margin:26px 0 10px;padding-bottom:5px;border-bottom:1px solid #21262d}
+h3{font-size:1.05em;color:#d2a8ff;margin:18px 0 7px}
+h4{font-size:.95em;color:#ffa657;margin:14px 0 5px}
+p{margin:7px 0}ul,ol{margin:7px 0 7px 22px}li{margin:3px 0}
+strong{color:#e6edf3}em{color:#ffa657;font-style:normal}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th{background:#21262d;color:#79c0ff;padding:7px 11px;text-align:left;border:1px solid #30363d}
+td{padding:6px 11px;border:1px solid #21262d;vertical-align:top}
+tr:nth-child(even) td{background:#0d1117}
+.pearl{background:#082032;border-left:4px solid #58a6ff;padding:10px 14px;margin:12px 0;border-radius:0 4px 4px 0;font-size:13.5px}
+.pearl b{color:#58a6ff}
+.mnem{background:#1a1030;border-left:4px solid #bc8cff;padding:10px 14px;margin:12px 0;border-radius:0 4px 4px 0;font-size:13.5px}
+.mnem b{color:#bc8cff}
+.box{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px 16px;margin:12px 0;font-size:13.5px}
+/* MCQ */
+.mcq{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px 18px;margin:14px 0}
+.qnum{font-size:11px;color:#8b949e;margin-bottom:6px}
+.stem{font-weight:600;color:#e6edf3;margin-bottom:10px;font-size:14.5px;line-height:1.5}
+.opts label{display:flex;align-items:flex-start;gap:8px;padding:6px 8px;margin:3px 0;border-radius:4px;cursor:pointer;font-size:13.5px;transition:background .1s}
+.opts label:hover{background:#21262d}
+.opts input[type=radio]{margin-top:3px;flex-shrink:0}
+.opts label.correct{background:#0d2116;color:#3fb950;font-weight:600}
+.opts label.wrong{background:#21060a;color:#f85149}
+.btn{margin-top:10px;padding:5px 14px;background:#21262d;border:1px solid #30363d;color:#c9d1d9;border-radius:5px;cursor:pointer;font-size:12.5px}
+.btn:hover{background:#30363d}
+.expl{margin-top:10px;background:#0d1117;border:1px solid #21262d;border-radius:5px;padding:11px 13px;font-size:13px;display:none}
+.expl .ans{color:#3fb950;font-weight:700;font-size:14px;margin-bottom:5px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
+.controls select,.controls button{padding:7px 12px;background:#21262d;border:1px solid #30363d;color:#c9d1d9;border-radius:5px;cursor:pointer;font-size:13px}
+.controls button:hover{background:#30363d}
+#scorebox{background:#0d2116;border:1px solid #238636;border-radius:8px;padding:14px 18px;margin-bottom:18px;display:none}
+#scorebox h3{color:#3fb950;margin-bottom:4px}
+</style>
+</head>
+<body>
+<nav id="nav">
+<a href="#" onclick="show('ek')" class="active">Enzyme Kinetics</a>
+<a href="#" onclick="show('glyc')">Glycolysis</a>
+<a href="#" onclick="show('gluco')">Gluconeogenesis</a>
+<a href="#" onclick="show('ppp')">Pentose Phosphate</a>
+<a href="#" onclick="show('glycogen')">Glycogen</a>
+<a href="#" onclick="show('trans')">Transition Stage</a>
+<a href="#" onclick="show('krebs')">Krebs Cycle</a>
+<a href="#" onclick="show('etc')">ETC &amp; ATP</a>
+<a href="#" onclick="show('fa')">Fatty Acids</a>
+<a href="#" onclick="show('lipid')">Lipoproteins &amp; Cholesterol</a>
+<a href="#" onclick="show('aa')">Amino Acids &amp; Urea</a>
+<a href="#" onclick="show('nuc')">Nucleotides</a>
+<a href="#" onclick="show('qbank')">&#128221; Q-Bank</a>
+</nav>
+<main>
+<section id="ek" class="active">
+<h1>Enzyme Kinetics</h1>
+<p class="subtitle">Michaelis-Menten · Lineweaver-Burk · Inhibition</p>
+<h2>Michaelis-Menten Equation</h2>
+<div class="box"><b>v = (V<sub>max</sub> × [S]) / (K<sub>m</sub> + [S])</b></div>
+<ul>
+<li>Curve shape: rectangular <b>hyperbola</b></li>
+<li><b>V<sub>max</sub></b> — maximum velocity when all active sites saturated</li>
+<li><b>K<sub>m</sub></b> — [S] at which v = ½V<sub>max</sub>; reflects enzyme–substrate affinity</li>
+<li>Low K<sub>m</sub> = high affinity; High K<sub>m</sub> = low affinity</li>
+<li>When [S] ≫ K<sub>m</sub>: zero-order kinetics (rate independent of [S])</li>
+<li>When [S] ≪ K<sub>m</sub>: first-order kinetics (rate ∝ [S])</li>
+<li>Catalytic efficiency = k<sub>cat</sub> / K<sub>m</sub></li>
+</ul>
+<h2>Lineweaver-Burk Plot (Double Reciprocal)</h2>
+<div class="box"><b>1/v = (K<sub>m</sub>/V<sub>max</sub>)(1/[S]) + 1/V<sub>max</sub></b><br>Y-intercept = 1/V<sub>max</sub> &nbsp;|&nbsp; X-intercept = −1/K<sub>m</sub> &nbsp;|&nbsp; Slope = K<sub>m</sub>/V<sub>max</sub></div>
+<h2>Enzyme Inhibition</h2>
+<table>
+<tr><th>Type</th><th>K<sub>m</sub></th><th>V<sub>max</sub></th><th>Binds to</th><th>LB Plot change</th></tr>
+<tr><td><b>Competitive</b></td><td>↑</td><td>Unchanged</td><td>Active site (like substrate)</td><td>Same Y-int; X-int moves right; steeper slope</td></tr>
+<tr><td><b>Non-competitive (pure)</b></td><td>Unchanged</td><td>↓</td><td>Allosteric site (E <em>and</em> ES)</td><td>Same X-int; Y-int moves up</td></tr>
+<tr><td><b>Uncompetitive</b></td><td>↓</td><td>↓</td><td>ES complex only</td><td>Parallel lines (both intercepts change equally)</td></tr>
+<tr><td><b>Mixed</b></td><td>↑ or ↓</td><td>↓</td><td>E and ES (unequally)</td><td>Both intercepts change</td></tr>
+<tr><td><b>Irreversible</b></td><td>—</td><td>↓↓</td><td>Active site (covalent bond)</td><td>Enzyme permanently inactivated</td></tr>
+</table>
+<h3>Key Points per Type</h3>
+<ul>
+<li>Competitive: overcome by ↑[S]; K<sub>m</sub> ↑, V<sub>max</sub> same. <em>Examples: statins (HMG-CoA reductase), methotrexate (DHFR)</em></li>
+<li>Non-competitive: cannot overcome with ↑[S]; V<sub>max</sub> ↓, K<sub>m</sub> unchanged. <em>Example: lead on δ-ALA dehydratase</em></li>
+<li>Uncompetitive: Both K<sub>m</sub> and V<sub>max</sub> decrease → apparent affinity increases</li>
+<li>Irreversible: covalent modification; new enzyme must be synthesized. <em>Examples: aspirin→COX, penicillin→transpeptidase, organophosphates→AChE, arsenic→lipoic acid</em></li>
+</ul>
+<div class="mnem"><b>Mnemonic:</b> Competitive inhibition → <b>C</b>hanges K<sub>m</sub> (↑), V<sub>max</sub> same. You Can Compete with more substrate.</div>
+<h2>Other Regulatory Mechanisms</h2>
+<ul>
+<li>Allosteric regulation: molecule binds non-active site → conformational change → activate or inhibit</li>
+<li>Covalent modification: phosphorylation (kinases) / dephosphorylation (phosphatases)</li>
+<li>Feedback inhibition: end product inhibits earlier enzyme in pathway</li>
+<li>Zymogen activation: inactive precursor cleaved → active form (trypsinogen→trypsin, pepsinogen→pepsin)</li>
+</ul>
+<div class="pearl"><b>Clinical Pearl:</b> Statins competitively inhibit HMG-CoA reductase — rate-limiting step of cholesterol synthesis. Even at high statin doses, sufficient substrate can partially overcome inhibition.</div>
+</section>
+<section id="glyc">
+<h1>Glycolysis</h1>
+<p class="subtitle">Location: Cytoplasm · Net yield: 2 ATP, 2 NADH, 2 Pyruvate per glucose</p>
+<h2>GLUT Transporters</h2>
+<table>
+<tr><th>Transporter</th><th>Tissues</th><th>Insulin-dependent</th><th>Notes</th></tr>
+<tr><td>GLUT 1</td><td>RBCs, BBB, fetus</td><td>No</td><td>Constitutive basal uptake</td></tr>
+<tr><td>GLUT 2</td><td>Liver, pancreatic β-cells, kidney, small intestine</td><td>No</td><td>Low affinity, high capacity — glucose sensor in pancreas</td></tr>
+<tr><td>GLUT 3</td><td>Neurons, placenta, kidney</td><td>No</td><td>High affinity; ensures brain gets glucose</td></tr>
+<tr><td><b>GLUT 4</b></td><td><b>Muscle, adipose</b></td><td><b>Yes</b></td><td>Major insulin-regulated transporter; ↑ insulin → GLUT4 to membrane</td></tr>
+</table>
+<h2>10 Steps of Glycolysis</h2>
+<h3>Energy Investment Phase (Steps 1–5) — uses 2 ATP</h3>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th><th>Reversible?</th><th>Key facts</th></tr>
+<tr><td>1</td><td>Glucose → G6P</td><td>Hexokinase / Glucokinase</td><td><b>No</b></td><td>Traps glucose; uses 1 ATP</td></tr>
+<tr><td>2</td><td>G6P → F6P</td><td>Phosphohexose isomerase</td><td>Yes</td><td>Aldose → ketose</td></tr>
+<tr><td>3</td><td>F6P → F1,6-BP</td><td><b>PFK-1</b></td><td><b>No</b></td><td><b>Rate-limiting &amp; committed step</b>; uses 1 ATP</td></tr>
+<tr><td>4</td><td>F1,6-BP → DHAP + G3P</td><td>Aldolase</td><td>Yes</td><td>Cleavage into 2 trioses</td></tr>
+<tr><td>5</td><td>DHAP → G3P</td><td>Triose phosphate isomerase</td><td>Yes</td><td>DHAP converted to usable G3P</td></tr>
+</table>
+<h3>Energy Generation Phase (Steps 6–10) — generates 4 ATP, 2 NADH</h3>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th><th>Notes</th></tr>
+<tr><td>6</td><td>G3P → 1,3-BPG</td><td>G3P dehydrogenase</td><td>Generates 2 NADH; inhibited by arsenic/arsenate</td></tr>
+<tr><td>7</td><td>1,3-BPG → 3-PG</td><td>Phosphoglycerate kinase</td><td>Substrate-level phosphorylation; 2 ATP</td></tr>
+<tr><td>8</td><td>3-PG → 2-PG</td><td>Phosphoglycerate mutase</td><td>Phosphate shift; reversible</td></tr>
+<tr><td>9</td><td>2-PG → PEP</td><td>Enolase</td><td>Dehydration; inhibited by fluoride</td></tr>
+<tr><td>10</td><td>PEP → Pyruvate</td><td><b>Pyruvate kinase</b></td><td><b>No</b>; substrate-level phosphorylation; 2 ATP</td></tr>
+</table>
+<div class="box"><b>Net per glucose:</b> 2 ATP used − 4 ATP made = +2 ATP net &nbsp;|&nbsp; 2 NADH &nbsp;|&nbsp; 2 Pyruvate</div>
+<h2>Hexokinase vs Glucokinase</h2>
+<table>
+<tr><th></th><th>Hexokinase (I–III)</th><th>Glucokinase (HK IV)</th></tr>
+<tr><td>Location</td><td>Most tissues</td><td>Liver parenchymal cells, pancreatic β-cells</td></tr>
+<tr><td>K<sub>m</sub></td><td>Low (high affinity)</td><td>High (low affinity)</td></tr>
+<tr><td>V<sub>max</sub></td><td>Low</td><td>High</td></tr>
+<tr><td>Inhibited by G6P?</td><td>Yes</td><td>No</td></tr>
+<tr><td>Induced by insulin?</td><td>No</td><td>Yes</td></tr>
+<tr><td>Saturation</td><td>Saturated at low [glucose]</td><td>Not saturated at normal glucose → acts proportionally to glucose level</td></tr>
+</table>
+<h2>Regulation — 3 Irreversible Enzymes</h2>
+<h3>1. Hexokinase / Glucokinase</h3>
+<ul>
+<li>HK: inhibited by G6P (product inhibition)</li>
+<li>GK: inhibited by F6P (returns to nucleus); activated by glucose (exits nucleus)</li>
+<li>Insulin → ↑ GK synthesis; Glucagon → ↓ GK</li>
+</ul>
+<h3>2. PFK-1 (Rate-Limiting)</h3>
+<table>
+<tr><th>Activators</th><th>Inhibitors</th></tr>
+<tr><td>AMP, ADP (low energy)</td><td>ATP (high energy — negative feedback)</td></tr>
+<tr><td>Fructose-2,6-bisphosphate (F2,6-BP) — most potent</td><td>Citrate (↑ Krebs activity → ↑ energy)</td></tr>
+<tr><td>Pi</td><td>Long-chain fatty acids</td></tr>
+<tr><td>Insulin (via ↑ F2,6-BP)</td><td>Glucagon (via ↓ F2,6-BP)</td></tr>
+</table>
+<h3>3. Pyruvate Kinase</h3>
+<ul>
+<li>Activated by: F1,6-BP (feedforward), AMP</li>
+<li>Inhibited by: ATP, acetyl-CoA, alanine, long-chain FA</li>
+<li>Glucagon → PKA → phosphorylates PK → <b>inactive</b></li>
+<li>Insulin → PP1 → dephosphorylates PK → <b>active</b></li>
+</ul>
+<h2>Fates of Pyruvate</h2>
+<table>
+<tr><th>Condition</th><th>Fate</th><th>Key enzyme</th></tr>
+<tr><td>Aerobic (O₂ present)</td><td>→ Acetyl-CoA (enters Krebs)</td><td>Pyruvate dehydrogenase complex</td></tr>
+<tr><td>Anaerobic (no O₂)</td><td>→ Lactate (regenerates NAD⁺)</td><td>Lactate dehydrogenase (LDH)</td></tr>
+<tr><td>Gluconeogenesis</td><td>→ OAA → glucose</td><td>Pyruvate carboxylase (needs biotin)</td></tr>
+</table>
+<div class="pearl"><b>Clinical Pearl:</b> RBCs lack mitochondria — rely entirely on anaerobic glycolysis. Cori cycle: muscle lactate → liver → glucose (gluconeogenesis) → back to muscle.</div>
+<div class="mnem"><b>Mnemonic:</b> <b>H</b>ex, <b>P</b>hosphofructo, <b>P</b>yruvate = the 3 irreversible steps (HK, PFK-1, PK). These are bypassed in gluconeogenesis.</div>
+</section>
+<section id="gluco">
+<h1>Gluconeogenesis</h1>
+<p class="subtitle">Liver (main) + Kidney · Triggered by hypoglycemia, fasting, cortisol</p>
+<p>Formation of <b>new glucose from non-carbohydrate sources</b>. Uses 7 reversible glycolytic enzymes + 4 unique bypass enzymes.</p>
+<div class="box"><b>Key rule:</b> Acetyl-CoA CANNOT contribute net carbons to glucose (both carbons lost as CO₂ in Krebs). Even-chain fatty acids cannot be gluconeogenic substrates.</div>
+<h2>4 Unique Bypass Enzymes</h2>
+<table>
+<tr><th>Bypasses glycolytic enzyme</th><th>Gluconeogenic enzyme(s)</th><th>Location</th><th>Cofactor</th></tr>
+<tr><td>Pyruvate kinase</td><td>Pyruvate carboxylase (Pyr → OAA)<br>PEPCK (OAA → PEP)</td><td>Mito (PC); Cytosol (PEPCK)</td><td>PC needs <b>Biotin + ATP</b>; PEPCK needs GTP</td></tr>
+<tr><td>PFK-1</td><td>Fructose-1,6-bisphosphatase (FBPase-1)</td><td>Cytosol</td><td>Inhibited by AMP, F2,6-BP</td></tr>
+<tr><td>Hexokinase</td><td>Glucose-6-phosphatase (G6Pase)</td><td><b>Smooth ER</b></td><td>Absent in muscle &amp; brain</td></tr>
+</table>
+<div class="pearl"><b>Clinical Pearl:</b> G6Pase is only in liver and kidney. Muscle cannot release free glucose — muscle glycogen is for local use only.</div>
+<h2>Substrates & Entry Points</h2>
+<h3>Lactate (Cori Cycle)</h3>
+<ul>
+<li>Lactate → Pyruvate (LDH, cytosol)</li>
+<li>Pyruvate → OAA (pyruvate carboxylase, mitochondria, requires biotin + ATP + CO₂)</li>
+<li>OAA can't cross inner mito membrane → converted to Malate → crosses → back to OAA in cytosol</li>
+<li>OAA → PEP (PEPCK, requires GTP)</li>
+</ul>
+<h3>Glycerol</h3>
+<ul>
+<li>From triglyceride lipolysis (fat breakdown)</li>
+<li>Glycerol → Glycerol-3-phosphate (glycerol kinase) → DHAP → enters pathway</li>
+</ul>
+<h3>Glucogenic Amino Acids</h3>
+<ul>
+<li>Transamination → keto acids → enter as pyruvate or Krebs intermediates</li>
+<li>Alanine → Pyruvate (ALT, needs PLP/B6) → most important gluconeogenic AA</li>
+<li>Glutamine/Glutamate → α-KG (enters Krebs → OAA → PEP)</li>
+<li>Only <b>Leucine &amp; Lysine</b> are purely ketogenic (cannot contribute to glucose)</li>
+</ul>
+<h3>Odd-Chain Fatty Acids</h3>
+<ul>
+<li>Last β-oxidation round → Propionyl-CoA (3C)</li>
+<li>Propionyl-CoA → Methylmalonyl-CoA (propionyl-CoA carboxylase, <b>biotin</b>)</li>
+<li>Methylmalonyl-CoA → Succinyl-CoA (methylmalonyl-CoA mutase, <b>Vit B12</b>) → Krebs → gluconeogenesis</li>
+</ul>
+<h2>Hormonal Regulation</h2>
+<table>
+<tr><th>Hormone</th><th>Effect</th><th>Mechanism</th></tr>
+<tr><td>Glucagon</td><td>↑↑ (primary stimulator)</td><td>↑ PEPCK transcription; ↓ F2,6-BP via PKA → FBPase-1 active</td></tr>
+<tr><td>Cortisol</td><td>↑ (provides substrates + enzymes)</td><td>↑ gluconeogenic enzyme expression; promotes AA catabolism</td></tr>
+<tr><td>Epinephrine</td><td>↑ (stress)</td><td>Similar to glucagon via cAMP</td></tr>
+<tr><td>Insulin</td><td>↓↓ (major inhibitor)</td><td>↑ F2,6-BP → ↑ PFK-1 → ↓ FBPase-1; ↓ PEPCK expression</td></tr>
+</table>
+<div class="mnem"><b>Mnemonic:</b> <b>PC</b> needs <b>B</b>iotin + <b>A</b>TP. <b>PEPCK</b> needs <b>G</b>TP. "<b>PAB-G</b>" — Pyruvate carboxylase uses ATP/Biotin, PEPCK uses GTP.</div>
+</section>
+<section id="ppp">
+<h1>Pentose Phosphate Pathway</h1>
+<p class="subtitle">Location: Cytosol · Also called: HMP Shunt</p>
+<p>Produces <b>NADPH</b> (reducing power) and <b>Ribose-5-phosphate</b> (for nucleotides). No ATP produced directly.</p>
+<h2>Oxidative Phase (Irreversible) — 2 NADPH produced</h2>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th><th>Cofactor</th></tr>
+<tr><td>1</td><td>G6P → 6-phosphogluconolactone</td><td><b>G6P dehydrogenase</b> (rate-limiting)</td><td>NADP⁺ → NADPH</td></tr>
+<tr><td>2</td><td>6-phosphogluconolactone → 6-phosphogluconate</td><td>Lactonase</td><td>H₂O</td></tr>
+<tr><td>3</td><td>6-phosphogluconate → Ribulose-5-P + CO₂</td><td>6-phosphogluconate DH</td><td>NADP⁺ → NADPH</td></tr>
+</table>
+<div class="box">Net per G6P: <b>2 NADPH + 1 Ribulose-5-P + 1 CO₂</b></div>
+<h2>Non-Oxidative Phase (Reversible)</h2>
+<ul>
+<li>Ribulose-5-P → Ribose-5-P (isomerase) — nucleotide synthesis</li>
+<li>Interconverts C3–C7 sugar phosphates via <b>transketolase</b> (needs <b>Thiamine/B1</b>) and transaldolase</li>
+<li>Products (F6P, G3P) re-enter glycolysis</li>
+<li>Allows nucleotide synthesis even without the oxidative phase (when NADPH is not needed)</li>
+</ul>
+<h2>NADPH Uses</h2>
+<ul>
+<li>Fatty acid synthesis (FAS complex needs NADPH)</li>
+<li>Cholesterol synthesis</li>
+<li>Glutathione reduction: GSSG → <b>GSH</b> (protects RBCs from oxidative damage)</li>
+<li>Cytochrome P450 (drug/steroid metabolism)</li>
+<li>Respiratory burst: NADPH oxidase → superoxide (O₂•⁻) for phagocytes</li>
+<li>Tyrosine hydroxylase (catecholamine synthesis)</li>
+</ul>
+<h2>Regulation</h2>
+<ul>
+<li><b>G6P dehydrogenase</b> is the rate-limiting enzyme</li>
+<li>Activated by: ↑ NADP⁺ (product of NADPH oxidation), insulin</li>
+<li>Inhibited by: ↑ NADPH (product inhibition)</li>
+<li>Most active in: liver, adrenal cortex, RBCs, lactating mammary gland, gonads</li>
+</ul>
+<div class="pearl"><b>Clinical Pearl:</b> <b>G6PD deficiency</b> — most common human enzyme defect; X-linked recessive. ↓ NADPH → ↓ GSH → RBCs lyse under oxidative stress. Triggers: fava beans, dapsone, primaquine, nitrofurantoin, infections. Blood smear: Heinz bodies (denatured Hb), bite cells. Protective against malaria.</div>
+<div class="mnem"><b>Mnemonic:</b> G6PD deficiency triggers: <b>DANG</b> — <b>D</b>apsone, <b>A</b>ntivirals/Anti-malarials (primaquine), <b>N</b>itrofurantoin, <b>G</b>luten (fava beans)</div>
+</section>
+<section id="glycogen">
+<h1>Glycogen Metabolism</h1>
+<p class="subtitle">Glycogenesis · Glycogenolysis · Regulation · Storage Diseases</p>
+<h2>Glycogenesis (Synthesis)</h2>
+<p><b>Location:</b> Cytosol | <b>Stimulated by:</b> Insulin (fed state) | Max storage: Liver ~100g, Muscle ~400g</p>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th><th>Notes</th></tr>
+<tr><td>1</td><td>Glucose → G6P</td><td>Hexokinase / Glucokinase</td><td>Uses ATP</td></tr>
+<tr><td>2</td><td>G6P → G1P</td><td>Phosphoglucomutase</td><td>Reversible</td></tr>
+<tr><td>3</td><td>G1P + UTP → UDP-glucose + PPi</td><td>UDP-glucose pyrophosphorylase</td><td>PPi immediately hydrolyzed → drives forward</td></tr>
+<tr><td>4</td><td>UDP-glucose → glycogenin-glucose</td><td><b>Glycogenin</b></td><td>Autoglycosylation; glycogenin is its own transferase; primer</td></tr>
+<tr><td>5</td><td>Chain elongation</td><td><b>Glycogen synthase</b></td><td>Adds UDP-glucose via α-1,4 bonds; active when dephosphorylated</td></tr>
+<tr><td>6</td><td>Branching</td><td><b>Branching enzyme</b></td><td>Moves 6–7 residues; attaches via α-1,6 bond (branch every ~10 residues)</td></tr>
+</table>
+<div class="mnem"><b>Mnemonic:</b> Glycogenesis order: <strong>4-5-1-2-3-6</strong> (Phosphorylation, Isomerization, Activation, Autoglycosylation, Elongation, Branching)</div>
+<h2>Glycogenolysis (Breakdown)</h2>
+<p><b>Stimulated by:</b> Glucagon (liver), Epinephrine (muscle + liver)</p>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th><th>Notes</th></tr>
+<tr><td>1</td><td>Glycogen → G1P</td><td><b>Glycogen phosphorylase</b></td><td>Cleaves α-1,4 bonds; stops 4 residues before branch; active when phosphorylated</td></tr>
+<tr><td>2a</td><td>Transfers 3 of 4 remaining residues</td><td>Debranching enzyme (transferase activity)</td><td>α-1,4 transfer</td></tr>
+<tr><td>2b</td><td>Releases last glucose at branch</td><td>Debranching enzyme (α-1,6 glucosidase)</td><td>Releases <b>free glucose</b> (not G1P)</td></tr>
+<tr><td>3</td><td>G1P → G6P</td><td>Phosphoglucomutase</td><td></td></tr>
+<tr><td>4 (liver)</td><td>G6P → Glucose</td><td><b>Glucose-6-phosphatase</b></td><td>Releases glucose into blood; absent in muscle/brain</td></tr>
+<tr><td>4 (muscle)</td><td>G6P → Pyruvate</td><td>Glycolysis</td><td>Energy for local muscle use</td></tr>
+</table>
+<h2>Hormonal Regulation</h2>
+<table>
+<tr><th>Enzyme</th><th>Phosphorylated</th><th>Dephosphorylated</th></tr>
+<tr><td>Glycogen synthase</td><td><b>Inactive</b> (b form)</td><td><b>Active</b> (a form)</td></tr>
+<tr><td>Glycogen phosphorylase</td><td><b>Active</b> (a form)</td><td><b>Inactive</b> (b form)</td></tr>
+<tr><td>Phosphorylase kinase</td><td><b>Active</b></td><td>Inactive</td></tr>
+</table>
+<div class="box"><b>Glucagon/Epinephrine cascade:</b> Receptor → Gs → adenylyl cyclase → ↑cAMP → PKA → phosphorylates phosphorylase kinase (active) → phosphorylates glycogen phosphorylase (active) + phosphorylates glycogen synthase (inactive)<br><br><b>Insulin:</b> → Protein phosphatase-1 (PP1) → dephosphorylates synthase (active) + phosphorylase (inactive)</div>
+<div class="pearl"><b>Clinical Pearl:</b> Epinephrine also acts via α₁ receptor (Gq) → PLC → IP₃ → Ca²⁺ release → Ca²⁺-calmodulin → activates phosphorylase kinase (Ca²⁺-dependent activation in liver)</div>
+<h2>Glycogen Storage Diseases</h2>
+<table>
+<tr><th>Disease</th><th>Type</th><th>Enzyme Deficiency</th><th>Key Features</th></tr>
+<tr><td><b>Von Gierke</b></td><td>I</td><td>Glucose-6-phosphatase</td><td>Severe hypoglycemia, hepatomegaly, ↑ lactate, ↑ uric acid, ↑ TG</td></tr>
+<tr><td><b>Pompe</b></td><td>II</td><td>Lysosomal acid maltase (α-1,4-glucosidase)</td><td>Cardiomegaly, hypotonia, "Pompe = lysosomal Pump problems"</td></tr>
+<tr><td><b>Cori</b></td><td>III</td><td>Debranching enzyme</td><td>Milder than Von Gierke; short outer chains</td></tr>
+<tr><td><b>Andersen</b></td><td>IV</td><td>Branching enzyme</td><td>Long unbranched chains → liver failure</td></tr>
+<tr><td><b>McArdle</b></td><td>V</td><td>Muscle glycogen phosphorylase</td><td>Exercise-induced cramps; no ↑ lactate with ischemic exercise test</td></tr>
+</table>
+<div class="mnem"><b>Mnemonic:</b> GSDs: <b>V</b>ery <b>P</b>oor <b>C</b>arbohydrate <b>A</b>bsorption <b>M</b>echanism = Von Gierke, Pompe, Cori, Andersen, McArdle</div>
+</section>
+<section id="trans">
+<h1>Transition Stage</h1>
+<p class="subtitle">Pyruvate Dehydrogenase Complex · Mitochondrial Matrix · Irreversible</p>
+<p><b>Reaction:</b> Pyruvate + CoA + NAD⁺ → Acetyl-CoA + CO₂ + NADH (irreversible link between glycolysis and Krebs cycle)</p>
+<div class="box">Per glucose: 2 Pyruvate → 2 Acetyl-CoA + 2 CO₂ + 2 NADH</div>
+<h2>PDH Complex — 3 Enzymes, 5 Cofactors</h2>
+<table>
+<tr><th>Subunit</th><th>Name</th><th>Function</th><th>Cofactor(s)</th></tr>
+<tr><td>E1</td><td>Pyruvate decarboxylase</td><td>Decarboxylates pyruvate</td><td><b>TPP (Thiamine B1)</b></td></tr>
+<tr><td>E2</td><td>Dihydrolipoyl transacetylase</td><td>Transfers acetyl group to CoA</td><td><b>Lipoic acid, CoA-SH</b></td></tr>
+<tr><td>E3</td><td>Dihydrolipoyl dehydrogenase</td><td>Reoxidizes lipoamide</td><td><b>FAD, NAD⁺</b></td></tr>
+</table>
+<div class="mnem"><b>Mnemonic:</b> PDH cofactors: <b>TLC FN</b> — <b>T</b>PP, <b>L</b>ipoic acid, <b>C</b>oA, <b>F</b>AD, <b>N</b>AD⁺</div>
+<h2>Regulation of PDH</h2>
+<table>
+<tr><th>Inhibition (→ PDH kinase activates → phosphorylates E1 → inactive)</th><th>Activation (→ PDH phosphatase activates → dephosphorylates E1 → active)</th></tr>
+<tr><td>↑ Acetyl-CoA (product)</td><td>↑ CoA-SH (substrate)</td></tr>
+<tr><td>↑ NADH (product)</td><td>↑ NAD⁺ (substrate)</td></tr>
+<tr><td>↑ ATP (energy surplus)</td><td>↑ Pyruvate</td></tr>
+<tr><td>↑ Fatty acids</td><td>↑ ADP</td></tr>
+<tr><td></td><td>Ca²⁺ (activates PDH phosphatase → active PDH in muscle during contraction)</td></tr>
+</table>
+<h2>PDH Deficiency</h2>
+<ul>
+<li>Most common: E1 (TPP-binding) subunit mutation — X-linked</li>
+<li>→ Lactic acidosis (pyruvate → lactate instead of Krebs)</li>
+<li>Neurologic symptoms: cannot make acetyl-CoA for brain</li>
+<li>Treatment: high-fat low-carb diet + thiamine supplementation</li>
+</ul>
+<div class="pearl"><b>Clinical Pearl:</b> <b>Thiamine (B1) deficiency</b> impairs <b>PDH</b> (E1) and <b>α-ketoglutarate DH</b> (Step 4, Krebs) and <b>transketolase</b> (PPP). Clinical: Wernicke's encephalopathy (confusion, ataxia, ophthalmoplegia), beriberi (dry = neuropathy; wet = heart failure).</div>
+<div class="pearl"><b>Clinical Pearl:</b> <b>Arsenic poisoning</b> inhibits lipoic acid (E2 cofactor) → blocks both PDH and α-KG DH. Signs: Mees' lines, peripheral neuropathy, garlic breath.</div>
+</section>
+<section id="krebs">
+<h1>Krebs Cycle</h1>
+<p class="subtitle">TCA / Citric Acid Cycle · Mitochondrial Matrix</p>
+<div class="box">Per acetyl-CoA (1 turn): <b>3 NADH, 1 FADH₂, 1 GTP, 2 CO₂</b><br>Per glucose (2 turns): <b>6 NADH, 2 FADH₂, 2 GTP, 4 CO₂</b></div>
+<div class="mnem"><b>Mnemonic:</b> <b>C</b>itrate <b>I</b>s <b>K</b>rebs <b>S</b>tarting <b>S</b>ubstrate <b>F</b>or <b>M</b>aking <b>O</b>xaloacetate<br>= <b>C</b>itrate → <b>I</b>socitrate → α-<b>K</b>etoglutarate → <b>S</b>uccinyl-CoA → <b>S</b>uccinate → <b>F</b>umarate → <b>M</b>alate → <b>O</b>xaloacetate</div>
+<h2>8 Steps</h2>
+<table>
+<tr><th>#</th><th>Substrate → Product</th><th>Enzyme</th><th>Products</th><th>Regulation/Notes</th></tr>
+<tr><td>1</td><td>OAA + Acetyl-CoA → Citrate</td><td>Citrate synthase</td><td>—</td><td>Irreversible; inhibited by ATP, NADH, succinyl-CoA, citrate; activated by ADP</td></tr>
+<tr><td>2</td><td>Citrate → Isocitrate</td><td>Aconitase</td><td>—</td><td>Reversible; inhibited by fluorocitrate (from fluoroacetate/rat poison)</td></tr>
+<tr><td>3</td><td>Isocitrate → α-Ketoglutarate</td><td><b>Isocitrate DH</b></td><td><b>NADH</b>, CO₂</td><td>Irreversible; 1st NADH; activated by ADP, Ca²⁺; inhibited by ATP, NADH</td></tr>
+<tr><td>4</td><td>α-KG → Succinyl-CoA</td><td><b>α-KG DH complex</b></td><td><b>NADH</b>, CO₂</td><td>Irreversible; like PDH — needs TPP, lipoic acid, CoA, FAD, NAD⁺; inhibited by succinyl-CoA, NADH</td></tr>
+<tr><td>5</td><td>Succinyl-CoA → Succinate</td><td>Succinyl-CoA synthetase</td><td><b>GTP</b></td><td>Substrate-level phosphorylation</td></tr>
+<tr><td>6</td><td>Succinate → Fumarate</td><td><b>Succinate DH</b></td><td><b>FADH₂</b></td><td>Also Complex II of ETC; inhibited by malonate (competitive)</td></tr>
+<tr><td>7</td><td>Fumarate → Malate</td><td>Fumarase</td><td>—</td><td>Reversible</td></tr>
+<tr><td>8</td><td>Malate → OAA</td><td>Malate DH</td><td><b>NADH</b></td><td>Equilibrium favors malate; driven forward by Step 1</td></tr>
+</table>
+<h2>Clinical — Oncometabolites & Mutations</h2>
+<table>
+<tr><th>Gene/Enzyme</th><th>Associated Cancer</th></tr>
+<tr><td>Fumarase (FH gene)</td><td>Hereditary leiomyomatosis, renal cell carcinoma (HLRCC), uterine fibroids</td></tr>
+<tr><td>Succinate DH (SDHB/C/D)</td><td>Pheochromocytoma, paraganglioma, GISTs</td></tr>
+<tr><td>IDH1/IDH2 (produces 2-HG oncometabolite)</td><td>Glioma, AML, cholangiocarcinoma, chondrosarcoma</td></tr>
+</table>
+<div class="pearl"><b>Clinical Pearl:</b> Fluoroacetate (rat poison) → fluorocitrate → <b>inhibits aconitase</b> (Step 2). This is "lethal synthesis" — fluoroacetate is harmless until metabolized into the toxic inhibitor.</div>
+<div class="pearl"><b>Clinical Pearl:</b> <b>IDH1/2 mutations</b> produce 2-hydroxyglutarate (2-HG), an oncometabolite that inhibits α-KG–dependent dioxygenases → hypermethylation phenotype (↑ methylation of histones and DNA). Targetable with IDH inhibitors (enasidenib, ivosidenib).</div>
+<h2>Anaplerotic Reactions</h2>
+<ul>
+<li>Replenish Krebs intermediates when drawn off for biosynthesis</li>
+<li>Pyruvate carboxylase: Pyruvate → OAA (most important; needs biotin + ATP)</li>
+<li>Glutamate → α-KG; Propionyl-CoA (odd-chain FA) → Succinyl-CoA</li>
+</ul>
+</section>
+<section id="etc">
+<h1>Electron Transport Chain & Oxidative Phosphorylation</h1>
+<p class="subtitle">Inner Mitochondrial Membrane</p>
+<h2>ETC Complexes</h2>
+<table>
+<tr><th>Complex</th><th>Name</th><th>Substrate</th><th>H⁺ pumped</th><th>Inhibitors</th></tr>
+<tr><td>I</td><td>NADH dehydrogenase</td><td>NADH → NAD⁺</td><td>4H⁺</td><td>Rotenone, amytal, MPTP</td></tr>
+<tr><td>II</td><td>Succinate DH (also Krebs step 6)</td><td>FADH₂ → FAD</td><td>None</td><td>Malonate (competitive)</td></tr>
+<tr><td>III</td><td>Cytochrome bc₁ (ubiquinol-cyt c reductase)</td><td>CoQ → Cyt c</td><td>4H⁺</td><td>Antimycin A</td></tr>
+<tr><td>IV</td><td>Cytochrome c oxidase</td><td>Cyt c → O₂ → H₂O</td><td>2H⁺</td><td><b>CN⁻, CO, H₂S, azide</b></td></tr>
+<tr><td>V</td><td>ATP synthase (F₀F₁)</td><td>H⁺ gradient → ATP</td><td>Consumed</td><td>Oligomycin (blocks F₀ proton channel)</td></tr>
+</table>
+<h2>Mobile Carriers</h2>
+<ul>
+<li><b>Coenzyme Q (Ubiquinone):</b> lipid-soluble; accepts electrons from Complex I and II; passes to Complex III</li>
+<li><b>Cytochrome c:</b> water-soluble peripheral protein; shuttles electrons from Complex III to IV</li>
+</ul>
+<h2>ATP Yield per Glucose</h2>
+<table>
+<tr><th>Stage</th><th>NADH</th><th>FADH₂</th><th>Direct ATP</th><th>Total ATP (~)</th></tr>
+<tr><td>Glycolysis (cytosol)</td><td>2</td><td>0</td><td>2</td><td>2 direct + 3–5 (via shuttle)</td></tr>
+<tr><td>Transition step (mito)</td><td>2</td><td>0</td><td>0</td><td>5</td></tr>
+<tr><td>Krebs ×2 (mito)</td><td>6</td><td>2</td><td>2</td><td>15 + 3</td></tr>
+<tr><td><b>Total</b></td><td><b>10</b></td><td><b>2</b></td><td><b>4</b></td><td><b>~30–32 ATP</b></td></tr>
+</table>
+<div class="box">Modern P/O ratios: NADH = 2.5 ATP; FADH₂ = 1.5 ATP. Classic values: NADH = 3, FADH₂ = 2 → ~36–38 ATP.</div>
+<h2>NADH Shuttle Systems</h2>
+<p>Cytosolic NADH (from glycolysis) cannot cross inner mito membrane:</p>
+<table>
+<tr><th>Shuttle</th><th>Tissues</th><th>Enters ETC as</th><th>ATP yield per cytosolic NADH</th></tr>
+<tr><td><b>Malate-Aspartate Shuttle (MAS)</b></td><td>Liver, heart, kidney</td><td>NADH → Complex I</td><td>2.5 ATP</td></tr>
+<tr><td><b>Glycerophosphate Shuttle (GPS)</b></td><td>Brain, skeletal muscle</td><td>FADH₂ → Complex II</td><td>1.5 ATP</td></tr>
+</table>
+<h2>Chemiosmotic Theory (Peter Mitchell)</h2>
+<ul>
+<li>Electrons flow through ETC → energy released → pumps H⁺ from matrix to IMS</li>
+<li>Electrochemical gradient (proton motive force): ΔΨ (electrical) + ΔpH</li>
+<li>H⁺ flows back through ATP synthase F₀ channel → rotates F₁ → ADP + Pi → ATP</li>
+<li>~3 H⁺ per ATP synthesized</li>
+</ul>
+<h2>Uncouplers</h2>
+<ul>
+<li>Dissipate H⁺ gradient without making ATP → energy released as <b>heat</b></li>
+<li><b>2,4-DNP:</b> historical weight-loss drug; proton ionophore</li>
+<li><b>Thermogenin (UCP-1):</b> brown adipose tissue; physiologic uncoupling for thermogenesis in neonates</li>
+<li>Uncouplers → ↑ O₂ consumption, ↑ heat, ↓ ATP, hyperthermia</li>
+</ul>
+<div class="pearl"><b>Clinical Pearl:</b> Cyanide (CN⁻), CO, and H₂S all inhibit Complex IV. <b>CN⁻ antidote:</b> hydroxocobalamin (binds CN⁻) or nitrites (form methemoglobin, which attracts CN⁻ away from Complex IV) + thiosulfate (converts CN⁻→thiocyanate).</div>
+<div class="pearl"><b>Clinical Pearl:</b> MPTP → Complex I inhibitor → destroys dopaminergic neurons → parkinsonism. Used to create animal Parkinson models.</div>
+</section>
+<section id="fa">
+<h1>Fatty Acid Metabolism</h1>
+<p class="subtitle">Beta-Oxidation · Ketogenesis · Fatty Acid Synthesis · Triglycerides</p>
+<h2>Fatty Acid Activation & Transport (Beta-Oxidation Setup)</h2>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme/Process</th><th>Notes</th></tr>
+<tr><td>1</td><td>FA → Fatty acyl-CoA</td><td>Fatty acyl-CoA synthetase</td><td>In cytosol; uses 1 ATP → AMP + PPi (equivalent to 2 ATP)</td></tr>
+<tr><td>2</td><td>Fatty acyl-CoA → Fatty acyl-carnitine</td><td><b>CPT-1</b> (carnitine palmitoyl transferase 1)</td><td>Outer mito membrane; rate-limiting step of FA oxidation</td></tr>
+<tr><td>3</td><td>Transport across inner mito membrane</td><td>Carnitine-acylcarnitine translocase</td><td>Antiport: acylcarnitine in, carnitine out</td></tr>
+<tr><td>4</td><td>Fatty acyl-carnitine → Fatty acyl-CoA</td><td>CPT-2</td><td>Inner mito membrane; reconjugates with CoA</td></tr>
+</table>
+<div class="box"><b>Malonyl-CoA</b> inhibits CPT-1 — prevents futile cycle of FA synthesis and oxidation simultaneously. In fed state (↑ insulin → ↑ malonyl-CoA) → FA oxidation off.</div>
+<h2>Beta-Oxidation Steps (per cycle)</h2>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th><th>Products</th></tr>
+<tr><td>1</td><td>Acyl-CoA → Trans-Δ²-enoyl-CoA</td><td>Acyl-CoA dehydrogenase</td><td><b>FADH₂</b></td></tr>
+<tr><td>2</td><td>Enoyl-CoA → 3-L-hydroxyacyl-CoA</td><td>Enoyl-CoA hydratase</td><td>H₂O added</td></tr>
+<tr><td>3</td><td>Hydroxyacyl-CoA → 3-ketoacyl-CoA</td><td>3-Hydroxyacyl-CoA DH</td><td><b>NADH</b></td></tr>
+<tr><td>4</td><td>3-ketoacyl-CoA → Acetyl-CoA + shortened acyl-CoA</td><td>Thiolase</td><td><b>Acetyl-CoA</b></td></tr>
+</table>
+<p>Repeats until fully degraded. Each cycle removes 2 carbons as Acetyl-CoA.</p>
+<h2>ATP Yield — Palmitate (16C) Example</h2>
+<ul>
+<li>8 Acetyl-CoA from 7 rounds → 8 × Krebs cycle</li>
+<li>7 rounds β-oxidation → 7 FADH₂ + 7 NADH</li>
+<li>8 Acetyl-CoA × (3 NADH + 1 FADH₂ + 1 GTP) = 24 NADH + 8 FADH₂ + 8 GTP</li>
+<li>Total NADH: 7+24 = 31 × 2.5 = 77.5; FADH₂: 7+8 = 15 × 1.5 = 22.5; GTP: 8</li>
+<li>− 2 ATP activation = <b>~106 ATP net</b> (using modern P/O ratios)</li>
+</ul>
+<h2>Special Cases of Beta-Oxidation</h2>
+<h3>Odd-Chain Fatty Acids</h3>
+<ul>
+<li>Final product: Propionyl-CoA (3C) instead of Acetyl-CoA</li>
+<li>Propionyl-CoA → Methylmalonyl-CoA (propionyl-CoA carboxylase, <b>biotin</b>)</li>
+<li>Methylmalonyl-CoA → Succinyl-CoA (methylmalonyl-CoA mutase, <b>Vit B12</b>) → Krebs</li>
+</ul>
+<div class="pearl"><b>Clinical Pearl:</b> Vit B12 deficiency → methylmalonyl-CoA accumulates → methylmalonic acidemia. Also causes megaloblastic anemia and subacute combined degeneration of spinal cord.</div>
+<h3>Unsaturated Fatty Acids</h3>
+<ul>
+<li>Cis double bonds require extra enzymes: isomerase (monounsaturated) or reductase + isomerase (polyunsaturated)</li>
+<li>Yield slightly less ATP (one fewer FADH₂ per pre-existing double bond)</li>
+</ul>
+<h3>Peroxisomal Beta-Oxidation (Very Long Chain FA, >22C)</h3>
+<ul>
+<li>First step uses O₂ → H₂O₂ (not FAD→FADH₂) — energy released as heat, NOT as FADH₂</li>
+<li>H₂O₂ neutralized by catalase</li>
+<li>Defect: Zellweger syndrome (absent peroxisomes) → accumulation of VLCFAs</li>
+</ul>
+<h2>Ketogenesis (in Liver Mitochondria)</h2>
+<p><b>Occurs when:</b> Acetyl-CoA exceeds Krebs capacity (fasting, starvation, DKA, high-fat diet)</p>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th></tr>
+<tr><td>1</td><td>2 Acetyl-CoA → Acetoacetyl-CoA</td><td>Thiolase</td></tr>
+<tr><td>2</td><td>Acetoacetyl-CoA + Acetyl-CoA → HMG-CoA</td><td>HMG-CoA synthase (mito)</td></tr>
+<tr><td>3</td><td>HMG-CoA → Acetoacetate + Acetyl-CoA</td><td>HMG-CoA lyase</td></tr>
+<tr><td>4a</td><td>Acetoacetate → β-hydroxybutyrate</td><td>β-hydroxybutyrate DH (NADH)</td></tr>
+<tr><td>4b</td><td>Acetoacetate → Acetone (spontaneous)</td><td>Non-enzymatic decarboxylation</td></tr>
+</table>
+<h2>Ketolysis (in Peripheral Tissues — NOT liver)</h2>
+<ul>
+<li>β-hydroxybutyrate → Acetoacetate (β-hydroxybutyrate DH)</li>
+<li>Acetoacetate + Succinyl-CoA → Acetoacetyl-CoA + Succinate (<b>succinyl-CoA transferase/thiophorase</b>)</li>
+<li>Acetoacetyl-CoA → 2 Acetyl-CoA (thiolase) → Krebs</li>
+<li><b>Liver cannot use ketones</b> — lacks succinyl-CoA transferase</li>
+</ul>
+<div class="pearl"><b>Clinical Pearl:</b> In DKA: insulin deficiency → ↑↑ lipolysis → ↑↑ fatty acid delivery to liver → ↑↑ ketogenesis. Acetone causes fruity breath. Anion gap metabolic acidosis (ketoacidosis).</div>
+<h2>Fatty Acid Synthesis (De Novo)</h2>
+<p><b>Location:</b> Cytosol | <b>Stimulated by:</b> Insulin, high glucose | <b>Where most active:</b> Liver, lactating mammary gland</p>
+<table>
+<tr><th>Feature</th><th>Beta-Oxidation</th><th>Fatty Acid Synthesis</th></tr>
+<tr><td>Location</td><td>Mitochondrial matrix</td><td>Cytosol</td></tr>
+<tr><td>Key carrier</td><td>CoA</td><td>ACP (acyl carrier protein)</td></tr>
+<tr><td>Activated by</td><td>Glucagon, epinephrine</td><td>Insulin</td></tr>
+<tr><td>Rate-limiting enzyme</td><td>CPT-1</td><td><b>ACC (Acetyl-CoA carboxylase)</b></td></tr>
+<tr><td>Key cofactor</td><td>FAD, NAD⁺</td><td>NADPH</td></tr>
+<tr><td>Intermediate</td><td>Acyl-CoA</td><td>Malonyl-CoA</td></tr>
+<tr><td>Inhibited by</td><td>Malonyl-CoA (CPT-1)</td><td>Glucagon, long-chain FA, AMP (via AMPK)</td></tr>
+</table>
+<h3>Key Steps of FA Synthesis</h3>
+<ul>
+<li>Acetyl-CoA → Malonyl-CoA: <b>Acetyl-CoA carboxylase (ACC)</b>, rate-limiting, needs <b>biotin + ATP</b></li>
+<li>FAS (Fatty Acid Synthase) complex: adds 2C at a time using malonyl-CoA and NADPH</li>
+<li>16 rounds → Palmitate (16C) — most common product</li>
+<li>Requires 7 Malonyl-CoA + 1 Acetyl-CoA + 14 NADPH per palmitate</li>
+</ul>
+<h2>Triglyceride Synthesis</h2>
+<ul>
+<li>Glycerol-3-phosphate + 3 Fatty Acyl-CoA → Triglyceride (via sequential esterification)</li>
+<li>Occurs in liver and adipose tissue</li>
+<li>Liver packages into VLDL for export</li>
+</ul>
+<h2>Triglyceride Mobilization (Lipolysis)</h2>
+<ul>
+<li>Adipose tissue breaks TAG → Glycerol + 3 FFAs (free fatty acids)</li>
+<li>Stimulated by: glucagon, epinephrine, cortisol, growth hormone, sympathetic NS</li>
+<li>Inhibited by: insulin</li>
+<li>Enzymes activated by phosphorylation:</li>
+<li>&nbsp;&nbsp;• Adipose triglyceride lipase (ATGL): TAG → DAG</li>
+<li>&nbsp;&nbsp;• <b>Hormone-sensitive lipase (HSL)</b>: DAG → MAG (rate-limiting, most regulated)</li>
+<li>&nbsp;&nbsp;• Monoglyceride lipase: MAG → Glycerol + FFA</li>
+<li>Glycerol → liver → gluconeogenesis</li>
+<li>FFAs → blood bound to albumin → tissues for β-oxidation</li>
+</ul>
+</section>
+<section id="lipid">
+<h1>Lipoproteins & Cholesterol Metabolism</h1>
+<p class="subtitle">Chylomicrons · VLDL · IDL · LDL · HDL · Cholesterol Synthesis</p>
+<h2>Lipoprotein Overview</h2>
+<table>
+<tr><th>Lipoprotein</th><th>Origin</th><th>Function</th><th>ApoB type</th><th>Key enzyme/receptor</th></tr>
+<tr><td><b>Chylomicrons</b></td><td>Intestinal epithelium</td><td>Transport dietary (exogenous) fat</td><td>ApoB-48</td><td>LPL (in capillaries) degrades; ApoE for liver uptake</td></tr>
+<tr><td><b>VLDL</b></td><td>Liver</td><td>Transport endogenous TG from liver</td><td>ApoB-100</td><td>LPL degrades TG → IDL</td></tr>
+<tr><td><b>IDL</b></td><td>VLDL remnant</td><td>Intermediate; taken up by liver or → LDL</td><td>ApoB-100, ApoE</td><td>Hepatic lipase</td></tr>
+<tr><td><b>LDL</b></td><td>IDL</td><td>Delivers cholesterol to tissues</td><td>ApoB-100</td><td><b>LDL receptor</b> (ApoB-100 binds)</td></tr>
+<tr><td><b>HDL</b></td><td>Liver + intestine</td><td>Reverse cholesterol transport</td><td>ApoA-I</td><td><b>LCAT</b> (esterifies free cholesterol)</td></tr>
+</table>
+<h3>Key Apolipoproteins</h3>
+<table>
+<tr><th>Apo</th><th>Lipoprotein</th><th>Function</th></tr>
+<tr><td>ApoB-48</td><td>Chylomicrons</td><td>Structural; made in intestine</td></tr>
+<tr><td>ApoB-100</td><td>VLDL, IDL, LDL</td><td>Structural; LDL receptor ligand</td></tr>
+<tr><td>ApoC-II</td><td>Chylomicrons, VLDL</td><td>Activates <b>LPL</b></td></tr>
+<tr><td>ApoE</td><td>Chylomicrons, VLDL, IDL, HDL</td><td>Mediates hepatic uptake (LDL receptor)</td></tr>
+<tr><td>ApoA-I</td><td>HDL</td><td>Activates <b>LCAT</b>; major HDL protein</td></tr>
+</table>
+<h2>Lipoprotein Lipase (LPL)</h2>
+<ul>
+<li>Attached to capillary endothelium (NOT in blood)</li>
+<li>Activated by: ApoC-II (on chylomicrons/VLDL)</li>
+<li>Degrades TG in chylomicrons and VLDL → FFAs + glycerol (taken up by tissues)</li>
+<li>Inhibited by: ApoC-III</li>
+<li>Deficiency → Familial LPL deficiency → massive ↑↑ TG, pancreatitis, eruptive xanthomas</li>
+</ul>
+<h2>Cholesterol Synthesis</h2>
+<p><b>Location:</b> Liver (mainly) + all cells | <b>Starts from:</b> Acetyl-CoA</p>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th><th>Notes</th></tr>
+<tr><td>1</td><td>2 Acetyl-CoA → Acetoacetyl-CoA</td><td>Thiolase</td><td></td></tr>
+<tr><td>2</td><td>Acetoacetyl-CoA + Acetyl-CoA → HMG-CoA</td><td>HMG-CoA synthase (cytosolic)</td><td>Same intermediate as ketogenesis but in cytosol</td></tr>
+<tr><td>3</td><td>HMG-CoA → Mevalonate</td><td><b>HMG-CoA reductase</b></td><td><b>Rate-limiting step</b>; needs NADPH; target of statins</td></tr>
+<tr><td>4</td><td>Mevalonate → Isopentenyl-PP</td><td>Multiple steps</td><td></td></tr>
+<tr><td>5</td><td>Isopentenyl-PP → Squalene</td><td>Squalene synthase</td><td>Multiple isoprene units condensed</td></tr>
+<tr><td>6</td><td>Squalene → Cholesterol</td><td>Multiple steps</td><td>Via 7-dehydrocholesterol</td></tr>
+</table>
+<h3>Regulation of HMG-CoA Reductase</h3>
+<table>
+<tr><th>Activated by</th><th>Inhibited by</th></tr>
+<tr><td>Insulin (↑ expression)</td><td>Cholesterol (product inhibition)</td></tr>
+<tr><td>Thyroid hormone</td><td>Glucagon</td></tr>
+<tr><td></td><td>Statins (competitive inhibitors)</td></tr>
+<tr><td></td><td>Bile acids → bile acid sequestrants interrupt enterohepatic recycling → ↑ HMG-CoA reductase to make more cholesterol</td></tr>
+</table>
+<h3>Cholesterol Functions</h3>
+<ul>
+<li>Cell membrane component (modulates fluidity/rigidity)</li>
+<li>Precursor to <b>bile acids/salts</b> (emulsification)</li>
+<li>Precursor to <b>steroid hormones</b> (cortisol, aldosterone, sex hormones)</li>
+<li>Precursor to <b>Vitamin D</b></li>
+<li>Structural component of lipoproteins</li>
+</ul>
+<h2>Reverse Cholesterol Transport (HDL)</h2>
+<ul>
+<li>HDL is made as discoidal particles → acquires free cholesterol from peripheral tissues</li>
+<li>LCAT (activated by ApoA-I): esterifies cholesterol → HDL becomes spherical</li>
+<li>CETP (cholesterol ester transfer protein): transfers cholesterol esters to VLDL/LDL</li>
+<li>HDL → liver → bile acids/cholesterol excreted</li>
+</ul>
+<h2>Familial Hypercholesterolemia</h2>
+<ul>
+<li>LDL receptor mutations → LDL cannot be cleared → ↑↑ plasma LDL</li>
+<li>Heterozygous: LDL ~2× normal; Homozygous: LDL ~4-6× normal → premature CAD</li>
+<li>Xanthomas (tendon, skin), xanthelasmas, arcus corneae</li>
+<li>Treatment: statins (↑ LDL receptor expression), PCSK9 inhibitors, LDL apheresis</li>
+</ul>
+<div class="pearl"><b>Clinical Pearl:</b> PCSK9 inhibitors (alirocumab, evolocumab) block PCSK9 from degrading LDL receptors → ↑ LDL receptor recycling → ↓ LDL. Major breakthrough for refractory hypercholesterolemia.</div>
+</section>
+<section id="aa">
+<h1>Amino Acids & Urea Cycle</h1>
+<p class="subtitle">Transamination · Oxidative Deamination · Urea Cycle · Glucogenic/Ketogenic AA</p>
+<h2>Amino Acid Catabolism Overview</h2>
+<ul>
+<li>Step 1: <b>Transamination</b> — amino group transferred to α-KG → Glutamate (in muscle/liver)</li>
+<li>Step 2: <b>Oxidative deamination</b> — Glutamate → α-KG + NH₃ (in liver)</li>
+<li>Step 3: NH₃ → <b>Urea cycle</b> (liver) → excreted by kidneys</li>
+<li>Carbon skeleton → Krebs intermediates → energy or gluconeogenesis/ketogenesis</li>
+</ul>
+<h2>Transamination</h2>
+<table>
+<tr><th>Reaction</th><th>Enzyme</th><th>Cofactor</th><th>Clinical relevance</th></tr>
+<tr><td>Alanine + α-KG → Pyruvate + Glutamate</td><td><b>ALT</b> (alanine amino transferase)</td><td>PLP (Vit B6)</td><td>Elevated in hepatocellular damage</td></tr>
+<tr><td>Aspartate + α-KG → OAA + Glutamate</td><td><b>AST</b> (aspartate amino transferase)</td><td>PLP (Vit B6)</td><td>Elevated in MI, hepatitis</td></tr>
+</table>
+<p>All transaminases require <b>PLP (pyridoxal phosphate)</b> — active form of Vitamin B6.</p>
+<h2>Oxidative Deamination</h2>
+<ul>
+<li>Location: <b>Liver</b></li>
+<li>Glutamate + NADP⁺ + H₂O → α-KG + NH₃ + NADPH</li>
+<li>Enzyme: Glutamate dehydrogenase</li>
+<li>NH₃ → reacts with H⁺ → NH₄⁺ → enters urea cycle</li>
+</ul>
+<h2>Glucogenic vs Ketogenic Amino Acids</h2>
+<table>
+<tr><th>Category</th><th>AAs</th><th>Entry point</th></tr>
+<tr><td><b>Purely Ketogenic</b> (cannot make glucose)</td><td><b>Leucine, Lysine</b></td><td>Acetyl-CoA / Acetoacetyl-CoA</td></tr>
+<tr><td>Both glucogenic & ketogenic</td><td>Ile, Phe, Tyr, Trp, Thr</td><td>Multiple entry points</td></tr>
+<tr><td>Glucogenic (all others)</td><td>Ala, Gly, Ser, Cys, Asp, Asn, Glu, Gln, His, Pro, Met, Val, Arg</td><td>Pyruvate, OAA, α-KG, Succinyl-CoA, Fumarate</td></tr>
+</table>
+<div class="mnem"><b>Mnemonic:</b> Purely ketogenic AAs: <b>Luscious Lemon</b> = Leucine &amp; Lysine</div>
+<h2>Urea Cycle</h2>
+<p><b>Location:</b> Steps 1–2 in mitochondria; Steps 3–5 in cytosol | <b>Liver only</b></p>
+<div class="box">NH₃ + CO₂ + Aspartate → <b>Urea</b> (excreted by kidneys)</div>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th><th>Location</th><th>Notes</th></tr>
+<tr><td>1</td><td>NH₄⁺ + HCO₃⁻ + 2ATP → Carbamoyl-P</td><td><b>CPS-1</b></td><td>Mitochondria</td><td>Activated by N-acetylglutamate (NAG)</td></tr>
+<tr><td>2</td><td>Carbamoyl-P + Ornithine → Citrulline</td><td><b>OTC</b> (ornithine transcarbamylase)</td><td>Mitochondria</td><td>Most common urea cycle enzyme defect</td></tr>
+<tr><td>3</td><td>Citrulline + Aspartate → Argininosuccinate</td><td>Argininosuccinate synthetase</td><td>Cytosol</td><td>Uses ATP → AMP + PPi</td></tr>
+<tr><td>4</td><td>Argininosuccinate → Arginine + Fumarate</td><td>Argininosuccinase</td><td>Cytosol</td><td>Fumarate → Krebs (links cycles)</td></tr>
+<tr><td>5</td><td>Arginine + H₂O → Ornithine + Urea</td><td><b>Arginase</b></td><td>Cytosol</td><td>Ornithine recycled; Urea excreted</td></tr>
+</table>
+<div class="mnem"><b>Mnemonic:</b> <b>O</b>rdinary <b>C</b>ows <b>A</b>re <b>A</b>wfully <b>A</b>wful = <b>O</b>rnithine → <b>C</b>itrulline → <b>A</b>rgininosuccinate → <b>A</b>rginine → (urea) + back to <b>O</b>rnithine</div>
+<h3>Regulation</h3>
+<ul>
+<li><b>N-acetylglutamate (NAG)</b> is the allosteric activator of CPS-1 — essential cofactor</li>
+<li>NAG synthase activated by: arginine and glutamate</li>
+<li>High protein intake → ↑ NAG → ↑ CPS-1 → ↑ urea cycle</li>
+</ul>
+<h3>Urea Cycle Defects — Hyperammonemia</h3>
+<table>
+<tr><th>Defect</th><th>Effect</th><th>Lab finding</th></tr>
+<tr><td>OTC deficiency (X-linked, most common)</td><td>↑ NH₃, ↑ orotic acid (pyrimidine pathway overloaded)</td><td>↑ orotic acid distinguishes from CPS-1 defect</td></tr>
+<tr><td>CPS-1 deficiency</td><td>↑ NH₃, no ↑ orotic acid</td><td>Orotic acid normal</td></tr>
+<tr><td>Arginase deficiency</td><td>↑ Arginine, ↑ NH₃</td><td>Spastic diplegia, hyperammonemia</td></tr>
+</table>
+<h3>Ammonia Toxicity</h3>
+<ul>
+<li>Brain: NH₄⁺ → glutamine synthesis (glutamine synthetase) → osmotically active → cerebral edema, ↑ ICP</li>
+<li>Also depletes α-KG → inhibits Krebs → ↓ ATP in brain</li>
+<li>Treatment: lactulose, rifaximin (↓ gut bacteria producing NH₃), sodium benzoate/phenylbutyrate (alternative nitrogen excretion paths)</li>
+</ul>
+</section>
+<section id="nuc">
+<h1>Nucleotide Synthesis</h1>
+<p class="subtitle">Purine & Pyrimidine Synthesis · Salvage Pathways · Drug Targets</p>
+<h2>Nucleotide Structure</h2>
+<ul>
+<li>Nitrogenous base + pentose sugar + phosphate group(s)</li>
+<li><b>Purines:</b> double-ring (adenine, guanine) — A, G</li>
+<li><b>Pyrimidines:</b> single-ring (cytosine, uracil, thymine) — C, U, T</li>
+<li>RNA: AMP, GMP, CMP, UMP | DNA: dAMP, dGMP, dCMP, dTMP</li>
+</ul>
+<div class="mnem"><b>Mnemonic:</b> <b>PURe</b> As Gold = <b>PUR</b>ines (A, G); <b>CUT</b> the PY = <b>PY</b>rimidines are C, U, T</div>
+<h2>Pentose Synthesis (from PPP)</h2>
+<ul>
+<li>G6P → (G6P DH) → 6-PG → ribulose-5-P → ribose-5-P (for RNA/PRPP)</li>
+<li>Ribose-5-P + 2ATP → <b>PRPP</b> (phosphoribosyl pyrophosphate) — key precursor for both purines and pyrimidines</li>
+</ul>
+<h2>Pyrimidine Synthesis (de novo)</h2>
+<p><b>Key feature:</b> Ring built <em>before</em> attaching to ribose</p>
+<table>
+<tr><th>Step</th><th>Reaction</th><th>Enzyme</th><th>Notes</th></tr>
+<tr><td>1</td><td>Glutamine + HCO₃⁻ + ATP → Carbamoyl-P</td><td><b>CPS-2</b> (cytosolic)</td><td>Distinct from CPS-1 (mito, urea cycle)</td></tr>
+<tr><td>2</td><td>Carbamoyl-P + Aspartate → Carbamoyl-aspartate</td><td>ATCase</td><td></td></tr>
+<tr><td>3</td><td>→ Dihydroorotate → Orotate</td><td>DHO dehydrogenase</td><td></td></tr>
+<tr><td>4</td><td>Orotate + PRPP → OMP (orotic acid)</td><td>UMPS (orotate phosphoribosyltransferase + OMP decarboxylase)</td><td>Deficient → orotic aciduria</td></tr>
+<tr><td>5</td><td>OMP → UMP</td><td>OMP decarboxylase</td><td>UMP is the base for all pyrimidines</td></tr>
+<tr><td>6</td><td>UMP → CTP</td><td>CTP synthetase</td><td></td></tr>
+<tr><td>7</td><td>dUMP → dTMP</td><td><b>Thymidylate synthase</b></td><td>Needs <b>THF → DHF</b>; target of <b>5-FU</b></td></tr>
+</table>
+<div class="mnem"><b>Mnemonic:</b> CPS-2 makes pyrimidine (cytosol); CPS-1 makes urea (mitochondria). "<b>2-py</b>rimidines in cyto; <b>1-urea</b> in mito"</div>
+<h2>Purine Synthesis (de novo)</h2>
+<p><b>Key feature:</b> Ring built <em>on top of</em> PRPP (ribose-first)</p>
+<ul>
+<li>Starts with PRPP → many steps adding atoms from glutamine, glycine, CO₂, aspartate, folate (THF)</li>
+<li>Rate-limiting enzyme: <b>PRPP amidotransferase</b> (glutamine + PRPP → PRA)</li>
+<li>Inhibited by: AMP, GMP (end products — feedback inhibition)</li>
+<li>Requires: glutamine, glycine, aspartate, CO₂, <b>folate (N₁₀-formyl-THF)</b></li>
+<li>Final products: IMP → AMP or GMP</li>
+</ul>
+<h2>Salvage Pathways</h2>
+<ul>
+<li><b>HGPRT</b> (hypoxanthine-guanine phosphoribosyltransferase): recycles hypoxanthine → IMP, guanine → GMP</li>
+<li><b>APRT</b> (adenine phosphoribosyltransferase): recycles adenine → AMP</li>
+<li>Lesch-Nyhan syndrome: HGPRT deficiency → <b>cannot salvage purines</b> → ↑↑ uric acid + neurologic symptoms</li>
+</ul>
+<h2>Key Enzyme Deficiencies & Drug Targets</h2>
+<table>
+<tr><th>Deficiency/Drug Target</th><th>Enzyme</th><th>Consequence</th></tr>
+<tr><td>Lesch-Nyhan syndrome</td><td>HGPRT</td><td>Hyperuricemia, gout, self-mutilation, choreoathetosis, intellectual disability</td></tr>
+<tr><td>Orotic aciduria (type I)</td><td>UMPS (OPRTase + ODCase)</td><td>Megaloblastic anemia, orotic acid crystals in urine; treat with uridine</td></tr>
+<tr><td>ADA deficiency</td><td>Adenosine deaminase</td><td>↑ dATP → inhibits ribonucleotide reductase → SCID (no T/B cells)</td></tr>
+<tr><td>5-Fluorouracil (5-FU)</td><td>Thymidylate synthase</td><td>Blocks dTMP synthesis → ↓ DNA synthesis; cancer treatment</td></tr>
+<tr><td>Methotrexate, TMP</td><td>DHFR (dihydrofolate reductase)</td><td>Blocks THF regeneration → ↓ pyrimidine &amp; purine synthesis</td></tr>
+<tr><td>6-Mercaptopurine</td><td>HGPRT → false nucleotide</td><td>Inhibits de novo purine synthesis</td></tr>
+<tr><td>Hydroxyurea</td><td>Ribonucleotide reductase</td><td>Blocks dNTP synthesis; used in sickle cell, CML</td></tr>
+</table>
+<div class="pearl"><b>Clinical Pearl:</b> ADA deficiency → ↑ deoxyadenosine → ↑ dATP → feedback inhibits ribonucleotide reductase → T and B lymphocytes cannot proliferate → SCID. First disease treated by gene therapy.</div>
+<div class="mnem"><b>Mnemonic:</b> Purine atoms come from: <b>GAAGe CoCa</b> — Glutamine (×2), Aspartate (×1), Glycine (×2 atoms), CO₂, Folate (×2 carbon units)</div>
+</section>
+<section id="qbank">
+<h1>Q-Bank</h1>
+<p class="subtitle">USMLE-Style MCQs — All Topics</p>
+<div class="controls">
+  <select id="qfilter" onchange="filterQ()">
+    <option value="all">All Topics</option>
+    <option value="ek">Enzyme Kinetics</option>
+    <option value="glyc">Glycolysis</option>
+    <option value="gluco">Gluconeogenesis</option>
+    <option value="ppp">Pentose Phosphate</option>
+    <option value="glycogen">Glycogen</option>
+    <option value="trans">Transition Stage / PDH</option>
+    <option value="krebs">Krebs Cycle</option>
+    <option value="etc">ETC & Oxidative Phos</option>
+    <option value="fa">Fatty Acids & Lipids</option>
+    <option value="aa">Amino Acids & Urea</option>
+    <option value="nuc">Nucleotides</option>
+  </select>
+  <button onclick="checkAll()">Submit All</button>
+  <button onclick="resetAll()">Reset</button>
+  <span id="scoretxt"></span>
+</div>
+<div id="scorebox"><h3 id="scoreheading"></h3><p id="scoredesc"></p></div>
+<div id="qlist"></div>
+<div id="qlist">
+<div class="mcq" data-tag="ek">
+<div class="qnum">Q1 &nbsp;·&nbsp; EK</div>
+<div class="stem">A drug blocks an enzyme by binding irreversibly to its active site. Kinetic analysis shows Vmax is decreased. Addition of excess substrate does NOT restore activity. Which mechanism best describes this inhibitor?</div>
+<div class="opts">
+<label><input type="radio" name="q1" value="A"> A) Competitive inhibition</label>
+<label><input type="radio" name="q1" value="B"> B) Noncompetitive inhibition</label>
+<label><input type="radio" name="q1" value="C"> C) Uncompetitive inhibition</label>
+<label><input type="radio" name="q1" value="D"> D) Irreversible inhibition</label>
+<label><input type="radio" name="q1" value="E"> E) Allosteric activation</label>
+</div>
+<button class="btn" onclick="reveal('q1','D')">Show Answer</button>
+<div class="expl" id="expl_q1"><div class="ans">Answer: D</div>Irreversible inhibitors form covalent bonds with the active site. Vmax ↓ and cannot be overcome by adding more substrate. Competitive inhibitors can be overcome by ↑[S]. Noncompetitive/uncompetitive are reversible.</div>
+</div>
+<div class="mcq" data-tag="ek">
+<div class="qnum">Q2 &nbsp;·&nbsp; EK</div>
+<div class="stem">On a Lineweaver-Burk plot, an inhibitor shifts the line to give the same Y-intercept but a different (more negative) X-intercept. Which type of inhibition is this?</div>
+<div class="opts">
+<label><input type="radio" name="q2" value="A"> A) Competitive</label>
+<label><input type="radio" name="q2" value="B"> B) Noncompetitive</label>
+<label><input type="radio" name="q2" value="C"> C) Uncompetitive</label>
+<label><input type="radio" name="q2" value="D"> D) Irreversible</label>
+</div>
+<button class="btn" onclick="reveal('q2','A')">Show Answer</button>
+<div class="expl" id="expl_q2"><div class="ans">Answer: A</div>Same Y-intercept = same Vmax. Different X-intercept = different Km (↑ Km, apparent). This is competitive inhibition. Noncompetitive: same X-intercept, different Y-intercept. Uncompetitive: parallel lines.</div>
+</div>
+<div class="mcq" data-tag="ek">
+<div class="qnum">Q3 &nbsp;·&nbsp; EK</div>
+<div class="stem">An enzyme has a Km of 2 mM for its substrate. A researcher runs the reaction at a substrate concentration of 0.2 mM. What best describes the kinetics?</div>
+<div class="opts">
+<label><input type="radio" name="q3" value="A"> A) Zero-order — rate is independent of substrate concentration</label>
+<label><input type="radio" name="q3" value="B"> B) First-order — rate is proportional to substrate concentration</label>
+<label><input type="radio" name="q3" value="C"> C) Vmax is achieved</label>
+<label><input type="radio" name="q3" value="D"> D) The enzyme is fully saturated</label>
+</div>
+<button class="btn" onclick="reveal('q3','B')">Show Answer</button>
+<div class="expl" id="expl_q3"><div class="ans">Answer: B</div>When [S] ≪ Km (0.2 mM ≪ 2 mM), the enzyme operates in first-order kinetics — rate is proportional to [S]. Zero-order applies when [S] ≫ Km (enzyme saturated).</div>
+</div>
+<div class="mcq" data-tag="ek">
+<div class="qnum">Q4 &nbsp;·&nbsp; EK</div>
+<div class="stem">Which enzyme inhibitor is best characterized as uncompetitive?</div>
+<div class="opts">
+<label><input type="radio" name="q4" value="A"> A) Binds only to the free enzyme, increasing Km</label>
+<label><input type="radio" name="q4" value="B"> B) Binds only the ES complex, decreasing both Km and Vmax</label>
+<label><input type="radio" name="q4" value="C"> C) Binds both E and ES equally, leaving Km unchanged</label>
+<label><input type="radio" name="q4" value="D"> D) Covalently modifies the active site histidine</label>
+</div>
+<button class="btn" onclick="reveal('q4','B')">Show Answer</button>
+<div class="expl" id="expl_q4"><div class="ans">Answer: B</div>Uncompetitive inhibitors bind only the ES complex → both Vmax and Km decrease by the same factor → parallel lines on Lineweaver-Burk. Apparent Km ↓ means apparent affinity ↑.</div>
+</div>
+<div class="mcq" data-tag="glyc">
+<div class="qnum">Q5 &nbsp;·&nbsp; GLYC</div>
+<div class="stem">Which enzyme catalyzes the rate-limiting, committed step of glycolysis and is allosterically activated by AMP and fructose-2,6-bisphosphate?</div>
+<div class="opts">
+<label><input type="radio" name="q5" value="A"> A) Hexokinase</label>
+<label><input type="radio" name="q5" value="B"> B) Phosphoglycerate kinase</label>
+<label><input type="radio" name="q5" value="C"> C) Phosphofructokinase-1 (PFK-1)</label>
+<label><input type="radio" name="q5" value="D"> D) Pyruvate kinase</label>
+<label><input type="radio" name="q5" value="E"> E) Enolase</label>
+</div>
+<button class="btn" onclick="reveal('q5','C')">Show Answer</button>
+<div class="expl" id="expl_q5"><div class="ans">Answer: C</div>PFK-1 catalyzes the conversion of F6P → F1,6-BP. It is the rate-limiting, committed step of glycolysis. Activated by AMP, ADP, F-2,6-BP (most potent). Inhibited by ATP, citrate.</div>
+</div>
+<div class="mcq" data-tag="glyc">
+<div class="qnum">Q6 &nbsp;·&nbsp; GLYC</div>
+<div class="stem">A patient with a genetic disorder lacks GLUT4 in muscle and adipose tissue. Which hormone would be most impaired in its ability to stimulate glucose uptake?</div>
+<div class="opts">
+<label><input type="radio" name="q6" value="A"> A) Glucagon</label>
+<label><input type="radio" name="q6" value="B"> B) Cortisol</label>
+<label><input type="radio" name="q6" value="C"> C) Insulin</label>
+<label><input type="radio" name="q6" value="D"> D) Epinephrine</label>
+</div>
+<button class="btn" onclick="reveal('q6','C')">Show Answer</button>
+<div class="expl" id="expl_q6"><div class="ans">Answer: C</div>GLUT4 is the insulin-sensitive glucose transporter in muscle and adipose. Insulin stimulates GLUT4 translocation to the cell membrane. Without GLUT4, insulin cannot promote glucose uptake in these tissues.</div>
+</div>
+<div class="mcq" data-tag="glyc">
+<div class="qnum">Q7 &nbsp;·&nbsp; GLYC</div>
+<div class="stem">During anaerobic glycolysis, pyruvate is converted to lactate by lactate dehydrogenase. What is the metabolic purpose of this reaction?</div>
+<div class="opts">
+<label><input type="radio" name="q7" value="A"> A) To generate additional ATP beyond substrate-level phosphorylation</label>
+<label><input type="radio" name="q7" value="B"> B) To regenerate NAD⁺ so glycolysis can continue</label>
+<label><input type="radio" name="q7" value="C"> C) To produce NADH for the electron transport chain</label>
+<label><input type="radio" name="q7" value="D"> D) To provide pyruvate for the Krebs cycle</label>
+</div>
+<button class="btn" onclick="reveal('q7','B')">Show Answer</button>
+<div class="expl" id="expl_q7"><div class="ans">Answer: B</div>The conversion of pyruvate → lactate oxidizes NADH → NAD⁺. This regenerates NAD⁺ needed for step 6 of glycolysis (G3P dehydrogenase), allowing glycolysis to continue under anaerobic conditions. No net NADH is produced in anaerobic glycolysis.</div>
+</div>
+<div class="mcq" data-tag="glyc">
+<div class="qnum">Q8 &nbsp;·&nbsp; GLYC</div>
+<div class="stem">A 22-year-old athlete has normal resting lactate levels but markedly elevated lactate during intense sprinting. Which enzyme is responsible for converting glucose to G6P in his muscle?</div>
+<div class="opts">
+<label><input type="radio" name="q8" value="A"> A) Glucokinase</label>
+<label><input type="radio" name="q8" value="B"> B) Hexokinase</label>
+<label><input type="radio" name="q8" value="C"> C) Phosphofructokinase</label>
+<label><input type="radio" name="q8" value="D"> D) Glucose-6-phosphatase</label>
+</div>
+<button class="btn" onclick="reveal('q8','B')">Show Answer</button>
+<div class="expl" id="expl_q8"><div class="ans">Answer: B</div>Muscle uses hexokinase (HK I–III), not glucokinase. Hexokinase has high affinity (low Km) for glucose, is present in most tissues, and is inhibited by G6P. Glucokinase is liver/β-cell specific.</div>
+</div>
+<div class="mcq" data-tag="glyc">
+<div class="qnum">Q9 &nbsp;·&nbsp; GLYC</div>
+<div class="stem">Glucokinase differs from hexokinase in that glucokinase: (select the CORRECT statement)</div>
+<div class="opts">
+<label><input type="radio" name="q9" value="A"> A) Has a lower Km for glucose</label>
+<label><input type="radio" name="q9" value="B"> B) Is inhibited by glucose-6-phosphate</label>
+<label><input type="radio" name="q9" value="C"> C) Is induced by insulin</label>
+<label><input type="radio" name="q9" value="D"> D) Is found in all tissues</label>
+</div>
+<button class="btn" onclick="reveal('q9','C')">Show Answer</button>
+<div class="expl" id="expl_q9"><div class="ans">Answer: C</div>Glucokinase is induced by insulin. It has HIGH Km (low affinity), is NOT inhibited by G6P (unlike hexokinase), and is found only in hepatocytes and pancreatic β-cells.</div>
+</div>
+<div class="mcq" data-tag="gluco">
+<div class="qnum">Q10 &nbsp;·&nbsp; GLUCO</div>
+<div class="stem">Which of the following is the rate-limiting step in gluconeogenesis from pyruvate, and what cofactor does it require?</div>
+<div class="opts">
+<label><input type="radio" name="q10" value="A"> A) PEPCK; requires GTP</label>
+<label><input type="radio" name="q10" value="B"> B) Pyruvate carboxylase; requires biotin and ATP</label>
+<label><input type="radio" name="q10" value="C"> C) Fructose-1,6-bisphosphatase; requires Mg²⁺</label>
+<label><input type="radio" name="q10" value="D"> D) Glucose-6-phosphatase; requires no cofactor</label>
+</div>
+<button class="btn" onclick="reveal('q10','B')">Show Answer</button>
+<div class="expl" id="expl_q10"><div class="ans">Answer: B</div>Pyruvate carboxylase converts pyruvate → OAA (first committed step from pyruvate). It requires biotin (CO₂ carrier) and ATP. PEPCK then converts OAA → PEP (requires GTP) — a critical but downstream step.</div>
+</div>
+<div class="mcq" data-tag="gluco">
+<div class="qnum">Q11 &nbsp;·&nbsp; GLUCO</div>
+<div class="stem">A fasting patient's serum cortisol is markedly elevated. Which of the following best explains how cortisol promotes gluconeogenesis?</div>
+<div class="opts">
+<label><input type="radio" name="q11" value="A"> A) Cortisol directly phosphorylates PEPCK to activate it</label>
+<label><input type="radio" name="q11" value="B"> B) Cortisol promotes protein catabolism, providing gluconeogenic amino acid substrates, and increases gluconeogenic enzyme expression</label>
+<label><input type="radio" name="q11" value="C"> C) Cortisol inhibits insulin secretion</label>
+<label><input type="radio" name="q11" value="D"> D) Cortisol activates AMPK, which promotes gluconeogenesis</label>
+</div>
+<button class="btn" onclick="reveal('q11','B')">Show Answer</button>
+<div class="expl" id="expl_q11"><div class="ans">Answer: B</div>Cortisol is the prime gluconeogenic hormone. It promotes protein breakdown → amino acids (especially alanine) → gluconeogenesis. It also increases expression of PEPCK and other gluconeogenic enzymes. Insulin inhibits gluconeogenesis; AMPK inhibits it.</div>
+</div>
+<div class="mcq" data-tag="gluco">
+<div class="qnum">Q12 &nbsp;·&nbsp; GLUCO</div>
+<div class="stem">Which enzyme is uniquely required to release free glucose from the liver and is absent in muscle?</div>
+<div class="opts">
+<label><input type="radio" name="q12" value="A"> A) Glucokinase</label>
+<label><input type="radio" name="q12" value="B"> B) Fructose-1,6-bisphosphatase</label>
+<label><input type="radio" name="q12" value="C"> C) Glucose-6-phosphatase</label>
+<label><input type="radio" name="q12" value="D"> D) PEPCK</label>
+</div>
+<button class="btn" onclick="reveal('q12','C')">Show Answer</button>
+<div class="expl" id="expl_q12"><div class="ans">Answer: C</div>Glucose-6-phosphatase (located in smooth ER) converts G6P → free glucose, which can exit hepatocytes. Absent in muscle and brain, which is why they cannot release free glucose into the bloodstream.</div>
+</div>
+<div class="mcq" data-tag="ppp">
+<div class="qnum">Q13 &nbsp;·&nbsp; PPP</div>
+<div class="stem">A 35-year-old male of African descent develops hemolytic anemia after being prescribed primaquine for malaria prophylaxis. His peripheral smear shows Heinz bodies. Which enzyme deficiency best explains this presentation?</div>
+<div class="opts">
+<label><input type="radio" name="q13" value="A"> A) Pyruvate kinase</label>
+<label><input type="radio" name="q13" value="B"> B) Adenosine deaminase</label>
+<label><input type="radio" name="q13" value="C"> C) Glucose-6-phosphate dehydrogenase</label>
+<label><input type="radio" name="q13" value="D"> D) Transketolase</label>
+</div>
+<button class="btn" onclick="reveal('q13','C')">Show Answer</button>
+<div class="expl" id="expl_q13"><div class="ans">Answer: C</div>G6PD deficiency is X-linked and common in Africans and Mediterranean populations. ↓ G6PD → ↓ NADPH → ↓ GSH → RBCs susceptible to oxidative damage. Primaquine/dapsone/fava beans/infection precipitate hemolysis. Heinz bodies = denatured Hb.</div>
+</div>
+<div class="mcq" data-tag="ppp">
+<div class="qnum">Q14 &nbsp;·&nbsp; PPP</div>
+<div class="stem">Which cofactor does transketolase require, and what is the clinical consequence of its deficiency?</div>
+<div class="opts">
+<label><input type="radio" name="q14" value="A"> A) Biotin; methylmalonic acidemia</label>
+<label><input type="radio" name="q14" value="B"> B) Pyridoxal phosphate; sideroblastic anemia</label>
+<label><input type="radio" name="q14" value="C"> C) Thiamine (B1); Wernicke's encephalopathy</label>
+<label><input type="radio" name="q14" value="D"> D) Cobalamin (B12); subacute combined degeneration</label>
+</div>
+<button class="btn" onclick="reveal('q14','C')">Show Answer</button>
+<div class="expl" id="expl_q14"><div class="ans">Answer: C</div>Transketolase (non-oxidative phase of PPP) requires thiamine pyrophosphate (TPP). Deficiency → Wernicke's encephalopathy (confusion, ataxia, ophthalmoplegia). Erythrocyte transketolase activity is used to diagnose thiamine deficiency.</div>
+</div>
+<div class="mcq" data-tag="ppp">
+<div class="qnum">Q15 &nbsp;·&nbsp; PPP</div>
+<div class="stem">NADPH produced by the pentose phosphate pathway is LEAST important for which of the following?</div>
+<div class="opts">
+<label><input type="radio" name="q15" value="A"> A) Fatty acid synthesis</label>
+<label><input type="radio" name="q15" value="B"> B) Respiratory burst in neutrophils</label>
+<label><input type="radio" name="q15" value="C"> C) Glutathione reduction in RBCs</label>
+<label><input type="radio" name="q15" value="D"> D) Substrate-level phosphorylation in glycolysis</label>
+</div>
+<button class="btn" onclick="reveal('q15','D')">Show Answer</button>
+<div class="expl" id="expl_q15"><div class="ans">Answer: D</div>Substrate-level phosphorylation (in glycolysis and Krebs) uses ATP/GTP directly and does not involve NADPH. NADPH is critical for FA synthesis, respiratory burst (NADPH oxidase), and maintaining reduced glutathione (GSH) in RBCs.</div>
+</div>
+<div class="mcq" data-tag="glycogen">
+<div class="qnum">Q16 &nbsp;·&nbsp; GLYCOGEN</div>
+<div class="stem">A 5-year-old presents with severe fasting hypoglycemia, massive hepatomegaly, elevated lactate, and high triglycerides. Muscle strength is normal. Which enzyme is most likely deficient?</div>
+<div class="opts">
+<label><input type="radio" name="q16" value="A"> A) Glycogen phosphorylase (muscle)</label>
+<label><input type="radio" name="q16" value="B"> B) Debranching enzyme</label>
+<label><input type="radio" name="q16" value="C"> C) Glucose-6-phosphatase</label>
+<label><input type="radio" name="q16" value="D"> D) Acid maltase (lysosomal α-1,4-glucosidase)</label>
+</div>
+<button class="btn" onclick="reveal('q16','C')">Show Answer</button>
+<div class="expl" id="expl_q16"><div class="ans">Answer: C</div>Von Gierke disease (Type I GSD): glucose-6-phosphatase deficiency. Cannot release glucose from G6P → severe hypoglycemia; G6P → glycolysis → ↑ pyruvate → ↑ lactate; G6P also → FA synthesis → ↑ TG. No muscle involvement. Liver and kidney affected.</div>
+</div>
+<div class="mcq" data-tag="glycogen">
+<div class="qnum">Q17 &nbsp;·&nbsp; GLYCOGEN</div>
+<div class="stem">Which of the following correctly describes the regulation of glycogen synthase?</div>
+<div class="opts">
+<label><input type="radio" name="q17" value="A"> A) Phosphorylation by PKA activates glycogen synthase</label>
+<label><input type="radio" name="q17" value="B"> B) Dephosphorylation by protein phosphatase-1 activates glycogen synthase</label>
+<label><input type="radio" name="q17" value="C"> C) Glucagon activates glycogen synthase via cAMP</label>
+<label><input type="radio" name="q17" value="D"> D) AMP allosterically activates glycogen synthase</label>
+</div>
+<button class="btn" onclick="reveal('q17','B')">Show Answer</button>
+<div class="expl" id="expl_q17"><div class="ans">Answer: B</div>Glycogen synthase is ACTIVE when dephosphorylated. Insulin → protein phosphatase-1 → dephosphorylates (activates) glycogen synthase. Glucagon/epinephrine → PKA → phosphorylates glycogen synthase → INACTIVE.</div>
+</div>
+<div class="mcq" data-tag="glycogen">
+<div class="qnum">Q18 &nbsp;·&nbsp; GLYCOGEN</div>
+<div class="stem">An infant presents with hypotonia, cardiomegaly, and respiratory failure. Echocardiography shows hypertrophic cardiomyopathy. Muscle biopsy shows glycogen accumulation within lysosomes. Which disease is this?</div>
+<div class="opts">
+<label><input type="radio" name="q18" value="A"> A) McArdle disease (Type V)</label>
+<label><input type="radio" name="q18" value="B"> B) Von Gierke disease (Type I)</label>
+<label><input type="radio" name="q18" value="C"> C) Pompe disease (Type II)</label>
+<label><input type="radio" name="q18" value="D"> D) Cori disease (Type III)</label>
+</div>
+<button class="btn" onclick="reveal('q18','C')">Show Answer</button>
+<div class="expl" id="expl_q18"><div class="ans">Answer: C</div>Pompe disease: lysosomal acid maltase (α-1,4-glucosidase) deficiency → glycogen accumulates in lysosomes → cardiomegaly, hypotonia. Infantile form is rapidly fatal without treatment (alglucosidase alfa — enzyme replacement therapy).</div>
+</div>
+<div class="mcq" data-tag="trans">
+<div class="qnum">Q19 &nbsp;·&nbsp; TRANS</div>
+<div class="stem">A patient with PDH complex deficiency presents with lactic acidosis and neurological impairment. Which of the following cofactors, if deficient, would directly impair the E1 subunit of PDH?</div>
+<div class="opts">
+<label><input type="radio" name="q19" value="A"> A) Biotin</label>
+<label><input type="radio" name="q19" value="B"> B) Thiamine (B1)</label>
+<label><input type="radio" name="q19" value="C"> C) Pyridoxine (B6)</label>
+<label><input type="radio" name="q19" value="D"> D) Cobalamin (B12)</label>
+</div>
+<button class="btn" onclick="reveal('q19','B')">Show Answer</button>
+<div class="expl" id="expl_q19"><div class="ans">Answer: B</div>E1 (pyruvate decarboxylase) requires thiamine pyrophosphate (TPP). Thiamine deficiency → E1 dysfunction → pyruvate cannot be converted to acetyl-CoA → accumulates as lactate → lactic acidosis.</div>
+</div>
+<div class="mcq" data-tag="trans">
+<div class="qnum">Q20 &nbsp;·&nbsp; TRANS</div>
+<div class="stem">In which condition would pyruvate dehydrogenase kinase (PDK) be MOST active?</div>
+<div class="opts">
+<label><input type="radio" name="q20" value="A"> A) Low ATP and low NADH</label>
+<label><input type="radio" name="q20" value="B"> B) High acetyl-CoA and high NADH</label>
+<label><input type="radio" name="q20" value="C"> C) Low pyruvate and high CoA</label>
+<label><input type="radio" name="q20" value="D"> D) High ADP and high NAD⁺</label>
+</div>
+<button class="btn" onclick="reveal('q20','B')">Show Answer</button>
+<div class="expl" id="expl_q20"><div class="ans">Answer: B</div>PDK is activated by high Acetyl-CoA and high NADH (products of PDH) → phosphorylates PDH → turns it OFF. This prevents excessive pyruvate oxidation when the cell has enough energy. Think: fed/resting state → products activate PDK.</div>
+</div>
+<div class="mcq" data-tag="krebs">
+<div class="qnum">Q21 &nbsp;·&nbsp; KREBS</div>
+<div class="stem">Which Krebs cycle enzyme is inhibited by fluorocitrate (formed from fluoroacetate, rat poison)?</div>
+<div class="opts">
+<label><input type="radio" name="q21" value="A"> A) Citrate synthase</label>
+<label><input type="radio" name="q21" value="B"> B) Aconitase</label>
+<label><input type="radio" name="q21" value="C"> C) Isocitrate dehydrogenase</label>
+<label><input type="radio" name="q21" value="D"> D) α-Ketoglutarate dehydrogenase</label>
+</div>
+<button class="btn" onclick="reveal('q21','B')">Show Answer</button>
+<div class="expl" id="expl_q21"><div class="ans">Answer: B</div>Fluoroacetate → fluoroacetyl-CoA → fluorocitrate (via citrate synthase) → competitively inhibits aconitase (Step 2). This is 'lethal synthesis' — the precursor itself is not toxic; its metabolite is.</div>
+</div>
+<div class="mcq" data-tag="krebs">
+<div class="qnum">Q22 &nbsp;·&nbsp; KREBS</div>
+<div class="stem">Which of the following mutations is correctly matched to its associated tumor?</div>
+<div class="opts">
+<label><input type="radio" name="q22" value="A"> A) IDH1/2 mutation → pheochromocytoma</label>
+<label><input type="radio" name="q22" value="B"> B) Fumarase (FH) mutation → leiomyoma and renal cell carcinoma</label>
+<label><input type="radio" name="q22" value="C"> C) Succinate dehydrogenase → glioma</label>
+<label><input type="radio" name="q22" value="D"> D) Citrate synthase → paraganglioma</label>
+</div>
+<button class="btn" onclick="reveal('q22','B')">Show Answer</button>
+<div class="expl" id="expl_q22"><div class="ans">Answer: B</div>FH (fumarase) mutations cause hereditary leiomyomatosis and renal cell carcinoma (HLRCC). SDH mutations cause pheochromocytoma/paraganglioma. IDH1/2 mutations cause glioma, AML, cholangiocarcinoma.</div>
+</div>
+<div class="mcq" data-tag="krebs">
+<div class="qnum">Q23 &nbsp;·&nbsp; KREBS</div>
+<div class="stem">A low GTP/GDP ratio would be expected to have what effect on the Krebs cycle?</div>
+<div class="opts">
+<label><input type="radio" name="q23" value="A"> A) Inhibit citrate synthase</label>
+<label><input type="radio" name="q23" value="B"> B) Stimulate succinyl-CoA synthetase (more substrate-level phosphorylation)</label>
+<label><input type="radio" name="q23" value="C"> C) Inhibit isocitrate dehydrogenase</label>
+<label><input type="radio" name="q23" value="D"> D) No effect</label>
+</div>
+<button class="btn" onclick="reveal('q23','B')">Show Answer</button>
+<div class="expl" id="expl_q23"><div class="ans">Answer: B</div>Low GTP = low energy → stimulates succinyl-CoA synthetase (Step 5) to convert succinyl-CoA → succinate + GTP. High ATP (not GTP) inhibits citrate synthase and isocitrate DH. GTP/GDP ratio directly affects Step 5.</div>
+</div>
+<div class="mcq" data-tag="etc">
+<div class="qnum">Q24 &nbsp;·&nbsp; ETC</div>
+<div class="stem">Cyanide poisoning prevents cellular respiration by inhibiting which complex of the electron transport chain?</div>
+<div class="opts">
+<label><input type="radio" name="q24" value="A"> A) Complex I</label>
+<label><input type="radio" name="q24" value="B"> B) Complex II</label>
+<label><input type="radio" name="q24" value="C"> C) Complex III</label>
+<label><input type="radio" name="q24" value="D"> D) Complex IV</label>
+<label><input type="radio" name="q24" value="E"> E) Complex V (ATP synthase)</label>
+</div>
+<button class="btn" onclick="reveal('q24','D')">Show Answer</button>
+<div class="expl" id="expl_q24"><div class="ans">Answer: D</div>Cyanide (CN⁻), CO, and azide inhibit Complex IV (cytochrome c oxidase) by binding to the Fe³⁺ of cytochrome a₃, preventing electron transfer to O₂. Treatment: hydroxocobalamin or nitrites + thiosulfate.</div>
+</div>
+<div class="mcq" data-tag="etc">
+<div class="qnum">Q25 &nbsp;·&nbsp; ETC</div>
+<div class="stem">Which of the following is the correct effect of 2,4-dinitrophenol (2,4-DNP)?</div>
+<div class="opts">
+<label><input type="radio" name="q25" value="A"> A) Inhibits Complex I, preventing NADH oxidation</label>
+<label><input type="radio" name="q25" value="B"> B) Inhibits ATP synthase, causing proton gradient buildup</label>
+<label><input type="radio" name="q25" value="C"> C) Acts as a proton ionophore, dissipating the H⁺ gradient and releasing energy as heat</label>
+<label><input type="radio" name="q25" value="D"> D) Activates NADPH oxidase in adipose tissue</label>
+</div>
+<button class="btn" onclick="reveal('q25','C')">Show Answer</button>
+<div class="expl" id="expl_q25"><div class="ans">Answer: C</div>2,4-DNP is an uncoupler — it carries H⁺ across the inner mitochondrial membrane (bypassing ATP synthase), dissipating the proton gradient. This ↑ O₂ consumption and ↑ heat production, but ↓ ATP synthesis. Used historically as a weight loss drug.</div>
+</div>
+<div class="mcq" data-tag="etc">
+<div class="qnum">Q26 &nbsp;·&nbsp; ETC</div>
+<div class="stem">The malate-aspartate shuttle is preferred over the glycerophosphate shuttle in the liver because:</div>
+<div class="opts">
+<label><input type="radio" name="q26" value="A"> A) It generates more FADH₂</label>
+<label><input type="radio" name="q26" value="B"> B) It transfers cytosolic NADH into the mitochondria as NADH (entering Complex I) rather than FADH₂</label>
+<label><input type="radio" name="q26" value="C"> C) It does not require any carrier proteins</label>
+<label><input type="radio" name="q26" value="D"> D) It operates in the cytosol and does not cross any membranes</label>
+</div>
+<button class="btn" onclick="reveal('q26','B')">Show Answer</button>
+<div class="expl" id="expl_q26"><div class="ans">Answer: B</div>Malate-aspartate shuttle transfers cytosolic NADH equivalents into the mitochondria as NADH → Complex I → 2.5 ATP per NADH. Glycerophosphate shuttle enters as FADH₂ → Complex II → only 1.5 ATP. MAS is more energy-efficient.</div>
+</div>
+<div class="mcq" data-tag="fa">
+<div class="qnum">Q27 &nbsp;·&nbsp; FA</div>
+<div class="stem">Which enzyme is the rate-limiting step of fatty acid beta-oxidation in the mitochondria, and what inhibits it?</div>
+<div class="opts">
+<label><input type="radio" name="q27" value="A"> A) Acyl-CoA dehydrogenase; inhibited by NADH</label>
+<label><input type="radio" name="q27" value="B"> B) CPT-1; inhibited by malonyl-CoA</label>
+<label><input type="radio" name="q27" value="C"> C) Thiolase; inhibited by acetyl-CoA</label>
+<label><input type="radio" name="q27" value="D"> D) Enoyl-CoA hydratase; inhibited by hydroxyl groups</label>
+</div>
+<button class="btn" onclick="reveal('q27','B')">Show Answer</button>
+<div class="expl" id="expl_q27"><div class="ans">Answer: B</div>CPT-1 (carnitine palmitoyl transferase 1) is the rate-limiting step of fatty acid transport into mitochondria (required for β-oxidation). Malonyl-CoA (the FA synthesis intermediate) inhibits CPT-1 — preventing futile cycling of synthesis and oxidation simultaneously.</div>
+</div>
+<div class="mcq" data-tag="fa">
+<div class="qnum">Q28 &nbsp;·&nbsp; FA</div>
+<div class="stem">A 3-year-old presents with fasting hypoglycemia, hypoketosis, and elevated medium-chain acylcarnitines. Which enzyme deficiency is most likely?</div>
+<div class="opts">
+<label><input type="radio" name="q28" value="A"> A) HMG-CoA lyase</label>
+<label><input type="radio" name="q28" value="B"> B) MCAD (medium-chain acyl-CoA dehydrogenase)</label>
+<label><input type="radio" name="q28" value="C"> C) CPT-1</label>
+<label><input type="radio" name="q28" value="D"> D) Propionyl-CoA carboxylase</label>
+</div>
+<button class="btn" onclick="reveal('q28','B')">Show Answer</button>
+<div class="expl" id="expl_q28"><div class="ans">Answer: B</div>MCAD deficiency: cannot oxidize medium-chain FA → ↓ acetyl-CoA → ↓ ketogenesis → hypoketotic hypoglycemia. Elevated medium-chain acylcarnitines on newborn screen. Most common FA oxidation disorder. Fatal if undetected (SIDS).</div>
+</div>
+<div class="mcq" data-tag="fa">
+<div class="qnum">Q29 &nbsp;·&nbsp; FA</div>
+<div class="stem">In patients with odd-chain fatty acid oxidation, what vitamin is required to convert methylmalonyl-CoA to succinyl-CoA?</div>
+<div class="opts">
+<label><input type="radio" name="q29" value="A"> A) Thiamine (B1)</label>
+<label><input type="radio" name="q29" value="B"> B) Biotin (B7)</label>
+<label><input type="radio" name="q29" value="C"> C) Cobalamin (B12)</label>
+<label><input type="radio" name="q29" value="D"> D) Pyridoxine (B6)</label>
+</div>
+<button class="btn" onclick="reveal('q29','C')">Show Answer</button>
+<div class="expl" id="expl_q29"><div class="ans">Answer: C</div>Methylmalonyl-CoA mutase requires adenosylcobalamin (Vit B12). Deficiency → methylmalonyl-CoA accumulates → methylmalonic acidemia. Also causes megaloblastic anemia. Propionyl-CoA carboxylase (prior step) requires biotin.</div>
+</div>
+<div class="mcq" data-tag="fa">
+<div class="qnum">Q30 &nbsp;·&nbsp; FA</div>
+<div class="stem">A patient on a prolonged fast develops ketoacidosis. In which organ does ketogenesis primarily occur, and which enzyme is rate-limiting?</div>
+<div class="opts">
+<label><input type="radio" name="q30" value="A"> A) Liver; HMG-CoA synthase (mitochondrial)</label>
+<label><input type="radio" name="q30" value="B"> B) Kidney; HMG-CoA lyase</label>
+<label><input type="radio" name="q30" value="C"> C) Muscle; thiolase</label>
+<label><input type="radio" name="q30" value="D"> D) Brain; β-hydroxybutyrate dehydrogenase</label>
+</div>
+<button class="btn" onclick="reveal('q30','A')">Show Answer</button>
+<div class="expl" id="expl_q30"><div class="ans">Answer: A</div>Ketogenesis occurs in hepatic mitochondria. Rate-limiting enzyme is mitochondrial HMG-CoA synthase. The liver synthesizes ketones but CANNOT use them (lacks succinyl-CoA transferase/thiophorase).</div>
+</div>
+<div class="mcq" data-tag="fa">
+<div class="qnum">Q31 &nbsp;·&nbsp; FA</div>
+<div class="stem">What is the primary regulatory mechanism that prevents simultaneous fatty acid synthesis and beta-oxidation?</div>
+<div class="opts">
+<label><input type="radio" name="q31" value="A"> A) Acetyl-CoA inhibits both pathways equally</label>
+<label><input type="radio" name="q31" value="B"> B) Malonyl-CoA (substrate of FA synthesis) inhibits CPT-1, blocking FA entry into mitochondria for oxidation</label>
+<label><input type="radio" name="q31" value="C"> C) NADPH inhibits both pathways</label>
+<label><input type="radio" name="q31" value="D"> D) Insulin directly inhibits acyl-CoA dehydrogenase</label>
+</div>
+<button class="btn" onclick="reveal('q31','B')">Show Answer</button>
+<div class="expl" id="expl_q31"><div class="ans">Answer: B</div>When FA synthesis is active (↑ malonyl-CoA), CPT-1 is inhibited → FA cannot enter mitochondria → no β-oxidation. This is the classic reciprocal regulation preventing futile cycling.</div>
+</div>
+<div class="mcq" data-tag="lipid">
+<div class="qnum">Q32 &nbsp;·&nbsp; LIPID</div>
+<div class="stem">A patient has a mutation in ApoC-II. Which of the following would you expect?</div>
+<div class="opts">
+<label><input type="radio" name="q32" value="A"> A) Impaired LDL uptake by hepatocytes</label>
+<label><input type="radio" name="q32" value="B"> B) Markedly elevated TG due to impaired LPL activation</label>
+<label><input type="radio" name="q32" value="C"> C) Decreased reverse cholesterol transport</label>
+<label><input type="radio" name="q32" value="D"> D) Increased IDL accumulation</label>
+</div>
+<button class="btn" onclick="reveal('q32','B')">Show Answer</button>
+<div class="expl" id="expl_q32"><div class="ans">Answer: B</div>ApoC-II activates lipoprotein lipase (LPL) on capillary endothelium. Without ApoC-II, LPL cannot degrade TG in chylomicrons/VLDL → massive hypertriglyceridemia → pancreatitis, eruptive xanthomas.</div>
+</div>
+<div class="mcq" data-tag="lipid">
+<div class="qnum">Q33 &nbsp;·&nbsp; LIPID</div>
+<div class="stem">Statins lower plasma LDL by which primary mechanism?</div>
+<div class="opts">
+<label><input type="radio" name="q33" value="A"> A) Directly binding LDL particles in blood and clearing them</label>
+<label><input type="radio" name="q33" value="B"> B) Inhibiting HMG-CoA reductase → ↓ intracellular cholesterol → ↑ LDL receptor expression</label>
+<label><input type="radio" name="q33" value="C"> C) Activating LCAT to esterify cholesterol</label>
+<label><input type="radio" name="q33" value="D"> D) Inhibiting CETP, blocking transfer to LDL</label>
+</div>
+<button class="btn" onclick="reveal('q33','B')">Show Answer</button>
+<div class="expl" id="expl_q33"><div class="ans">Answer: B</div>Statins competitively inhibit HMG-CoA reductase → ↓ hepatic cholesterol synthesis → ↓ intracellular cholesterol → upregulation of LDL receptors → ↑ clearance of LDL from plasma.</div>
+</div>
+<div class="mcq" data-tag="lipid">
+<div class="qnum">Q34 &nbsp;·&nbsp; LIPID</div>
+<div class="stem">Which lipoprotein is responsible for reverse cholesterol transport, and which apolipoprotein activates the key enzyme in this process?</div>
+<div class="opts">
+<label><input type="radio" name="q34" value="A"> A) LDL; ApoB-100 activates HMG-CoA reductase</label>
+<label><input type="radio" name="q34" value="B"> B) HDL; ApoA-I activates LCAT</label>
+<label><input type="radio" name="q34" value="C"> C) Chylomicrons; ApoC-II activates LPL</label>
+<label><input type="radio" name="q34" value="D"> D) VLDL; ApoE activates hepatic lipase</label>
+</div>
+<button class="btn" onclick="reveal('q34','B')">Show Answer</button>
+<div class="expl" id="expl_q34"><div class="ans">Answer: B</div>HDL performs reverse cholesterol transport. ApoA-I activates LCAT (lecithin-cholesterol acyltransferase), which esterifies free cholesterol on HDL. This allows HDL to accumulate cholesterol and return it to the liver.</div>
+</div>
+<div class="mcq" data-tag="aa">
+<div class="qnum">Q35 &nbsp;·&nbsp; AA</div>
+<div class="stem">A 6-month-old boy presents with hyperammonemia, orotic aciduria, and lethargy. Which enzyme deficiency is most likely?</div>
+<div class="opts">
+<label><input type="radio" name="q35" value="A"> A) CPS-1</label>
+<label><input type="radio" name="q35" value="B"> B) OTC (ornithine transcarbamylase)</label>
+<label><input type="radio" name="q35" value="C"> C) Arginase</label>
+<label><input type="radio" name="q35" value="D"> D) Argininosuccinate synthetase</label>
+</div>
+<button class="btn" onclick="reveal('q35','B')">Show Answer</button>
+<div class="expl" id="expl_q35"><div class="ans">Answer: B</div>OTC deficiency is the most common urea cycle defect and is X-linked. Carbamoyl phosphate (CP) accumulates → spills into cytosol → enters pyrimidine synthesis → ↑ orotic acid. CPS-1 deficiency also causes ↑ NH₃ but NO orotic acid (CP is not made).</div>
+</div>
+<div class="mcq" data-tag="aa">
+<div class="qnum">Q36 &nbsp;·&nbsp; AA</div>
+<div class="stem">A patient with elevated serum AST and ALT has hepatocellular damage. Both enzymes require which cofactor?</div>
+<div class="opts">
+<label><input type="radio" name="q36" value="A"> A) FAD</label>
+<label><input type="radio" name="q36" value="B"> B) NAD⁺</label>
+<label><input type="radio" name="q36" value="C"> C) PLP (pyridoxal phosphate)</label>
+<label><input type="radio" name="q36" value="D"> D) TPP</label>
+</div>
+<button class="btn" onclick="reveal('q36','C')">Show Answer</button>
+<div class="expl" id="expl_q36"><div class="ans">Answer: C</div>AST and ALT are transaminases — all transaminases require PLP (the active form of Vitamin B6) as cofactor. They transfer amino groups to α-ketoglutarate, forming glutamate.</div>
+</div>
+<div class="mcq" data-tag="aa">
+<div class="qnum">Q37 &nbsp;·&nbsp; AA</div>
+<div class="stem">N-acetylglutamate (NAG) is essential for urea cycle function because:</div>
+<div class="opts">
+<label><input type="radio" name="q37" value="A"> A) It provides the carbon backbone for citrulline synthesis</label>
+<label><input type="radio" name="q37" value="B"> B) It is an obligate allosteric activator of CPS-1</label>
+<label><input type="radio" name="q37" value="C"> C) It inhibits arginase, preventing feedback inhibition</label>
+<label><input type="radio" name="q37" value="D"> D) It provides the amino group incorporated into urea</label>
+</div>
+<button class="btn" onclick="reveal('q37','B')">Show Answer</button>
+<div class="expl" id="expl_q37"><div class="ans">Answer: B</div>N-acetylglutamate is an obligate allosteric activator of CPS-1 (carbamoyl phosphate synthetase I). Without NAG, CPS-1 is inactive and the urea cycle cannot function. NAG is synthesized from glutamate + acetyl-CoA by NAG synthase (activated by arginine).</div>
+</div>
+<div class="mcq" data-tag="aa">
+<div class="qnum">Q38 &nbsp;·&nbsp; AA</div>
+<div class="stem">Ammonia toxicity in the brain is primarily mediated by which mechanism?</div>
+<div class="opts">
+<label><input type="radio" name="q38" value="A"> A) Inhibition of Complex IV of the electron transport chain</label>
+<label><input type="radio" name="q38" value="B"> B) Direct acidification of neuronal cytoplasm</label>
+<label><input type="radio" name="q38" value="C"> C) Astrocyte glutamine synthesis → osmotic swelling → cerebral edema</label>
+<label><input type="radio" name="q38" value="D"> D) Depletion of GABA in inhibitory neurons</label>
+</div>
+<button class="btn" onclick="reveal('q38','C')">Show Answer</button>
+<div class="expl" id="expl_q38"><div class="ans">Answer: C</div>In astrocytes, excess NH₄⁺ is incorporated into glutamate → glutamine (by glutamine synthetase). Glutamine is osmotically active → draws water → astrocyte swelling → cerebral edema → ↑ ICP → herniation. α-KG also depleted → ↓ Krebs/ATP.</div>
+</div>
+<div class="mcq" data-tag="nuc">
+<div class="qnum">Q39 &nbsp;·&nbsp; NUC</div>
+<div class="stem">A child presents with severe combined immunodeficiency (SCID), lymphopenia, and elevated deoxyadenosine in urine. Which enzyme deficiency is responsible?</div>
+<div class="opts">
+<label><input type="radio" name="q39" value="A"> A) HGPRT</label>
+<label><input type="radio" name="q39" value="B"> B) Adenosine deaminase (ADA)</label>
+<label><input type="radio" name="q39" value="C"> C) Purine nucleoside phosphorylase</label>
+<label><input type="radio" name="q39" value="D"> D) UMPS</label>
+</div>
+<button class="btn" onclick="reveal('q39','B')">Show Answer</button>
+<div class="expl" id="expl_q39"><div class="ans">Answer: B</div>ADA deficiency → deoxyadenosine accumulates → phosphorylated to dATP → dATP inhibits ribonucleotide reductase → T and B cells cannot make dNTPs for DNA replication → SCID. First disease treated by gene therapy.</div>
+</div>
+<div class="mcq" data-tag="nuc">
+<div class="qnum">Q40 &nbsp;·&nbsp; NUC</div>
+<div class="stem">5-Fluorouracil (5-FU) exerts its anti-cancer effect primarily by:</div>
+<div class="opts">
+<label><input type="radio" name="q40" value="A"> A) Intercalating into DNA double helix</label>
+<label><input type="radio" name="q40" value="B"> B) Irreversibly inhibiting thymidylate synthase, blocking dTMP synthesis</label>
+<label><input type="radio" name="q40" value="C"> C) Competitively inhibiting DHFR</label>
+<label><input type="radio" name="q40" value="D"> D) Alkylating guanine residues</label>
+</div>
+<button class="btn" onclick="reveal('q40','B')">Show Answer</button>
+<div class="expl" id="expl_q40"><div class="ans">Answer: B</div>5-FU → 5-F-dUMP → suicide inhibitor of thymidylate synthase (needs THF as cofactor). This prevents conversion of dUMP → dTMP → ↓ dTTP → ↓ DNA synthesis. Methotrexate/trimethoprim inhibit DHFR (blocks THF regeneration).</div>
+</div>
+<div class="mcq" data-tag="nuc">
+<div class="qnum">Q41 &nbsp;·&nbsp; NUC</div>
+<div class="stem">Which of the following correctly distinguishes de novo purine synthesis from pyrimidine synthesis?</div>
+<div class="opts">
+<label><input type="radio" name="q41" value="A"> A) Purine synthesis builds the ring on top of PRPP; pyrimidine ring is built first then attached to PRPP</label>
+<label><input type="radio" name="q41" value="B"> B) Pyrimidine synthesis builds the ring on top of PRPP; purine ring is built first</label>
+<label><input type="radio" name="q41" value="C"> C) Both syntheses build the ring before attaching to PRPP</label>
+<label><input type="radio" name="q41" value="D"> D) Both syntheses attach pre-formed rings to PRPP</label>
+</div>
+<button class="btn" onclick="reveal('q41','A')">Show Answer</button>
+<div class="expl" id="expl_q41"><div class="ans">Answer: A</div>In purine synthesis, the ring is assembled step-by-step directly on PRPP (ribose-first). In pyrimidine synthesis, the pyrimidine ring (via OMP) is fully assembled first, then attached to PRPP. Key distinguishing feature for boards.</div>
+</div>
+<div class="mcq" data-tag="nuc">
+<div class="qnum">Q42 &nbsp;·&nbsp; NUC</div>
+<div class="stem">Lesch-Nyhan syndrome results from HGPRT deficiency. Which metabolic consequence best explains the hyperuricemia?</div>
+<div class="opts">
+<label><input type="radio" name="q42" value="A"> A) Increased PRPP utilization by de novo purine synthesis</label>
+<label><input type="radio" name="q42" value="B"> B) Decreased conversion of hypoxanthine to IMP and guanine to GMP → purines degraded to uric acid instead</label>
+<label><input type="radio" name="q42" value="C"> C) Increased xanthine oxidase activity</label>
+<label><input type="radio" name="q42" value="D"> D) Decreased renal uric acid excretion</label>
+</div>
+<button class="btn" onclick="reveal('q42','A,B')">Show Answer</button>
+<div class="expl" id="expl_q42"><div class="ans">Answer: A,B</div>Without HGPRT, free purines (hypoxanthine, guanine) cannot be salvaged → PRPP accumulates → ↑ de novo purine synthesis → ↑ purine degradation → ↑ uric acid. Also, purines are directly catabolized to uric acid via xanthine oxidase.</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+function show(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0,0);
+}
+function reveal(qid, correct){
+  const opts = document.querySelectorAll(`input[name="${qid}"]`);
+  let selected = null;
+  opts.forEach(o=>{if(o.checked)selected=o.value;});
+  if(!selected){alert("Please select an answer first.");return;}
+  opts.forEach(o=>{
+    const lbl = o.parentElement;
+    if(o.value===correct){lbl.classList.add('correct');}
+    else if(o.checked){lbl.classList.add('wrong');}
+    o.disabled=true;
+  });
+  document.getElementById('expl_'+qid).style.display='block';
+}
+function filterQ(){
+  const val = document.getElementById('qfilter').value;
+  document.querySelectorAll('.mcq').forEach(q=>{
+    q.style.display = (val==='all'||q.dataset.tag===val)?'':'none';
+  });
+}
+function checkAll(){
+  let correct=0,total=0,attempted=0;
+  document.querySelectorAll('.mcq').forEach(q=>{
+    if(q.style.display==='none')return;
+    const radios = q.querySelectorAll('input[type=radio]');
+    const expl = q.querySelector('.expl');
+    const ans = q.querySelector('.ans');
+    if(!ans)return;
+    const correctLetter = ans.textContent.replace('Answer:','').trim().split(',')[0].trim();
+    let sel=null;
+    radios.forEach(r=>{if(r.checked)sel=r.value;});
+    total++;
+    if(sel){
+      attempted++;
+      radios.forEach(r=>{
+        const lbl=r.parentElement;
+        if(r.value===correctLetter)lbl.classList.add('correct');
+        else if(r.checked)lbl.classList.add('wrong');
+        r.disabled=true;
+      });
+      expl.style.display='block';
+      if(sel===correctLetter)correct++;
+    }
+  });
+  const pct = attempted?Math.round(correct/attempted*100):0;
+  document.getElementById('scorebox').style.display='block';
+  document.getElementById('scoreheading').textContent=`Score: ${correct}/${attempted} correct (${pct}%)`;
+  document.getElementById('scoredesc').textContent=
+    pct>=80?'Excellent! You have a strong grasp of this material.':
+    pct>=60?'Good effort. Review the topics where you missed questions.':
+    'Keep studying. Focus on the explanations for each question.';
+  document.getElementById('scorebox').scrollIntoView({behavior:'smooth'});
+}
+function resetAll(){
+  document.querySelectorAll('.mcq input[type=radio]').forEach(r=>{r.checked=false;r.disabled=false;});
+  document.querySelectorAll('.mcq label').forEach(l=>{l.classList.remove('correct','wrong');});
+  document.querySelectorAll('.expl').forEach(e=>{e.style.display='none';});
+  document.getElementById('scorebox').style.display='none';
+  document.getElementById('scoretxt').textContent='';
+}
+</script>
+</body></html>
